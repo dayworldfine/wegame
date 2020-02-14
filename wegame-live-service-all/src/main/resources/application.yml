@@ -5,5 +5,17 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wegame?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
-
+  #jpa相关配置
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      #自动建表
+      ddl-auto: update
+      #字段排序
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    #选用Innodb
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
 
