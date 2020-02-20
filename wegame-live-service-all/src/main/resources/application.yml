@@ -1,3 +1,5 @@
+server:
+  port: 80
 spring:
   datasource:
     # 基本数据源配置

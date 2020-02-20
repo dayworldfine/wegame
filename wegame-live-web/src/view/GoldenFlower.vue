@@ -308,7 +308,7 @@
 </template>
 
 <script>
-  import socket from "../utils/socket";
+  import socket from "@/utils/socket";
   import Vue from "vue";
     export default {
         name: "GoldenFlower",

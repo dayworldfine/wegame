@@ -17,8 +17,10 @@
 </template>
 
 <script>
+  import LoginService from '@/service/LoginService'
     export default {
       name: "Login",
+
       data(){
           return{
             formdata: {
@@ -29,7 +31,17 @@
       },
       methods:{
         Login(){
-          this.$router.push({name:'Home'})
+          var _this =this
+          // this.$router.push({name:'Home'})
+          LoginService.login({userName:_this.formdata.account,passWord:_this.formdata.password}).then((res=>{
+            console.log("res",res)
+            if(res.code===200){
+              this.$router.push({name:'Home'})
+            }else{
+              this.$message.error(res.message);
+            }
+          }))
+
         }
       }
     }

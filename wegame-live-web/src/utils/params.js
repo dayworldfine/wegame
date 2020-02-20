@@ -1,7 +1,13 @@
 /*websocket路径*/
-const socketUrl = "http://localhost:8080/endpoint-websocket";
+const socketUrl = "http://localhost:80/endpoint-websocket";
+
+/*api路径*/
+const baseUrl = "http://localhost:80/"
 
 
 
 
-export {socketUrl}
+export {
+  socketUrl,                /*websocket路径*/
+  baseUrl,                  /*api路径*/
+}

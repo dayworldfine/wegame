@@ -2,51 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52c3dd64-6153-44d5-8e3e-570094714d2f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/wegame.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/BaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/JsonResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/controller/WebSocketController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/dto/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/InMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/OutMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/intecepter/HttpHandShakeIntecepter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/intecepter/SocketChannelIntecepter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/service/Impl/WebSocketServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/service/WebSocketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/utils/ClassUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/utils/HttpUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/utils/TimeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/getters.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/mutations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/params.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/socket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/socket22.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/GoldenFlower.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/Landlords.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/viewComponents/Home/NavMenu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/882_congshi_normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/ante_coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/card_01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/zjh-brczm.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRealm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRolesOrAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomSessionIdGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomSessionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/config/CrosConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/config/ShiroConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/Gambling.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingStatistics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/Room.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/Seat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/service/Impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/LoginService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/http.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/socketMessage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-service-all/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-service-all/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-service-all/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-service-all/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/controller/WebSocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/java/com/wegame/wegameliveserviceall/controller/WebSocketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-service-all/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-service-all/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-service-all/wegame-live-service-all.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-service-all/wegame-live-service-all.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/params.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/params.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GoldenFlower.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GoldenFlower.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +72,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/sjqg/sjqg-live-wechatapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build/webpack.base.conf.js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -96,16 +83,18 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="settings.webpack" />
+    <property name="ts.external.directory.path" value="D:\workTools\idea\file\IntelliJ IDEA 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\myWork\wegame\wegame-live-web\src\base" />
-      <recent name="D:\myWork\wegame\wegame-live-web\static" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\myWork\wegame\wegame-live-web\src\utils" />
       <recent name="D:\myWork\wegame\wegame-live-web\src\base\webSocket" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\myWork\wegame\wegame-live-web\src\utils" />
+      <recent name="D:\myWork\wegame\wegame-live-web\src\base" />
+      <recent name="D:\myWork\wegame\wegame-live-web\static" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -155,7 +144,11 @@
       <workItem from="1581484076893" duration="3687000" />
       <workItem from="1581569421066" duration="7398000" />
       <workItem from="1581588857431" duration="6161000" />
-      <workItem from="1581653960159" duration="598000" />
+      <workItem from="1581653960159" duration="2025000" />
+      <workItem from="1581749942893" duration="3277000" />
+      <workItem from="1581917987695" duration="9180000" />
+      <workItem from="1582090556680" duration="11727000" />
+      <workItem from="1582182007096" duration="531000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1579661732819</created>
@@ -176,22 +169,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581757639546">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581757639546" />
     <state x="357" y="6" key="CommitChangelistDialog2" timestamp="1579661731092">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="357" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579661731092" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1581579759512">
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1582032509606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581579759512" />
-    <state x="270" y="55" key="SettingsEditor" timestamp="1581485276755">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1582032509606" />
+    <state x="270" y="55" key="SettingsEditor" timestamp="1582032518607">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581485276755" />
-    <state x="449" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1580550572711">
+    <state x="270" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582032518607" />
+    <state x="449" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1582182377652">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580550572711" />
+    <state x="449" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1582182377652" />
+    <state x="447" y="145" width="642" height="534" key="find.popup" timestamp="1581686476084">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1581686476084" />
     <state x="178" y="114" key="new project wizard" timestamp="1580470926132">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -200,5 +201,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580453101307" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1582031974721">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1582031974721" />
   </component>
 </project>

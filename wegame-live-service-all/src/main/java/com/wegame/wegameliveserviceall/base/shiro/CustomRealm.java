@@ -1,0 +1,57 @@
+package com.wegame.wegameliveserviceall.base.shiro;
+
+import com.wegame.wegameliveserviceall.entity.User;
+import com.wegame.wegameliveserviceall.service.UserService;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * @ClassName：CustomRealm
+ * @Description: 自定义Realm
+ * @Author：13738700108
+ * @Data 2020/2/15 20:34
+ * @Version: v1.0
+ **/
+public class CustomRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserService userService;
+
+    /**
+     *进行权限校验的时候会调用
+     * @param principalCollection
+     * @return
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        return null;
+    }
+
+    /**
+     * 用户登录的时候会调用
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("用户登录调用");
+        //从token获得用户信息，token代表用户输入
+        String userName =(String)token.getPrincipal();
+        User user = userService.findUserByUserName(userName);
+        if (null==user){
+            return null;
+        }
+        String pwd= user.getPassWord();
+        if (pwd == null || "".equals(pwd)){
+            return null;
+        }
+        return new SimpleAuthenticationInfo(userName,user.getPassWord(),this.getClass().getName());
+    }
+}
