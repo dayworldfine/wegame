@@ -14,7 +14,7 @@ import java.util.Set;
  * @Version: v1.0
  **/
 
-@Data
+//@Data
 @Entity
 @Table(name = "t_gambling")
 @org.hibernate.annotations.Table(appliesTo = "t_gambling",comment="牌局")
@@ -29,6 +29,12 @@ public class Gambling extends BaseEntity<String> {
     private GAMBLING_STATUS status;
 
     /**
+     * 房间序号
+     */
+    @Column(name = "ROOMSERIAL",columnDefinition = "int(2) comment '房间序号'")
+    private int roomSerial;
+
+    /**
      * 庄家座位
      */
     @OneToOne(fetch = FetchType.EAGER)
@@ -41,11 +47,6 @@ public class Gambling extends BaseEntity<String> {
     @OneToMany(mappedBy = "gambling",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private Set<GamblingStatistics> gamblingStatistics;
 
-    /**
-     * 牌局信息
-     */
-    @OneToMany(mappedBy = "gambling",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingMessage> gamblingMessages;
 
     public enum GAMBLING_STATUS{
         /**
@@ -83,4 +84,39 @@ public class Gambling extends BaseEntity<String> {
             this.name = name;
         }
     }
+
+    public GAMBLING_STATUS getStatus() {
+        return status;
+    }
+
+    public void setStatus(GAMBLING_STATUS status) {
+        this.status = status;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public Set<GamblingStatistics> getGamblingStatistics() {
+        return gamblingStatistics;
+    }
+
+    public void setGamblingStatistics(Set<GamblingStatistics> gamblingStatistics) {
+        this.gamblingStatistics = gamblingStatistics;
+    }
+
+    public int getRoomSerial() {
+        return roomSerial;
+    }
+
+    public void setRoomSerial(int roomSerial) {
+        this.roomSerial = roomSerial;
+    }
+
+
+
 }

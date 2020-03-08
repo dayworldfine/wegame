@@ -14,7 +14,7 @@ import java.util.Set;
  * @Version: v1.0
  **/
 
-@Data
+//@Data
 @Entity
 @Table(name = "t_seat")
 @org.hibernate.annotations.Table(appliesTo = "t_seat",comment="座位")
@@ -36,33 +36,34 @@ public class Seat extends BaseEntity<String> {
     private SEAT_STATUS status;
 
     /**
+     * 用户编码
+     */
+    @Column(name = "USERCODE",columnDefinition = "int(4) comment '用户编码'")
+    private int userCode;
+
+    /**
      * 牌局
      */
     @OneToOne(mappedBy = "seat",fetch = FetchType.LAZY)
     private Gambling gambling;
 
     /**
-     * 牌局统计
+     * 看牌情况(0,未看 1.已看)
      */
-    @OneToMany(mappedBy = "seat",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingStatistics> gamblingStatistics;
+    @Column(name = "SEECARD",nullable = false,columnDefinition = "int(2) default 0 comment '看牌情况'")
+    private Boolean seeCard;
 
     /**
-     * 牌局信息
+     * 牌
      */
-    @OneToMany(mappedBy = "seat",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingMessage> gamblingMessages;
+    @Column(name = "BOARD",nullable = false,columnDefinition = "varchar(10) default 0 comment '看牌情况'")
+    private String board;
 
-    /**
-     * 牌局详情
-     */
-    @OneToMany(mappedBy = "seat",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingDetails> gamblingDetails;
 
     /**
      * 房间id
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROOMID",nullable = false)
     private Room room;
 
@@ -80,10 +81,24 @@ public class Seat extends BaseEntity<String> {
         /**
          * 已准备
          */
-        prepare(2,"已准备");
+        prepare(2,"已准备"),
+
+        /**
+         * 进行中
+         */
+        underway(3,"进行中"),
+
+        /**
+         * 输
+         */
+        lose(4,"输"),
+
+        /**
+         * 赢
+         */
+        win(5,"赢");
 
         private int index;
-
         private String name;
 
         SEAT_STATUS(int index,String name){
@@ -106,5 +121,62 @@ public class Seat extends BaseEntity<String> {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+
+    public int getSerial() {
+        return serial;
+    }
+
+    public void setSerial(int serial) {
+        this.serial = serial;
+    }
+
+    public SEAT_STATUS getStatus() {
+        return status;
+    }
+
+    public void setStatus(SEAT_STATUS status) {
+        this.status = status;
+    }
+
+    public Gambling getGambling() {
+        return gambling;
+    }
+
+    public void setGambling(Gambling gambling) {
+        this.gambling = gambling;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public int getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(int userCode) {
+        this.userCode = userCode;
+    }
+
+    public Boolean getSeeCard() {
+        return seeCard;
+    }
+
+    public void setSeeCard(Boolean seeCard) {
+        this.seeCard = seeCard;
+    }
+
+    public String getBoard() {
+        return board;
+    }
+
+    public void setBoard(String board) {
+        this.board = board;
     }
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @Version: v1.0
  **/
 
-@Data
+//@Data
 @Entity
 @Table(name = "t_gambling_statistics")
 @org.hibernate.annotations.Table(appliesTo = "t_gambling_statistics",comment="牌局统计")
@@ -40,25 +40,22 @@ public class GamblingStatistics extends BaseEntity<String> {
     private String endTime;
 
     /**
-     * 房间
+     * 房间序号
      */
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "ROOMID",nullable = false)
-    private Room room;
+    @Column(name = "ROOMSERIAL",columnDefinition = "int(4) comment '房间序号'")
+    private int roomSerial;
 
     /**
-     * 用户
+     * 用户编码
      */
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "USERID",nullable = false)
-    private User user;
+    @Column(name = "USERCODE",columnDefinition = "int(4) comment '用户编码'")
+    private int userCode;
 
     /**
-     * 座位
+     * 座位序号
      */
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "SEATID",nullable = false)
-    private Seat seat;
+    @Column(name = "SEATSERIAL",columnDefinition = "int(4) comment '座位序号'")
+    private int seatSerial;
 
     /**
      * 牌局
@@ -66,4 +63,60 @@ public class GamblingStatistics extends BaseEntity<String> {
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "GAMBLING",nullable = false)
     private Gambling gambling;
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public Gambling getGambling() {
+        return gambling;
+    }
+
+    public void setGambling(Gambling gambling) {
+        this.gambling = gambling;
+    }
+
+    public int getRoomSerial() {
+        return roomSerial;
+    }
+
+    public void setRoomSerial(int roomSerial) {
+        this.roomSerial = roomSerial;
+    }
+
+    public int getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(int userCode) {
+        this.userCode = userCode;
+    }
+
+    public int getSeatSerial() {
+        return seatSerial;
+    }
+
+    public void setSeatSerial(int seatSerial) {
+        this.seatSerial = seatSerial;
+    }
 }

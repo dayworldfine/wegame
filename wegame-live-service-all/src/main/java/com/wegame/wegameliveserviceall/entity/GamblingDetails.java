@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @Version: v1.0
  **/
 
-@Data
+//@Data
 @Entity
 @Table(name = "t_gambling_details")
 @org.hibernate.annotations.Table(appliesTo = "t_gambling_details",comment="牌局详情")
@@ -47,18 +47,16 @@ public class GamblingDetails extends BaseEntity<String> {
     private GAMBLINGDETAILS_DOTYPE doType;
 
     /**
-     * 用户
+     * 用户编码
      */
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "USERID")
-    private User user;
+    @Column(name = "USERCODE",columnDefinition = "int(4) comment '用户编码'")
+    private int userCode;
 
     /**
-     * 座位
+     * 座位序号
      */
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "SEATID")
-    private Seat seat;
+    @Column(name = "SEATSERIAL",nullable = false,columnDefinition = "int(4) default 0 comment '座位序号'")
+    private int seatSerial;
 
     public enum GAMBLINGDETAILS_DOTYPE{
         /**
@@ -105,5 +103,53 @@ public class GamblingDetails extends BaseEntity<String> {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public int getOperatingLeverage() {
+        return operatingLeverage;
+    }
+
+    public void setOperatingLeverage(int operatingLeverage) {
+        this.operatingLeverage = operatingLeverage;
+    }
+
+    public String getCompareUser() {
+        return compareUser;
+    }
+
+    public void setCompareUser(String compareUser) {
+        this.compareUser = compareUser;
+    }
+
+    public GAMBLINGDETAILS_DOTYPE getDoType() {
+        return doType;
+    }
+
+    public void setDoType(GAMBLINGDETAILS_DOTYPE doType) {
+        this.doType = doType;
+    }
+
+    public int getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(int userCode) {
+        this.userCode = userCode;
+    }
+
+    public int getSeatSerial() {
+        return seatSerial;
+    }
+
+    public void setSeatSerial(int seatSerial) {
+        this.seatSerial = seatSerial;
     }
 }

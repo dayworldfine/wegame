@@ -36,6 +36,7 @@
           LoginService.login({userName:_this.formdata.account,passWord:_this.formdata.password}).then((res=>{
             console.log("res",res)
             if(res.code===200){
+              sessionStorage.setItem('token',res.data.token)
               this.$router.push({name:'Home'})
             }else{
               this.$message.error(res.message);

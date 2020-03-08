@@ -14,13 +14,19 @@ import java.util.Set;
  * @Version: v1.0
  **/
 
-@Data
+//@Data
 @Entity
 @Table(name = "t_user")
 @org.hibernate.annotations.Table(appliesTo = "t_user",comment="用户")
 public class User extends BaseEntity<String> {
 
     private static final long serialVersionUID = -702313206961667663L;
+
+    /**
+     * 编号
+     */
+    @Column(name = "CODE", nullable = false, length = 10, unique = true,columnDefinition = "int(10) comment '编号' not null UNIQUE key auto_increment")
+    private int code;
 
     /**
      * 昵称
@@ -59,22 +65,78 @@ public class User extends BaseEntity<String> {
     private int integral;
 
 
-    /**
-     * 牌局统计
-     */
-    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingStatistics> gamblingStatistics;
+//    /**
+//     * 牌局统计
+//     */
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+//    private Set<GamblingStatistics> gamblingStatistics;
 
-    /**
-     * 牌局信息
-     */
-    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingMessage> gamblingMessages;
+//    /**
+//     * 牌局信息
+//     */
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+//    private Set<GamblingMessage> gamblingMessages;
 
-    /**
-     * 牌局详情
-     */
-    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingDetails> gamblingDetails;
+//    /**
+//     * 牌局详情
+//     */
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+//    private Set<GamblingDetails> gamblingDetails;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 }
 

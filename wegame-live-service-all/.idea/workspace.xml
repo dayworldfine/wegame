@@ -2,36 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5ddc180-a035-4d44-b775-0f11471c19d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRealm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRolesOrAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomSessionIdGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomSessionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/CrosConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/ShiroConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Gambling.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingStatistics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Seat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/Impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-web/src/service/LoginService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-web/src/utils/http.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wegame-live-web/src/utils/socketMessage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apidoc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/doc/socketJs规则.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/doc/wegame.pdm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/repository/RoomRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/repository/SeatRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/utils/MD5Utiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/utils/WebSocketParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/vo/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wegame-live-web/src/doc/socketJs规则.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/base/shiro/CustomRealm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/ShiroConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/controller/WebSocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/controller/WebSocketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/dto/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/dto/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Gambling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Gambling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/GamblingStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/InMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/InMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/OutMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/OutMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/Impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/Impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/Impl/WebSocketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/Impl/WebSocketServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/WebSocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wegame/wegameliveserviceall/service/WebSocketService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wegame-live-service-all.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wegame-live-service-all.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wegame-live-web/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wegame-live-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wegame-live-web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/service/LoginService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/service/LoginService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/utils/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/utils/http.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/utils/params.js" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/utils/params.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/utils/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/utils/socket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/view/GoldenFlower.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/view/GoldenFlower.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wegame-live-web/src/view/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wegame-live-web/src/view/Login.vue" afterDir="false" />
     </list>
@@ -62,8 +69,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -88,6 +95,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql.8&#10;mysql" />
     <property name="JPA.DatabaseSchemaImportDialog" value="015f67ab-c955-4f6e-b0c3-d0cd180948bd" />
     <property name="RequestMappingsPanelOrder0" value="0" />
@@ -97,7 +105,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/studyTarget/websocket" />
+    <property name="last_opened_file_path" value="D:/yundao/file/leidian/frame" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -107,20 +115,21 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="com.wegame.wegameliveserviceall.entity" />
-      <recent name="" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wegame.wegameliveserviceall.base.shiro" />
       <recent name="com.wegame.wegameliveserviceall.utils" />
       <recent name="com.wegame.wegameliveserviceall.base" />
       <recent name="com.wegame.wegameliveserviceall.controller" />
     </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.wegame.wegameliveserviceall.entity" />
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\myWork\wegame\wegame-live-service-all" />
       <recent name="D:\myWork\wegame\wegame-live-service-all\src\main\java\com\wegame\wegameliveserviceall" />
       <recent name="D:\myWork\wegame\wegame-live-service-all\src\main\resources" />
     </key>
@@ -181,22 +190,31 @@
       <workItem from="1581749942698" duration="10496000" />
       <workItem from="1581917990047" duration="18194000" />
       <workItem from="1582090555413" duration="13413000" />
-      <workItem from="1582182007535" duration="564000" />
+      <workItem from="1582182007535" duration="16674000" />
+      <workItem from="1582268328473" duration="5797000" />
+      <workItem from="1582280058635" duration="7359000" />
+      <workItem from="1582355378090" duration="3798000" />
+      <workItem from="1582438963858" duration="595000" />
+      <workItem from="1582895644229" duration="26538000" />
+      <workItem from="1583590451341" duration="21198000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Assign_Data_Sources" timestamp="1581408203131">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Assign_Data_Sources/0.0.1536.824@0.0.1536.824" timestamp="1581408203131" />
-    <state x="361" y="71" key="#Inspections" timestamp="1581407263699">
+    <state x="361" y="71" key="#Inspections" timestamp="1582988451645">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1581407263699" />
+    <state x="361" y="71" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1582988451645" />
     <state x="361" y="71" key="#Notifications" timestamp="1581399095114">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -205,10 +223,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="346" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581404379147" />
-    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1581772243839">
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1583655077743">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1581772243839" />
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583655077743" />
     <state x="498" y="188" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1581401483967">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -225,66 +243,66 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="334" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579489765127" />
-    <state x="654" y="175" key="FileChooserDialogImpl" timestamp="1581404830855">
+    <state x="654" y="175" key="FileChooserDialogImpl" timestamp="1583628627938">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="654" y="175" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581404830855" />
-    <state width="1493" height="218" key="GridCell.Tab.0.bottom" timestamp="1582182584243">
+    <state x="654" y="175" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583628627938" />
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom" timestamp="1583657773004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582182584243" />
-    <state width="1493" height="218" key="GridCell.Tab.0.center" timestamp="1582182584243">
+    <state width="1493" height="231" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583657773004" />
+    <state width="1493" height="231" key="GridCell.Tab.0.center" timestamp="1583657773004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582182584243" />
-    <state width="1493" height="218" key="GridCell.Tab.0.left" timestamp="1582182584243">
+    <state width="1493" height="231" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583657773004" />
+    <state width="1493" height="231" key="GridCell.Tab.0.left" timestamp="1583657773004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582182584243" />
-    <state width="1493" height="218" key="GridCell.Tab.0.right" timestamp="1582182584243">
+    <state width="1493" height="231" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583657773004" />
+    <state width="1493" height="231" key="GridCell.Tab.0.right" timestamp="1583657773004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582182584243" />
-    <state width="1493" height="218" key="GridCell.Tab.1.bottom" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583657773004" />
+    <state width="1493" height="231" key="GridCell.Tab.1.bottom" timestamp="1583657772878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.1.center" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583657772878" />
+    <state width="1493" height="231" key="GridCell.Tab.1.center" timestamp="1583657772878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.1.left" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1583657772878" />
+    <state width="1493" height="231" key="GridCell.Tab.1.left" timestamp="1583657772878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.1.right" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1583657772878" />
+    <state width="1493" height="231" key="GridCell.Tab.1.right" timestamp="1583657772878">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.2.bottom" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1583657772878" />
+    <state width="1493" height="231" key="GridCell.Tab.2.bottom" timestamp="1583657772879">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.2.center" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583657772879" />
+    <state width="1493" height="231" key="GridCell.Tab.2.center" timestamp="1583657772879">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.2.left" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1583657772879" />
+    <state width="1493" height="231" key="GridCell.Tab.2.left" timestamp="1583657772879">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
-    <state width="1493" height="218" key="GridCell.Tab.2.right" timestamp="1582182584016">
+    <state width="1493" height="231" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1583657772879" />
+    <state width="1493" height="231" key="GridCell.Tab.2.right" timestamp="1583657772879">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1582182584016" />
+    <state width="1493" height="231" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1583657772879" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1581399907598">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1581399907598" />
-    <state x="270" y="0" key="SettingsEditor" timestamp="1581488586700">
+    <state x="270" y="0" width="1174" height="714" key="SettingsEditor" timestamp="1582899769136">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581488586700" />
+    <state x="270" y="0" width="1174" height="714" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582899769136" />
     <state x="449" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1581397274956">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -297,10 +315,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1582110236055" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1581708096473">
+    <state x="511" y="40" key="refactoring.ChangeSignatureDialog" timestamp="1583643029393">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1581708096473" />
+    <state x="511" y="40" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1583643029393" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1582207084473">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1582207084473" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581406936231">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -310,7 +332,11 @@
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="headerAccessor.enableTimestamp" language="JAVA" />
+        <watch expression="SimpleAuthenticationInfo" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/wegame_live_service_all$WegameLiveServiceAllApplication.ic" NAME="WegameLiveServiceAllApplication Coverage Results" MODIFIED="1582355542489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

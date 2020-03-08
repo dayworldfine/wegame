@@ -66,6 +66,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- ali druid连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.14</version>
+        </dependency>
+
         <!--    shiro   -->
         <dependency>
             <groupId>org.apache.shiro</groupId>

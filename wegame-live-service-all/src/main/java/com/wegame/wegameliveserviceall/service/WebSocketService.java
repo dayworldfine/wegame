@@ -1,6 +1,11 @@
 package com.wegame.wegameliveserviceall.service;
 
-import com.wegame.wegameliveserviceall.entity.InMessage;
+import com.wegame.wegameliveserviceall.entity.Room;
+import com.wegame.wegameliveserviceall.entity.Seat;
+import com.wegame.wegameliveserviceall.vo.Message;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @InterfaceName：WebSocketService
@@ -18,5 +23,32 @@ public interface WebSocketService {
     * @Param
     * @return
     **/
-    void sendMessage(InMessage inMessage);
+    void sendMessage(Message message);
+
+    /**
+     * 根据房间序号查询房间信息
+     * @param roomSerial
+     * @return
+     */
+    Room findRoomMessageByRoomSerial(String roomSerial);
+
+    /**
+     * 根据房间查询所有座位
+     * @param room
+     * @return
+     */
+    List<Seat> findSeatsByRoom(Room room);
+
+
+    /**
+     * 发送用户进入房间
+     * @param message
+     */
+    void sendUserInToRoomMessage(Map<String, String> message);
+
+    /**
+     * 发送房间信息
+     * @param room
+     */
+    void sendRoomMessage(Room room, Map<String, String> message);
 }

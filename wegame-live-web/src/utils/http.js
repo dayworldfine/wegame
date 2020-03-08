@@ -83,7 +83,8 @@ http.interceptors.request.use((option) => {
   if ( reqName != 'login' && reqName != 'changeSubject'){
     // option.headers['Content-Type'] = 'application/json;charset=UTF-8'
     // option.headers['IYunDao-AssessToken'] = sessionStorage.getItem('IYunDao-AssessToken');
-    option.headers['IYunDao-AssessToken'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXJyZW50VGltZU1pbGxpcyI6IjE1Njk3NDQ3MDAxOTkiLCJleHAiOjE1Njk3NTE5MDAsImFjY291bnQiOiJhZG1pbiJ9.d-7WZCk0iAjxp9hfaffZH9C-OBCPEfnzfHiY7P8htrs'
+    option.headers['token'] = sessionStorage.getItem('token');
+    // option.headers['IYunDao-AssessToken'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXJyZW50VGltZU1pbGxpcyI6IjE1Njk3NDQ3MDAxOTkiLCJleHAiOjE1Njk3NTE5MDAsImFjY291bnQiOiJhZG1pbiJ9.d-7WZCk0iAjxp9hfaffZH9C-OBCPEfnzfHiY7P8htrs'
   }
 
   console.log(`${option.url} == request ==> `, option);

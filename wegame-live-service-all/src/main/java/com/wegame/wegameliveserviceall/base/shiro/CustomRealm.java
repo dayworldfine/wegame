@@ -7,9 +7,13 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName：CustomRealm
@@ -30,6 +34,15 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        List<String> aaa =new ArrayList<>();
+        List<String> bbb =new ArrayList<>();
+        aaa.add("111");
+        aaa.add("222");
+        bbb.add("333");
+        bbb.add("444");
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addRoles(aaa);
+        simpleAuthorizationInfo.addStringPermissions(bbb);
         return null;
     }
 
@@ -52,6 +65,6 @@ public class CustomRealm extends AuthorizingRealm {
         if (pwd == null || "".equals(pwd)){
             return null;
         }
-        return new SimpleAuthenticationInfo(userName,user.getPassWord(),this.getClass().getName());
+        return new SimpleAuthenticationInfo(user,user.getPassWord(),this.getClass().getName());
     }
 }

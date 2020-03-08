@@ -11,3 +11,4 @@ export {
   socketUrl,                /*websocket路径*/
   baseUrl,                  /*api路径*/
 }
+

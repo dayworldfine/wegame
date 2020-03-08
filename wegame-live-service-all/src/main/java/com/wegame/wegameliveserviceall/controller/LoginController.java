@@ -1,6 +1,13 @@
 package com.wegame.wegameliveserviceall.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wegame.wegameliveserviceall.base.JsonResult;
+import com.wegame.wegameliveserviceall.utils.MD5Utiles;
+import netscape.javascript.JSObject;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +24,7 @@ public class LoginController {
 
    /**
         * @api {POST} /login 接口路径
-        * @apiGroup
+        * @apiGroup login
         * @apiVersion 1.0.0
         * @apiDescription 登录
         * @apiParam {String} userName 账号
@@ -38,8 +45,21 @@ public class LoginController {
     @PostMapping("/login")
     public JsonResult login(String userName,
                             String passWord){
-        System.out.println("111111");
-        return JsonResult.success();
-
+//        System.out.println(MD5Utiles.StringMD5("123456"));
+//        System.out.println(MD5Utiles.StringMD5(MD5Utiles.StringMD5("123456")));
+//        return null;
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName,passWord);
+        try {
+            subject.login(usernamePasswordToken);
+            System.out.println("token:"+subject.getSession().getId());
+            JSONObject object = new JSONObject();
+            object.put("token",subject.getSession().getId());
+            return JsonResult.success(object);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.paramError("账号密码错误");
+        }
     }
+
 }

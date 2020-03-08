@@ -3,6 +3,7 @@ package com.wegame.wegameliveserviceall.repository;
 import com.wegame.wegameliveserviceall.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @Version: v1.0
  **/
 @Repository
-public interface UserRepository extends JpaRepository<User,String> {
+public interface UserRepository extends JpaRepositoryImplementation<User,String> {
 
     @Query("select u from User u where u.userName = ?1")
     User findByUserName(String userName);

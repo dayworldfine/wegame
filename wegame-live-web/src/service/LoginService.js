@@ -10,11 +10,7 @@ import http from '@/utils/http'
  */
 const login = (param={})=>{
   return new Promise((resolve,reject) => {
-    param = {
-      account: param.userName,
-      password: param.passWord,
-      // rememberMe:true
-    };
+
     http.post({
       url: 'login',
       data: param
@@ -28,6 +24,23 @@ const login = (param={})=>{
   })
 };
 
+const login1 = (param={})=>{
+  return new Promise((resolve,reject) => {
+
+    http.post({
+      url: 'asdads',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
 export default {
-  login                   /*登录*/
+  login,                   /*登录*/
+  login1
 }

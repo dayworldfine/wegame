@@ -13,7 +13,7 @@ import java.util.Set;
  * @Data 2020/2/14 17:04
  * @Version: v1.0
  **/
-@Data
+//@Data
 @Entity
 @Table(name = "t_room")
 @org.hibernate.annotations.Table(appliesTo = "t_room",comment="房间")
@@ -40,16 +40,16 @@ public class Room extends BaseEntity<String> {
     @Column(name = "SERIAL",columnDefinition = "int(10) comment '序号'")
     private int serial;
 
-    /**
-     * 牌局统计
-     */
-    @OneToMany(mappedBy = "room",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
-    private Set<GamblingStatistics> gamblingStatistics;
+//    /**
+//     * 牌局统计
+//     */
+//    @OneToMany(mappedBy = "room",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+//    private Set<GamblingStatistics> gamblingStatistics;
 
     /**
-     *  房间
+     *  座位
      */
-    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private Set<Seat> seats;
 
     public enum ROOM_STATUS{
@@ -88,4 +88,39 @@ public class Room extends BaseEntity<String> {
             this.name = name;
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ROOM_STATUS getStatus() {
+        return status;
+    }
+
+    public void setStatus(ROOM_STATUS status) {
+        this.status = status;
+    }
+
+    public int getSerial() {
+        return serial;
+    }
+
+    public void setSerial(int serial) {
+        this.serial = serial;
+    }
+
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
+    }
+
+
 }

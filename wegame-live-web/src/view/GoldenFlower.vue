@@ -309,6 +309,7 @@
 
 <script>
   import socket from "@/utils/socket";
+  import login from "@/service/LoginService"
   import Vue from "vue";
     export default {
         name: "GoldenFlower",
@@ -329,22 +330,56 @@
             ],
           }
         },
+      created() {
+        socket.disconnect()
+        socket.connect('one')
+        Vue.prototype.$socket.$off("socket")
+
+          Vue.prototype.$socket.$on('socket',(res)=>{
+            console.log("监听到的socket消息",res)
+
+            switch (res.type) {
+              case '0':
+                this.room(res);
+                break;
+              case '1':
+                this.userInToRoom(res);
+                break;
+                default:
+                  break;
+            }
+          })
+
+      },
       methods:{
           //点击坐下的方法
         sitDown(number){
 
+        },
+        //类型0 系统消息
+        room(param){
+            let userList = param.userList;
+            let seatSerial;
+            for (let i = 0;i<userList.length;i++){
+              seatSerial=userList[i].seatSerial%6
+              switch (seatSerial) {
+                  case 1:
+                    this.styleOne[0]="display:inline"
+                    this.$forceUpdate()
+                    break;
+                  case 2:
+                    break;
+                    default:
+                      break;
+              }
+          }
+        },
+        //类型1 用户进入房间
+        userInToRoom(param){
+
         }
       },
-        created() {
-          socket.disconnect()
-            socket.connect()
-          Vue.prototype.$socket.$off("socket")
-          setTimeout(()=>{
-            Vue.prototype.$socket.$on('socket',(res)=>{
-              console.log("res",res)
-            })
-          },2000)
-        },
+
 
     }
 </script>
