@@ -78,15 +78,15 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.wegame.wegameliveserviceall.entity" />
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.wegame.wegameliveserviceall.base.shiro" />
       <recent name="com.wegame.wegameliveserviceall.utils" />
       <recent name="com.wegame.wegameliveserviceall.base" />
       <recent name="com.wegame.wegameliveserviceall.controller" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="com.wegame.wegameliveserviceall.entity" />
-      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\myWork\wegame\wegame-live-service-all\src\main\java\com\wegame\wegameliveserviceall\base\flower\provider" />
