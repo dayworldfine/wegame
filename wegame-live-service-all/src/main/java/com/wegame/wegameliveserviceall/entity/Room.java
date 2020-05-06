@@ -49,7 +49,7 @@ public class Room extends BaseEntity<String> {
     /**
      *  座位
      */
-    @OneToMany(mappedBy = "room",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private Set<Seat> seats;
 
     public enum ROOM_STATUS{

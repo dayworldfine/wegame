@@ -54,10 +54,22 @@ public class Seat extends BaseEntity<String> {
     private Boolean seeCard;
 
     /**
-     * 牌
+     * 第一张牌
      */
-    @Column(name = "BOARD",nullable = false,columnDefinition = "varchar(10) default 0 comment '看牌情况'")
-    private String board;
+    @Column(name = "BOARDA",nullable = false,columnDefinition = "int(2) comment '第一张牌'")
+    private int boardA;
+
+    /**
+     * 第二张牌
+     */
+    @Column(name = "BOARDB",nullable = false,columnDefinition = "int(2) comment '第二张牌'")
+    private int boardB;
+
+    /**
+     * 第三张牌
+     */
+    @Column(name = "BOARDC",nullable = false,columnDefinition = "int(2) comment '第三张牌'")
+    private int boardC;
 
 
     /**
@@ -69,14 +81,15 @@ public class Seat extends BaseEntity<String> {
 
     public enum SEAT_STATUS{
         /**
-         * 忙碌
-         */
-        busy(0,"忙碌"),
-
-        /**
          * 空闲
          */
-        leisure(1,"空闲"),
+
+        leisure(0,"空闲"),
+
+        /**
+         * 忙碌
+         */
+        busy(1,"忙碌"),
 
         /**
          * 已准备
@@ -172,11 +185,27 @@ public class Seat extends BaseEntity<String> {
         this.seeCard = seeCard;
     }
 
-    public String getBoard() {
-        return board;
+    public int getBoardA() {
+        return boardA;
     }
 
-    public void setBoard(String board) {
-        this.board = board;
+    public void setBoardA(int boardA) {
+        this.boardA = boardA;
+    }
+
+    public int getBoardB() {
+        return boardB;
+    }
+
+    public void setBoardB(int boardB) {
+        this.boardB = boardB;
+    }
+
+    public int getBoardC() {
+        return boardC;
+    }
+
+    public void setBoardC(int boardC) {
+        this.boardC = boardC;
     }
 }

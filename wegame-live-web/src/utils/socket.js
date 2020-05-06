@@ -10,13 +10,16 @@ function connect(number) {
   let _this = this
   // let socket = new SockJS('/endpoint-websocket');
   let socket = new SockJS(socketUrl);
+  socket.onmessage =function(e){
+    console.error("e",e)
+  }
   stompClient = Stomp.over(socket);
-  stompClient.connect({}, function (frame) {
+  stompClient.connect({},  (frame)=> {
     console.log('Connected: ' + frame);
 
     //订阅群聊消息
     console.log("stompClient",stompClient)
-    stompClient.subscribe('/friedFlower/'+number, function (result) {
+    stompClient.subscribe('/friedFlowerServer/'+number,  (result)=> {
       // showContent(JSON.parse(result.body));
       console.log("订阅群聊消息",result)
       // console.log("订阅群聊消息",JSON.parse(result.body) )
@@ -33,9 +36,7 @@ function connect(number) {
 
 
   });
-  // setTimeout(()=>{
-  //   sendContent();
-  // },5000)
+
 }
 
 
@@ -51,7 +52,7 @@ function disconnect() {
 function sendContent() {
   // stompClient.send("/app/v6/chat", {}, JSON.stringify({'content': "测试发送消息"}));
   // stompClient.send("/app/sendMessage", {}, JSON.stringify({'id':"123","userName":"用户名",'type':'12','message': "测试发送消息"}));
-  stompClient.send("/app/sendMessage", {}, JSON.stringify({'fromId':"123","toId":"用户名",'content':'12','time': "测试发送消息"}));
+  stompClient.send("/friedFlowerClient/sendMessage", {}, JSON.stringify({'fromId':"123","toId":"用户名",'content':'12','time': "测试发送消息"}));
 
 }
 
@@ -65,7 +66,7 @@ function sendContent() {
  * @param integral
  */
 function userInToRoom(type,roomSerial,userId,userImg,userNickName,integral) {
-  stompClient.send("/app/userInToRoom", {}, JSON.stringify({
+  stompClient.send("/friedFlowerClient/userInToRoom", {}, JSON.stringify({
     'type':type,
     'roomSerial':roomSerial,
     "userId":userId,
@@ -80,7 +81,7 @@ function userInToRoom(type,roomSerial,userId,userImg,userNickName,integral) {
  * @param userId
  */
 function userOutRoom(type,userId) {
-  stompClient.send("/app/userOutRoom", {}, JSON.stringify({
+  stompClient.send("/friedFlowerClient/userOutRoom", {}, JSON.stringify({
     'type':type,
     "userId":userId}));
 }
@@ -92,7 +93,7 @@ function userOutRoom(type,userId) {
  * @param seat
  */
 function userSitDown(type,userId,seat) {
-  stompClient.send("/app/userSitDown", {}, JSON.stringify({
+  stompClient.send("/friedFlowerClient/userSitDown", {}, JSON.stringify({
     'type':type,
     "userId":userId,
     'seat':seat}));
@@ -117,7 +118,7 @@ function userStandUp(type,userId,seat) {
  * @param userId
  * @param seat
  */
-function userPrepare(type,userId,seat) {
+function userSetOut(type,userId,seat) {
   stompClient.send("/app/userPrepare", {}, JSON.stringify({
     'type':type,
     "userId":userId,
@@ -207,7 +208,7 @@ export default {
   userOutRoom,                  /*用户退出直播*/
   userSitDown,                  /*用户坐下*/
   userStandUp,                  /*用户站起来*/
-  userPrepare,                  /*用户准备*/
+  userSetOut,                  /*用户准备*/
   userSeeCard,                  /*用户看牌*/
   userFollowChip,               /*用户跟注*/
   userAddChip,                  /*用户加注*/

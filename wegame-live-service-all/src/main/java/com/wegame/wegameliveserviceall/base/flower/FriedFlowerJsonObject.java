@@ -1,4 +1,4 @@
-package com.wegame.wegameliveserviceall.utils;
+package com.wegame.wegameliveserviceall.base.flower;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @Data 2020/2/28 23:17
  * @Version: v1.0
  **/
-public class WebSocketParam {
+public class FriedFlowerJsonObject {
 
     /**
      * 房间信息
@@ -19,7 +19,7 @@ public class WebSocketParam {
      * @param userList
      * @return
      */
-    public static JSONObject room(String type,
+    public static JSONObject room(int type,
                                   List<JSONObject> userList
                                  ){
         JSONObject obj = new JSONObject();
@@ -34,20 +34,20 @@ public class WebSocketParam {
      * @param userId
      * @param userImg
      * @param userNickName
-     * @param money
+     * @param integral
      * @return
      */
-    public static JSONObject userInToRoom(String type,
+    public static JSONObject userInToRoom(int type,
                                          String userId,
                                          String userImg,
                                          String userNickName,
-                                         String money){
+                                         int integral){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
         obj.put("userImg",userImg);
         obj.put("userNickName",userNickName);
-        obj.put("money",money);
+        obj.put("integral",integral);
         return obj;
     }
 
@@ -66,19 +66,28 @@ public class WebSocketParam {
     }
 
     /**
-     *  用户坐下
+     * 用户坐下
      * @param type
-     * @param userId
-     * @param seat
+     * @param userCode
+     * @param seatSerial
+     * @param userImg
+     * @param userNickName
+     * @param integral
      * @return
      */
-    public static JSONObject userSitDown(String type,
-                                  String userId,
-                                  String seat ){
+    public static JSONObject userSitDown(int type,
+                                         int userCode,
+                                         int seatSerial,
+                                         String userImg,
+                                         String userNickName,
+                                         int integral){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("userId",userId);
-        obj.put("seat",seat);
+        obj.put("userCode",userCode);
+        obj.put("seatSerial",seatSerial);
+        obj.put("userImg",userImg);
+        obj.put("userNickName",userNickName);
+        obj.put("integral",integral);
         return obj;
     }
 
@@ -100,19 +109,16 @@ public class WebSocketParam {
     }
 
     /**
-     *  用户准备
+     * 用户准备
      * @param type
-     * @param userId
-     * @param seat
+     * @param seatSerial
      * @return
      */
-    public  static JSONObject userPrepare(String type,
-                                  String userId,
-                                  String seat ){
+    public  static JSONObject userSetOut(int type,
+                                  int seatSerial ){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("userId",userId);
-        obj.put("seat",seat);
+        obj.put("seatSerial",seatSerial);
         return obj;
     }
 
@@ -249,14 +255,29 @@ public class WebSocketParam {
      * @param serial
      * @return
      */
-    public static String serial(String serial){
+    public static String serial(int serial){
         String roomSerial ="";
         switch (serial){
-            case "1":
+            case 1:
                 roomSerial = "one";
                 break;
-            case "2":
+            case 2:
                 roomSerial = "two";
+                break;
+            case 3:
+                roomSerial = "three";
+                break;
+            case 4:
+                roomSerial = "four";
+                break;
+            case 5:
+                roomSerial = "five";
+                break;
+            case 6:
+                roomSerial = "six";
+                break;
+            case 7:
+                roomSerial = "seven";
                 break;
             default:
                 break;

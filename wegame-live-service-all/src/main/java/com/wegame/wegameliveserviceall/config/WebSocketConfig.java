@@ -35,8 +35,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 
 //		registry.enableSimpleBroker("/topic", "/chat");
-		registry.enableSimpleBroker("/friedFlower");
-		registry.setApplicationDestinationPrefixes("/app");
+		registry.enableSimpleBroker("/friedFlowerServer");
+		registry.setApplicationDestinationPrefixes("/friedFlowerClient");
 
 	}
 

@@ -1,26 +1,20 @@
 package com.wegame.wegameliveserviceall.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.wegame.wegameliveserviceall.entity.Room;
-import com.wegame.wegameliveserviceall.entity.Seat;
-import com.wegame.wegameliveserviceall.service.WebSocketService;
+import com.wegame.wegameliveserviceall.service.FriedFlowerService;
 import com.wegame.wegameliveserviceall.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 
 @RestController
-//@RequestMapping("/websocket")
-public class WebSocketController {
+public class FriedFlowerMegController {
 
     @Autowired
-    private WebSocketService ws;
+    private FriedFlowerService ffs;
 
 //    @MessageMapping("/sendMessage")
 ////    public void sendMessage(String id,
@@ -34,9 +28,10 @@ public class WebSocketController {
 ////    }
 
     @MessageMapping("/sendMessage")
-    public void sendMessage(Message message){
+    public Message sendMessage(Message message){
         System.out.println("发送消息体id:"+message);
-        ws.sendMessage(message);
+        ffs.sendMessage(message);
+        return message;
     }
 
     /**
@@ -64,21 +59,18 @@ public class WebSocketController {
      * }
      */
     @MessageMapping("/userInToRoom")
-    public void inToRoom(Map<String,String> message){
-        System.out.println("type:"+message.get("type"));
-        System.out.println("userId:"+message.get("userId"));
-        System.out.println("userImg:"+message.get("userImg"));
+    public String inToRoom(Map<String,Object> msg){
         //发送有人进入消息
-        ws.sendUserInToRoomMessage(message);
-        Room room =  ws.findRoomMessageByRoomSerial(message.get("roomSerial"));
+        ffs.sendUserInToRoomMessage(msg);
+        Room room =  ffs.findRoomMessageByRoomSerial(Integer.parseInt(msg.get("roomSerial").toString()) );
         System.out.println("room:"+room);
         //所有桌子的信息
-//        List<Seat> seats = ws.findSeatsByRoom(room);
-//        System.out.println("seats:"+seats);
         //发送所有桌子的信息
-        ws.sendRoomMessage(room,message);
-
+        ffs.sendRoomMessage(room,msg);
+        return "asdasdaxzc";
     }
+
+
 
 
 

@@ -12,7 +12,7 @@ const login = (param={})=>{
   return new Promise((resolve,reject) => {
 
     http.post({
-      url: 'login',
+      url: '/login',
       data: param
     }).then((res) => {
       console.log("resolve",res)
@@ -28,7 +28,7 @@ const login1 = (param={})=>{
   return new Promise((resolve,reject) => {
 
     http.post({
-      url: 'asdads',
+      url: '/asdads',
       data: param
     }).then((res) => {
       console.log("resolve",res)
