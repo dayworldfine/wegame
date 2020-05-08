@@ -2,7 +2,7 @@
   "name": "wegame-live-web",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "wbh <136207024@qq.com>",
+  "author": "wangbaihong <136207024@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -10,8 +10,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "element-ui": "^2.13.0",
+    "promise-polyfill": "^8.1.3",
+    "sockjs-client": "^1.4.0",
+    "stompjs": "^2.3.3",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

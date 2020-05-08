@@ -1,0 +1,98 @@
+参考资料：http://jmesnil.net/stomp-websocket/doc/
+	     https://www.cnblogs.com/luoxuemei/p/10115679.html
+
+----------------------------------------------炸金花逻辑---------------------------------------------------------------------
+用户进入炸金花页面:
+1.连接websocket
+2.订阅私聊消息，session+id
+    1.接受当前房间的信息
+3.订阅群聊消息，
+进入房间准备逻辑：
+    用户进入房间-> 获取类型0消息， 如果用户接收过0消息类型，自动过滤 主要给新进入的用户房间的信息
+    准备获取类型5消息，所有人准备开始游戏获取消息11类型
+游戏进行中逻辑：
+    用户看牌：   消息类型6
+    用户跟住：   消息类型7
+    用户加住：   消息类型8
+    用户比牌：   消息类型9
+    用户弃牌：   消息类型10
+    游戏结束：   消息类型12
+
+
+消息体参数：
+"type":""                       //消息类型
+"userCode":""                     //用户id
+"userImg":""                    //用户头像
+"userNickName"                  //用户昵称
+"seatSerial":""                       //座位
+"userList":[]                   //用户集合
+"money":""                      //发送人筹码
+"board":[]                      //牌
+"beuserCode":""                   //比较的userCode
+"beseatSerial":""                     //比较的座位
+"userList":""                   //用户信息集合
+"roomSerial":""                 //房间序号
+
+消息类型对应消息体:
+0. 系统消息(发送当前房间资料)
+{
+  "type":"0","userList":[{"userCode":"",
+                          "userImg":"",
+                          "userNickName":"",
+                          "seatSerial":"",
+                          "integral":"",
+                          "boardA":"",
+                          "boardB":"",
+                          "boardC":"",
+                          "status:""}]
+}
+1. 用户进入房间     {"type":"1","roomSerial":"","userCode":"", "userImg":"","userNickName":"","integral":""}
+2. 用户退出房间     {"type":"2","roomSerial":"","userCode":""}
+3. 用户坐下         {"type":"3","roomSerial":"","userCode":"", "userImg":"","userNickName":"","seatSerial":"","integral":""}
+4. 用户站起来       {"type":"4","roomSerial":"","userCode":"","seatSerial":""}
+5. 用户准备         {"type":"5","roomSerial":"","userCode":"","seatSerial":""}
+6. 用户看牌         {"type":"6","roomSerial":"","userCode":"","seatSerial":"",board:[]}
+7. 用户跟注         {"type":"7","roomSerial":"","userCode":"","seatSerial":"","integral":""}
+8. 用户加注         {"type":"8","roomSerial":"","userCode":"","seatSerial":"","integral":""}
+9. 用户比牌         {"type":"9","roomSerial":"","userCode":"","seatSerial":"","beUserCode":"","beseatSerial":""}
+10. 用户弃牌        {"type":"10","roomSerial":"","userCode":"","seatSerial":""}
+11. 游戏开始        {"type":"11","roomSerial":"","boardList":[{"userCode":"","seatSerial":"","board":[]}]}
+12. 游戏结束        {"type":"12","roomSerial":"","userList":[{"userCode":"",
+                                                             "userImg":"",
+                                                             "userNickName":"",
+                                                             "seatSerial":"",
+                                                             "money":"",
+                                                             "board":"",
+                                                             "status:""}]}
+
+
+后端发送类型type
+0. 系统消息(发送当前房间资料)
+1. 用户进入房间
+2. 用户退出房间
+3. 用户坐下
+4. 用户站起来
+5. 用户准备
+6. 用户看牌
+7. 用户跟注
+8. 用户加注
+9. 用户比牌
+10. 用户弃牌
+11. 游戏开始
+12. 游戏结束
+
+
+前端发送的类型type:
+1. 用户进入房间
+2. 用户退出房间
+3. 用户坐下
+4. 用户站起来
+5. 用户准备
+6. 用户看牌
+7. 用户跟注
+8. 用户加注
+9. 用户比牌
+10. 用户弃牌
+
+
+
