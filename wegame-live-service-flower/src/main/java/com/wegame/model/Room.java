@@ -1,6 +1,7 @@
 package com.wegame.model;
 
 public class Room {
+
     private String id;
 
     private String createdate;
@@ -69,5 +70,18 @@ public class Room {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id='" + id + '\'' +
+                ", createdate='" + createdate + '\'' +
+                ", lastmodifiedtime='" + lastmodifiedtime + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", serial=" + serial +
+                ", status=" + status +
+                '}';
     }
 }
