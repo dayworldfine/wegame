@@ -1,10 +1,9 @@
-package com.wegame.contreoller;
+package com.wegame.controller;
 
 
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

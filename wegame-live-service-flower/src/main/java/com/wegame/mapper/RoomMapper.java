@@ -24,7 +24,7 @@ public interface RoomMapper {
     @InsertProvider(type=RoomSqlProvider.class, method="insertSelective")
     int insertSelective(Room record);
 
-    @Select("select r from Room r where r.serial = #{roomSerial,jdbcType=INTEGER}")
+    @Select("select * from t_room r where r.serial = #{roomSerial,jdbcType=INTEGER}")
     Room findRoomMessageByRoomSerial(Integer roomSerial);
 
     /**
@@ -36,8 +36,8 @@ public interface RoomMapper {
     @Select("SELECT count(*) \n" +
             "from t_seat s \n" +
             "INNER JOIN t_room r\n" +
-            "on s.ROOMID = r.ID AND r.SERIAL = #{roomSerial,jdbcType=INTEGER}\n" +
-            "where s.SERIAL = #{seatSerial,jdbcType=INTEGER}\n" +
-            "AND s.userCode IS NOT NULL")
+            "on s.room_id = r.id AND r.serial = #{roomSerial,jdbcType=INTEGER}\n" +
+            "where s.serial = #{seatSerial,jdbcType=INTEGER}\n" +
+            "AND s.user_code IS NOT NULL")
     int selSeatHavePeople(int roomSerial, int seatSerial);
 }

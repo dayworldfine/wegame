@@ -1,6 +1,7 @@
 package com.wegame.service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.wegame.entity.SeatUserEntity;
+import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.RoomMapper;
 import com.wegame.mapper.SeatMapper;
 import com.wegame.model.Room;
@@ -38,6 +39,9 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
     @Autowired
     private SeatMapper seatMapper;
+
+    @Autowired
+    private BoardMapper boardMapper;
 
 //    @Autowired
 //    private RoomRepository roomRepository;
@@ -120,8 +124,8 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     @Override
     public Map<String,Object> selGmaeStartCondition(int roomSerial) {
 //        return  seatRepository.selGmaeStartCondition(roomSerial);
+        return  seatMapper.selGmaeStartCondition(roomSerial);
 
-        return null;
     }
 
     @Override
@@ -132,6 +136,12 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         PlayerComparator playerComparator = new PlayerComparator(new NonFlowerValueCalculator());
         //创建多副牌
         List<Player> players = playerProvider.getPlayers(isSetOut);
+        /*输出每个角色的所有*/
+        System.out.println("Player:"+players);
+        /*存入数据库*/
+        int num =  boardMapper.insertAll(players);
+
+
     }
 
 }

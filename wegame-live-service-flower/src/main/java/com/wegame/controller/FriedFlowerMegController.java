@@ -1,4 +1,4 @@
-package com.wegame.contreoller;
+package com.wegame.controller;
 
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
