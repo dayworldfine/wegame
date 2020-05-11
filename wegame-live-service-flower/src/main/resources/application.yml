@@ -9,3 +9,7 @@ spring:
     url: jdbc:mysql://localhost:3306/wegame?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: wswbh
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

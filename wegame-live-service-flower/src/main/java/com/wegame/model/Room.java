@@ -1,87 +1,168 @@
 package com.wegame.model;
 
-public class Room {
+import java.io.Serializable;
 
+public class Room implements Serializable {
+    /**
+     * ID
+	 * 2020-05-11T16:28:03.513
+     */
     private String id;
 
-    private String createdate;
+    /**
+     * 创建日期
+	 * 2020-05-11T16:28:03.513
+     */
+    private String createDate;
 
-    private String lastmodifiedtime;
+    /**
+     * 最后修改日期
+	 * 2020-05-11T16:28:03.513
+     */
+    private String lastModifiedTime;
 
+    /**
+     * 版本
+	 * 2020-05-11T16:28:03.513
+     */
     private Long version;
 
-    private String name;
+    /**
+     * 用户名
+	 * 2020-05-11T16:28:03.513
+     */
+    private String roomName;
 
+    /**
+     * 序号
+	 * 2020-05-11T16:28:03.513
+     */
     private Integer serial;
 
+    /**
+     * 状态
+	 * 2020-05-11T16:28:03.513
+     */
     private Integer status;
 
+    /**
+     * 2020-05-11T16:28:03.514
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * ID
+     */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCreatedate() {
-        return createdate;
+    /**
+     * 创建日期
+     */
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate == null ? null : createdate.trim();
+    /**
+     * 创建日期
+     */
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate == null ? null : createDate.trim();
     }
 
-    public String getLastmodifiedtime() {
-        return lastmodifiedtime;
+    /**
+     * 最后修改日期
+     */
+    public String getLastModifiedTime() {
+        return lastModifiedTime;
     }
 
-    public void setLastmodifiedtime(String lastmodifiedtime) {
-        this.lastmodifiedtime = lastmodifiedtime == null ? null : lastmodifiedtime.trim();
+    /**
+     * 最后修改日期
+     */
+    public void setLastModifiedTime(String lastModifiedTime) {
+        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
     }
 
+    /**
+     * 版本
+     */
     public Long getVersion() {
         return version;
     }
 
+    /**
+     * 版本
+     */
     public void setVersion(Long version) {
         this.version = version;
     }
 
-    public String getName() {
-        return name;
+    /**
+     * 用户名
+     */
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    /**
+     * 用户名
+     */
+    public void setRoomName(String roomName) {
+        this.roomName = roomName == null ? null : roomName.trim();
     }
 
+    /**
+     * 序号
+     */
     public Integer getSerial() {
         return serial;
     }
 
+    /**
+     * 序号
+     */
     public void setSerial(Integer serial) {
         this.serial = serial;
     }
 
+    /**
+     * 状态
+     */
     public Integer getStatus() {
         return status;
     }
 
+    /**
+     * 状态
+     */
     public void setStatus(Integer status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
-                "id='" + id + '\'' +
-                ", createdate='" + createdate + '\'' +
-                ", lastmodifiedtime='" + lastmodifiedtime + '\'' +
-                ", version=" + version +
-                ", name='" + name + '\'' +
-                ", serial=" + serial +
-                ", status=" + status +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", version=").append(version);
+        sb.append(", roomName=").append(roomName);
+        sb.append(", serial=").append(serial);
+        sb.append(", status=").append(status);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

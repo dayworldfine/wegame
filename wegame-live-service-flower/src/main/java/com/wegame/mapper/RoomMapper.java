@@ -10,20 +10,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomMapper {
     @Insert({
-        "insert into t_room (ID, CREATEDATE, ",
-        "LASTMODIFIEDTIME, VERSION, ",
-        "NAME, SERIAL, STATUS)",
-        "values (#{id,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, ",
-        "#{lastmodifiedtime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
-        "#{name,jdbcType=VARCHAR}, #{serial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})"
+        "insert into t_room (id, create_date, ",
+        "last_modified_time, version, ",
+        "room_name, serial, ",
+        "status)",
+        "values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
+        "#{lastModifiedTime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
+        "#{roomName,jdbcType=VARCHAR}, #{serial,jdbcType=INTEGER}, ",
+        "#{status,jdbcType=INTEGER})"
     })
     int insert(Room record);
 
-    @InsertProvider(type= RoomSqlProvider.class, method="insertSelective")
+    @InsertProvider(type=RoomSqlProvider.class, method="insertSelective")
     int insertSelective(Room record);
 
-    @Select("select * from t_room where serial=#{serial,jdbcType=INTEGER}")
-    Room findRoomMessageByRoomSerial(int roomSerial);
+    @Select("select r from Room r where r.serial = #{roomSerial,jdbcType=INTEGER}")
+    Room findRoomMessageByRoomSerial(Integer roomSerial);
 
     /**
      * 查询这个位置是否有人（0 没人  1有人）
@@ -34,7 +36,7 @@ public interface RoomMapper {
     @Select("SELECT count(*) \n" +
             "from t_seat s \n" +
             "INNER JOIN t_room r\n" +
-            "on s.ROOMID = r.ID AND r.SERIAL =#{roomSerial,jdbcType=INTEGER}\n" +
+            "on s.ROOMID = r.ID AND r.SERIAL = #{roomSerial,jdbcType=INTEGER}\n" +
             "where s.SERIAL = #{seatSerial,jdbcType=INTEGER}\n" +
             "AND s.userCode IS NOT NULL")
     int selSeatHavePeople(int roomSerial, int seatSerial);

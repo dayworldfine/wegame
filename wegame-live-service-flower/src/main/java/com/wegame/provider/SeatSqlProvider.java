@@ -10,51 +10,39 @@ public class SeatSqlProvider {
         sql.INSERT_INTO("t_seat");
         
         if (record.getId() != null) {
-            sql.VALUES("ID", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreatedate() != null) {
-            sql.VALUES("CREATEDATE", "#{createdate,jdbcType=VARCHAR}");
+        if (record.getCreateDate() != null) {
+            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
         }
         
-        if (record.getLastmodifiedtime() != null) {
-            sql.VALUES("LASTMODIFIEDTIME", "#{lastmodifiedtime,jdbcType=VARCHAR}");
+        if (record.getLastModifiedTime() != null) {
+            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {
-            sql.VALUES("VERSION", "#{version,jdbcType=BIGINT}");
+            sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
         if (record.getSerial() != null) {
-            sql.VALUES("SERIAL", "#{serial,jdbcType=INTEGER}");
+            sql.VALUES("serial", "#{serial,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("STATUS", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
         }
         
-        if (record.getRoomid() != null) {
-            sql.VALUES("ROOMID", "#{roomid,jdbcType=VARCHAR}");
+        if (record.getRoomId() != null) {
+            sql.VALUES("room_id", "#{roomId,jdbcType=VARCHAR}");
         }
         
-        if (record.getUsercode() != null) {
-            sql.VALUES("USERCODE", "#{usercode,jdbcType=INTEGER}");
+        if (record.getUserCode() != null) {
+            sql.VALUES("user_code", "#{userCode,jdbcType=INTEGER}");
         }
         
-        if (record.getSeecard() != null) {
-            sql.VALUES("SEECARD", "#{seecard,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBoarda() != null) {
-            sql.VALUES("BOARDA", "#{boarda,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBoardb() != null) {
-            sql.VALUES("BOARDB", "#{boardb,jdbcType=INTEGER}");
-        }
-        
-        if (record.getBoardc() != null) {
-            sql.VALUES("BOARDC", "#{boardc,jdbcType=INTEGER}");
+        if (record.getSeeCard() != null) {
+            sql.VALUES("see_card", "#{seeCard,jdbcType=INTEGER}");
         }
         
         return sql.toString();

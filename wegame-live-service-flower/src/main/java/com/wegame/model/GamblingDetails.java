@@ -1,103 +1,231 @@
 package com.wegame.model;
 
-public class GamblingDetails {
+import java.io.Serializable;
+
+public class GamblingDetails implements Serializable {
+    /**
+     * ID
+	 * 2020-05-11T16:28:03.510
+     */
     private String id;
 
-    private String createdate;
+    /**
+     * 创建日期
+	 * 2020-05-11T16:28:03.510
+     */
+    private String createDate;
 
-    private String lastmodifiedtime;
+    /**
+     * 最后修改日期
+	 * 2020-05-11T16:28:03.510
+     */
+    private String lastModifiedTime;
 
+    /**
+     * 版本
+	 * 2020-05-11T16:28:03.510
+     */
     private Long version;
 
-    private String compareuser;
+    /**
+     * 比牌用户id
+	 * 2020-05-11T16:28:03.510
+     */
+    private String compareUser;
 
-    private Integer dotype;
+    /**
+     * 操作类型
+	 * 2020-05-11T16:28:03.510
+     */
+    private Integer doType;
 
-    private Integer operatingleverage;
+    /**
+     * 操作筹码加减
+	 * 2020-05-11T16:28:03.511
+     */
+    private Integer operatingLeverage;
 
+    /**
+     * 轮次
+	 * 2020-05-11T16:28:03.511
+     */
     private Integer round;
 
-    private Integer seatserial;
+    /**
+     * 座位序号
+	 * 2020-05-11T16:28:03.511
+     */
+    private Integer seatSerial;
 
-    private Integer usercode;
+    /**
+     * 用户编码
+	 * 2020-05-11T16:28:03.511
+     */
+    private Integer userCode;
 
+    /**
+     * 2020-05-11T16:28:03.511
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * ID
+     */
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCreatedate() {
-        return createdate;
+    /**
+     * 创建日期
+     */
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate == null ? null : createdate.trim();
+    /**
+     * 创建日期
+     */
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate == null ? null : createDate.trim();
     }
 
-    public String getLastmodifiedtime() {
-        return lastmodifiedtime;
+    /**
+     * 最后修改日期
+     */
+    public String getLastModifiedTime() {
+        return lastModifiedTime;
     }
 
-    public void setLastmodifiedtime(String lastmodifiedtime) {
-        this.lastmodifiedtime = lastmodifiedtime == null ? null : lastmodifiedtime.trim();
+    /**
+     * 最后修改日期
+     */
+    public void setLastModifiedTime(String lastModifiedTime) {
+        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
     }
 
+    /**
+     * 版本
+     */
     public Long getVersion() {
         return version;
     }
 
+    /**
+     * 版本
+     */
     public void setVersion(Long version) {
         this.version = version;
     }
 
-    public String getCompareuser() {
-        return compareuser;
+    /**
+     * 比牌用户id
+     */
+    public String getCompareUser() {
+        return compareUser;
     }
 
-    public void setCompareuser(String compareuser) {
-        this.compareuser = compareuser == null ? null : compareuser.trim();
+    /**
+     * 比牌用户id
+     */
+    public void setCompareUser(String compareUser) {
+        this.compareUser = compareUser == null ? null : compareUser.trim();
     }
 
-    public Integer getDotype() {
-        return dotype;
+    /**
+     * 操作类型
+     */
+    public Integer getDoType() {
+        return doType;
     }
 
-    public void setDotype(Integer dotype) {
-        this.dotype = dotype;
+    /**
+     * 操作类型
+     */
+    public void setDoType(Integer doType) {
+        this.doType = doType;
     }
 
-    public Integer getOperatingleverage() {
-        return operatingleverage;
+    /**
+     * 操作筹码加减
+     */
+    public Integer getOperatingLeverage() {
+        return operatingLeverage;
     }
 
-    public void setOperatingleverage(Integer operatingleverage) {
-        this.operatingleverage = operatingleverage;
+    /**
+     * 操作筹码加减
+     */
+    public void setOperatingLeverage(Integer operatingLeverage) {
+        this.operatingLeverage = operatingLeverage;
     }
 
+    /**
+     * 轮次
+     */
     public Integer getRound() {
         return round;
     }
 
+    /**
+     * 轮次
+     */
     public void setRound(Integer round) {
         this.round = round;
     }
 
-    public Integer getSeatserial() {
-        return seatserial;
+    /**
+     * 座位序号
+     */
+    public Integer getSeatSerial() {
+        return seatSerial;
     }
 
-    public void setSeatserial(Integer seatserial) {
-        this.seatserial = seatserial;
+    /**
+     * 座位序号
+     */
+    public void setSeatSerial(Integer seatSerial) {
+        this.seatSerial = seatSerial;
     }
 
-    public Integer getUsercode() {
-        return usercode;
+    /**
+     * 用户编码
+     */
+    public Integer getUserCode() {
+        return userCode;
     }
 
-    public void setUsercode(Integer usercode) {
-        this.usercode = usercode;
+    /**
+     * 用户编码
+     */
+    public void setUserCode(Integer userCode) {
+        this.userCode = userCode;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", version=").append(version);
+        sb.append(", compareUser=").append(compareUser);
+        sb.append(", doType=").append(doType);
+        sb.append(", operatingLeverage=").append(operatingLeverage);
+        sb.append(", round=").append(round);
+        sb.append(", seatSerial=").append(seatSerial);
+        sb.append(", userCode=").append(userCode);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

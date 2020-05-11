@@ -7,21 +7,21 @@ import org.apache.ibatis.annotations.InsertProvider;
 
 public interface GamblingStatisticsMapper {
     @Insert({
-        "insert into t_gambling_statistics (ID, CREATEDATE, ",
-        "LASTMODIFIEDTIME, VERSION, ",
-        "ENDTIME, INTEGRAL, ",
-        "ROOMSERIAL, SEATSERIAL, ",
-        "STARTTIME, USERCODE, ",
-        "GAMBLING)",
-        "values (#{id,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, ",
-        "#{lastmodifiedtime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
-        "#{endtime,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, ",
-        "#{roomserial,jdbcType=INTEGER}, #{seatserial,jdbcType=INTEGER}, ",
-        "#{starttime,jdbcType=VARCHAR}, #{usercode,jdbcType=INTEGER}, ",
+        "insert into t_gambling_statistics (id, create_date, ",
+        "last_modified_time, version, ",
+        "end_time, integral, ",
+        "room_serial, seat_serial, ",
+        "start_time, user_code, ",
+        "gambling)",
+        "values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
+        "#{lastModifiedTime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
+        "#{endTime,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, ",
+        "#{roomSerial,jdbcType=INTEGER}, #{seatSerial,jdbcType=INTEGER}, ",
+        "#{startTime,jdbcType=VARCHAR}, #{userCode,jdbcType=INTEGER}, ",
         "#{gambling,jdbcType=VARCHAR})"
     })
     int insert(GamblingStatistics record);
 
-    @InsertProvider(type= GamblingStatisticsSqlProvider.class, method="insertSelective")
+    @InsertProvider(type=GamblingStatisticsSqlProvider.class, method="insertSelective")
     int insertSelective(GamblingStatistics record);
 }

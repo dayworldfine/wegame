@@ -10,47 +10,47 @@ public class UserSqlProvider {
         sql.INSERT_INTO("t_user");
         
         if (record.getId() != null) {
-            sql.VALUES("ID", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreatedate() != null) {
-            sql.VALUES("CREATEDATE", "#{createdate,jdbcType=VARCHAR}");
+        if (record.getCreateDate() != null) {
+            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
         }
         
-        if (record.getLastmodifiedtime() != null) {
-            sql.VALUES("LASTMODIFIEDTIME", "#{lastmodifiedtime,jdbcType=VARCHAR}");
+        if (record.getLastModifiedTime() != null) {
+            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {
-            sql.VALUES("VERSION", "#{version,jdbcType=BIGINT}");
+            sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
         if (record.getCode() != null) {
-            sql.VALUES("CODE", "#{code,jdbcType=INTEGER}");
+            sql.VALUES("code", "#{code,jdbcType=INTEGER}");
         }
         
-        if (record.getHeadportrait() != null) {
-            sql.VALUES("HEADPORTRAIT", "#{headportrait,jdbcType=VARCHAR}");
+        if (record.getHeadPortrait() != null) {
+            sql.VALUES("head_portrait", "#{headPortrait,jdbcType=VARCHAR}");
         }
         
         if (record.getIntegral() != null) {
-            sql.VALUES("INTEGRAL", "#{integral,jdbcType=INTEGER}");
+            sql.VALUES("integral", "#{integral,jdbcType=INTEGER}");
         }
         
-        if (record.getNickname() != null) {
-            sql.VALUES("NICKNAME", "#{nickname,jdbcType=VARCHAR}");
+        if (record.getNickName() != null) {
+            sql.VALUES("nick_name", "#{nickName,jdbcType=VARCHAR}");
         }
         
-        if (record.getPassword() != null) {
-            sql.VALUES("PASSWORD", "#{password,jdbcType=VARCHAR}");
+        if (record.getPwd() != null) {
+            sql.VALUES("pwd", "#{pwd,jdbcType=VARCHAR}");
         }
         
         if (record.getPhone() != null) {
-            sql.VALUES("PHONE", "#{phone,jdbcType=INTEGER}");
+            sql.VALUES("phone", "#{phone,jdbcType=INTEGER}");
         }
         
-        if (record.getUsername() != null) {
-            sql.VALUES("USERNAME", "#{username,jdbcType=VARCHAR}");
+        if (record.getUserName() != null) {
+            sql.VALUES("user_name", "#{userName,jdbcType=VARCHAR}");
         }
         
         return sql.toString();

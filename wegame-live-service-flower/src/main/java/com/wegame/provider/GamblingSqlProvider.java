@@ -10,31 +10,31 @@ public class GamblingSqlProvider {
         sql.INSERT_INTO("t_gambling");
         
         if (record.getId() != null) {
-            sql.VALUES("ID", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreatedate() != null) {
-            sql.VALUES("CREATEDATE", "#{createdate,jdbcType=VARCHAR}");
+        if (record.getCreateDate() != null) {
+            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
         }
         
-        if (record.getLastmodifiedtime() != null) {
-            sql.VALUES("LASTMODIFIEDTIME", "#{lastmodifiedtime,jdbcType=VARCHAR}");
+        if (record.getLastModifiedTime() != null) {
+            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
         }
         
         if (record.getVersion() != null) {
-            sql.VALUES("VERSION", "#{version,jdbcType=BIGINT}");
+            sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
-        if (record.getRoomserial() != null) {
-            sql.VALUES("ROOMSERIAL", "#{roomserial,jdbcType=INTEGER}");
+        if (record.getRoomSerial() != null) {
+            sql.VALUES("room_serial", "#{roomSerial,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("STATUS", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
         }
         
-        if (record.getSeatid() != null) {
-            sql.VALUES("SEATID", "#{seatid,jdbcType=VARCHAR}");
+        if (record.getSeatId() != null) {
+            sql.VALUES("seat_id", "#{seatId,jdbcType=VARCHAR}");
         }
         
         return sql.toString();

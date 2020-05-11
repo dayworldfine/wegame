@@ -7,17 +7,17 @@ import org.apache.ibatis.annotations.InsertProvider;
 
 public interface GamblingMapper {
     @Insert({
-        "insert into t_gambling (ID, CREATEDATE, ",
-        "LASTMODIFIEDTIME, VERSION, ",
-        "ROOMSERIAL, STATUS, ",
-        "SEATID)",
-        "values (#{id,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, ",
-        "#{lastmodifiedtime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
-        "#{roomserial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, ",
-        "#{seatid,jdbcType=VARCHAR})"
+        "insert into t_gambling (id, create_date, ",
+        "last_modified_time, version, ",
+        "room_serial, status, ",
+        "seat_id)",
+        "values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
+        "#{lastModifiedTime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
+        "#{roomSerial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, ",
+        "#{seatId,jdbcType=VARCHAR})"
     })
     int insert(Gambling record);
 
-    @InsertProvider(type= GamblingSqlProvider.class, method="insertSelective")
+    @InsertProvider(type=GamblingSqlProvider.class, method="insertSelective")
     int insertSelective(Gambling record);
 }

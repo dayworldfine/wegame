@@ -13,38 +13,34 @@ import java.util.List;
 @Repository
 public interface SeatMapper {
     @Insert({
-        "insert into t_seat (ID, CREATEDATE, ",
-        "LASTMODIFIEDTIME, VERSION, ",
-        "SERIAL, STATUS, ",
-        "ROOMID, USERCODE, ",
-        "SEECARD, BOARDA, ",
-        "BOARDB, BOARDC)",
-        "values (#{id,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, ",
-        "#{lastmodifiedtime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
+        "insert into t_seat (id, create_date, ",
+        "last_modified_time, version, ",
+        "serial, status, ",
+        "room_id, user_code, ",
+        "see_card)",
+        "values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
+        "#{lastModifiedTime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
         "#{serial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, ",
-        "#{roomid,jdbcType=VARCHAR}, #{usercode,jdbcType=INTEGER}, ",
-        "#{seecard,jdbcType=INTEGER}, #{boarda,jdbcType=INTEGER}, ",
-        "#{boardb,jdbcType=INTEGER}, #{boardc,jdbcType=INTEGER})"
+        "#{roomId,jdbcType=VARCHAR}, #{userCode,jdbcType=INTEGER}, ",
+        "#{seeCard,jdbcType=INTEGER})"
     })
     int insert(Seat record);
 
-    @InsertProvider(type= SeatSqlProvider.class, method="insertSelective")
+    @InsertProvider(type=SeatSqlProvider.class, method="insertSelective")
     int insertSelective(Seat record);
 
-//        @Query(value = "SELECT u.Code as userCode, u.headPortrait as userImg, u.nickName as userNickName,\n" +
-//            "s.SERIAL%6 as seatSerial, u.integral as integral, s.BOARDA as boardA ,\n" +
-//            "s.BOARDB as boardB ,s.BOARDC as boardC , s.`STATUS` as status\n" +
-//            "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.ROOMID\n" +
-//            "LEFT JOIN t_user u ON u.`CODE` = s.USERCODE\n" +
-//            "WHERE r.SERIAL=?1",nativeQuery = true)
-
+    /**
+      * 查看房间信息
+      * @param serial
+      * @return
+      */
     @Select("SELECT u.Code as userCode, u.headPortrait as userImg, u.nickName as userNickName,\n" +
             "s.SERIAL%6 as seatSerial, u.integral as integral, s.BOARDA as boardA ,\n" +
             "s.BOARDB as boardB ,s.BOARDC as boardC , s.`STATUS` as status\n" +
-            "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.ROOMID\n" +
-            "LEFT JOIN t_user u ON u.`CODE` = s.USERCODE\n" +
-            "WHERE r.SERIAL=#{serial,jdbcType=INTEGER}")
-    List<SeatUserEntity> findRoomInfo(int serial);
+            "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.room_id\n" +
+            "LEFT JOIN t_user u ON u.`CODE` = s.user_code\n" +
+            "WHERE r.SERIAL= #{serial,jdbcType=INTEGER}")
+    List<SeatUserEntity> findRoomInfo(Integer serial);
 
     /**
      * 准备
@@ -53,20 +49,12 @@ public interface SeatMapper {
      * @param seatSerial
      * @return
      */
-//    @Query(value = "update t_seat t\n" +
-//            "LEFT JOIN t_room r\n" +
-//            "ON t.ROOMID = r.ID\n" +
-//            "SET t.`STATUS` = 2\n" +
-//            "WHERE r.SERIAL = (?1)\n" +
-//            "AND t.USERCODE = (?2)\n" +
-//            "AND t.SERIAL = (?3)\n" +
-//            "AND t.`STATUS` !=2",nativeQuery = true)
     @Select("update t_seat t\n" +
             "LEFT JOIN t_room r\n" +
             "ON t.ROOMID = r.ID\n" +
             "SET t.`STATUS` = 2\n" +
             "WHERE r.SERIAL = #{roomSerial,jdbcType=INTEGER}\n" +
-            "AND t.USERCODE =#{userCode,jdbcType=INTEGER}\n" +
+            "AND t.USERCODE = #{userCode,jdbcType=INTEGER}\n" +
             "AND t.SERIAL = #{seatSerial,jdbcType=INTEGER}\n" +
             "AND t.`STATUS` !=2")
     int saveUserSetOut(int roomSerial, int userCode, int seatSerial);
