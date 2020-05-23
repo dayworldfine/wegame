@@ -1,5 +1,9 @@
 package com.wegame.tools.flower;
 
+import com.wegame.model.Board;
+
+import java.util.List;
+
 public class PlayerUtil {
 
 	// 将一副牌按牌面从大到小排序
@@ -44,6 +48,12 @@ public class PlayerUtil {
 			player.cards[0] = player.cards[1];
 			player.cards[1] = tempCard;
 		}
+	}
+
+	//将List<Player> 类型转换成List<Board> 类型
+	public static List<Board> listPlayerToListBoard(List<Player> playerList){
+
+		return  null;
 	}
 
 }
