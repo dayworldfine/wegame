@@ -5,48 +5,48 @@ import java.io.Serializable;
 public class Room implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.484
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.484
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.485
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.485
      */
     private Long version;
 
     /**
      * 用户名
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.485
      */
     private String roomName;
 
     /**
      * 序号
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.485
      */
     private Integer serial;
 
     /**
      * 状态
-	 * 2020-05-11T16:28:03.513
+	 * 2020-05-26T09:58:35.485
      */
     private Integer status;
 
     /**
-     * 2020-05-11T16:28:03.514
+     * 2020-05-26T09:58:35.485
      */
     private static final long serialVersionUID = 1L;
 

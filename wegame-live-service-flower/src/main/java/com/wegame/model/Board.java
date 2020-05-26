@@ -5,78 +5,96 @@ import java.io.Serializable;
 public class Board implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.519
+	 * 2020-05-26T09:58:35.489
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.519
+	 * 2020-05-26T09:58:35.489
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.519
+	 * 2020-05-26T09:58:35.489
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.519
+	 * 2020-05-26T09:58:35.490
      */
     private Long version;
 
     /**
+     * 用户编号
+	 * 2020-05-26T09:58:35.490
+     */
+    private Integer userCode;
+
+    /**
      * 第一张牌花色
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer firstBoardColor;
 
     /**
      * 第一张牌值
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer firstBoardValue;
 
     /**
      * 第二张牌花色
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer secondBoardColor;
 
     /**
      * 第二张牌值
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer secondBoardValue;
 
     /**
      * 第三张牌花色
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer thirdlyBoardColor;
 
     /**
      * 第三张牌值
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer thirdlyBoardValue;
 
     /**
      * 牌值大小
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Long size;
 
     /**
      * 牌值类型
-	 * 2020-05-11T16:28:03.520
+	 * 2020-05-26T09:58:35.490
      */
     private Integer type;
 
     /**
-     * 2020-05-11T16:28:03.520
+     * 是否为特殊牌
+	 * 2020-05-26T09:58:35.490
+     */
+    private Integer special;
+
+    /**
+     * A32也是顺子
+	 * 2020-05-26T09:58:35.490
+     */
+    private Integer isa32;
+
+    /**
+     * 2020-05-26T09:58:35.490
      */
     private static final long serialVersionUID = 1L;
 
@@ -134,6 +152,20 @@ public class Board implements Serializable {
      */
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    /**
+     * 用户编号
+     */
+    public Integer getUserCode() {
+        return userCode;
+    }
+
+    /**
+     * 用户编号
+     */
+    public void setUserCode(Integer userCode) {
+        this.userCode = userCode;
     }
 
     /**
@@ -248,6 +280,34 @@ public class Board implements Serializable {
         this.type = type;
     }
 
+    /**
+     * 是否为特殊牌
+     */
+    public Integer getSpecial() {
+        return special;
+    }
+
+    /**
+     * 是否为特殊牌
+     */
+    public void setSpecial(Integer special) {
+        this.special = special;
+    }
+
+    /**
+     * A32也是顺子
+     */
+    public Integer getIsa32() {
+        return isa32;
+    }
+
+    /**
+     * A32也是顺子
+     */
+    public void setIsa32(Integer isa32) {
+        this.isa32 = isa32;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -258,6 +318,7 @@ public class Board implements Serializable {
         sb.append(", createDate=").append(createDate);
         sb.append(", lastModifiedTime=").append(lastModifiedTime);
         sb.append(", version=").append(version);
+        sb.append(", userCode=").append(userCode);
         sb.append(", firstBoardColor=").append(firstBoardColor);
         sb.append(", firstBoardValue=").append(firstBoardValue);
         sb.append(", secondBoardColor=").append(secondBoardColor);
@@ -266,6 +327,8 @@ public class Board implements Serializable {
         sb.append(", thirdlyBoardValue=").append(thirdlyBoardValue);
         sb.append(", size=").append(size);
         sb.append(", type=").append(type);
+        sb.append(", special=").append(special);
+        sb.append(", isa32=").append(isa32);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

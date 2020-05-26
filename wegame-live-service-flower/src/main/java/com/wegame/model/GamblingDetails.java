@@ -5,66 +5,66 @@ import java.io.Serializable;
 public class GamblingDetails implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private Long version;
 
     /**
      * 比牌用户id
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private String compareUser;
 
     /**
      * 操作类型
-	 * 2020-05-11T16:28:03.510
+	 * 2020-05-26T09:58:35.481
      */
     private Integer doType;
 
     /**
      * 操作筹码加减
-	 * 2020-05-11T16:28:03.511
+	 * 2020-05-26T09:58:35.481
      */
     private Integer operatingLeverage;
 
     /**
      * 轮次
-	 * 2020-05-11T16:28:03.511
+	 * 2020-05-26T09:58:35.482
      */
     private Integer round;
 
     /**
      * 座位序号
-	 * 2020-05-11T16:28:03.511
+	 * 2020-05-26T09:58:35.482
      */
     private Integer seatSerial;
 
     /**
      * 用户编码
-	 * 2020-05-11T16:28:03.511
+	 * 2020-05-26T09:58:35.482
      */
     private Integer userCode;
 
     /**
-     * 2020-05-11T16:28:03.511
+     * 2020-05-26T09:58:35.482
      */
     private static final long serialVersionUID = 1L;
 

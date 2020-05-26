@@ -5,48 +5,48 @@ import java.io.Serializable;
 public class Gambling implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.493
+	 * 2020-05-26T09:58:35.462
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private Long version;
 
     /**
      * 房间序号
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private Integer roomSerial;
 
     /**
      * 状态
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private Integer status;
 
     /**
      * 庄家座位序号
-	 * 2020-05-11T16:28:03.495
+	 * 2020-05-26T09:58:35.464
      */
     private String seatId;
 
     /**
-     * 2020-05-11T16:28:03.495
+     * 2020-05-26T09:58:35.464
      */
     private static final long serialVersionUID = 1L;
 

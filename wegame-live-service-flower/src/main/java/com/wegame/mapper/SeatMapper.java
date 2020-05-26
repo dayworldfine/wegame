@@ -69,7 +69,7 @@ public interface SeatMapper {
      */
     @Select("SELECT \n" +
             "SUM(CASE WHEN t.status = 2 THEN 1 ELSE 0 END ) AS 'isSetOut',\n" +
-            "count(*) AS 'isAllOut'\n" +
+            "count(*) AS 'isAllOut' \n" +
             "FROM t_seat t\n" +
             "LEFT JOIN t_room r\n" +
             "ON t.room_id = r.ID\n" +

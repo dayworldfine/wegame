@@ -31,10 +31,13 @@ public interface BoardMapper {
     int insertSelective(Board record);
 
     @Insert("<script>"  +
-            "INSERT INTO cms_portal_menu(name,service_type,index_code) VALUES" +
-            "<foreach collection=\"list\" item=\"item1\" index=\"index\"  separator=\",\">" +
-            "(#{item1.name},#{item1.serviceType},#{item1.indexCode})" +
+            "INSERT INTO t_board(firstBoardValue,firstBoardColor,secondBoardValue,secondBoardColor" +
+            ",thirdlyBoardValue,thirdlyBoardColor,size,type,special,isa32) VALUES" +
+            "<foreach collection=\"boards\" item=\"item\" index=\"index\"  separator=\",\">" +
+            "(#{item.firstBoardValue},#{item.firstBoardColor},#{item.secondBoardValue}" +
+            ",#{item.secondBoardColor},#{item.thirdlyBoardValue},#{item.thirdlyBoardColor}" +
+            ",#{item.size},#{item.type},#{item.special},#{item.isa32})" +
             "</foreach>" +
             "</script>")
-    int insertAll(List<Player> players);
+    int insertAll(List<Board> boards);
 }

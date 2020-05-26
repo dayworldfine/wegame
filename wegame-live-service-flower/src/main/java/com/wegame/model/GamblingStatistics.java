@@ -5,72 +5,72 @@ import java.io.Serializable;
 public class GamblingStatistics implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private Long version;
 
     /**
      * 结束时间
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String endTime;
 
     /**
      * 积分
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private Integer integral;
 
     /**
      * 房间序号
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private Integer roomSerial;
 
     /**
      * 座位序号
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private Integer seatSerial;
 
     /**
      * 开始时间
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String startTime;
 
     /**
      * 用户编码
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private Integer userCode;
 
     /**
      * 牌局
-	 * 2020-05-11T16:28:03.512
+	 * 2020-05-26T09:58:35.483
      */
     private String gambling;
 
     /**
-     * 2020-05-11T16:28:03.512
+     * 2020-05-26T09:58:35.483
      */
     private static final long serialVersionUID = 1L;
 

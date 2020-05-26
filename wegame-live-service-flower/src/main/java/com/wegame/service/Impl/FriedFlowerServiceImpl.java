@@ -4,8 +4,10 @@ import com.wegame.entity.SeatUserEntity;
 import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.RoomMapper;
 import com.wegame.mapper.SeatMapper;
+import com.wegame.model.Board;
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
+import com.wegame.tools.flower.Card;
 import com.wegame.tools.flower.FriedFlowerJsonObject;
 import com.wegame.tools.flower.Player;
 import com.wegame.tools.flower.calculator.impl.NonFlowerValueCalculator;
@@ -18,6 +20,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -138,8 +141,24 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         List<Player> players = playerProvider.getPlayers(isSetOut);
         /*输出每个角色的所有*/
         System.out.println("Player:"+players);
+        //拼接数据
+        List<Board> boards = new ArrayList<>();
+        Board board ;
+        for (Player p : players){
+            board = new Board();
+            Card[] cards = p.getCards();
+            board.setFirstBoardValue(cards[0].getNumber());
+            board.setFirstBoardColor(cards[0].getFlower());
+            board.setSecondBoardValue(cards[1].getNumber());
+            board.setSecondBoardColor(cards[1].getFlower());
+            board.setThirdlyBoardValue(cards[2].getNumber());
+            board.setThirdlyBoardColor(cards[2].getFlower());
+            board.setType(p.getType());
+            board.setSize((long) p.getValue());
+            boards.add(board);
+        }
         /*存入数据库*/
-        int num =  boardMapper.insertAll(players);
+        int num =  boardMapper.insertAll(boards);  //待测试
 
 
     }

@@ -5,60 +5,60 @@ import java.io.Serializable;
 public class Seat implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.514
+	 * 2020-05-26T09:58:35.486
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.514
+	 * 2020-05-26T09:58:35.486
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.514
+	 * 2020-05-26T09:58:35.486
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.514
+	 * 2020-05-26T09:58:35.486
      */
     private Long version;
 
     /**
      * 序号
-	 * 2020-05-11T16:28:03.514
+	 * 2020-05-26T09:58:35.486
      */
     private Integer serial;
 
     /**
      * 状态
-	 * 2020-05-11T16:28:03.515
+	 * 2020-05-26T09:58:35.486
      */
     private Integer status;
 
     /**
      * 房间id
-	 * 2020-05-11T16:28:03.515
+	 * 2020-05-26T09:58:35.486
      */
     private String roomId;
 
     /**
      * 用户编码
-	 * 2020-05-11T16:28:03.515
+	 * 2020-05-26T09:58:35.486
      */
     private Integer userCode;
 
     /**
      * 看牌情况
-	 * 2020-05-11T16:28:03.515
+	 * 2020-05-26T09:58:35.486
      */
     private Integer seeCard;
 
     /**
-     * 2020-05-11T16:28:03.515
+     * 2020-05-26T09:58:35.486
      */
     private static final long serialVersionUID = 1L;
 

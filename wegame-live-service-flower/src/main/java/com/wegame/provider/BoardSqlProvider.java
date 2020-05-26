@@ -25,6 +25,10 @@ public class BoardSqlProvider {
             sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
+        if (record.getUserCode() != null) {
+            sql.VALUES("user_code", "#{userCode,jdbcType=INTEGER}");
+        }
+        
         if (record.getFirstBoardColor() != null) {
             sql.VALUES("first_board_color", "#{firstBoardColor,jdbcType=INTEGER}");
         }
@@ -55,6 +59,14 @@ public class BoardSqlProvider {
         
         if (record.getType() != null) {
             sql.VALUES("type", "#{type,jdbcType=INTEGER}");
+        }
+        
+        if (record.getSpecial() != null) {
+            sql.VALUES("Special", "#{special,jdbcType=INTEGER}");
+        }
+        
+        if (record.getIsa32() != null) {
+            sql.VALUES("isA32", "#{isa32,jdbcType=INTEGER}");
         }
         
         return sql.toString();

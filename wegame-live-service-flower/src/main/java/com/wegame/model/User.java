@@ -5,72 +5,72 @@ import java.io.Serializable;
 public class User implements Serializable {
     /**
      * ID
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String id;
 
     /**
      * 创建日期
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String createDate;
 
     /**
      * 最后修改日期
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String lastModifiedTime;
 
     /**
      * 版本
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private Long version;
 
     /**
      * 编号
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private Integer code;
 
     /**
      * 头像
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String headPortrait;
 
     /**
      * 积分
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private Integer integral;
 
     /**
      * 昵称
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String nickName;
 
     /**
      * 密码
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String pwd;
 
     /**
      * 手机号
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private Integer phone;
 
     /**
      * 账号
-	 * 2020-05-11T16:28:03.518
+	 * 2020-05-26T09:58:35.488
      */
     private String userName;
 
     /**
-     * 2020-05-11T16:28:03.518
+     * 2020-05-26T09:58:35.488
      */
     private static final long serialVersionUID = 1L;
 
