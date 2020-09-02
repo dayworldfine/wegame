@@ -5,6 +5,7 @@ import Login from "@/views/Login/Login";                           //登录
 import Home from "@/views/Home/Home";                        //主页
 import Landlords from "@/views/Landlords/Landlords";                   //斗地主
 import GoldenFlower from "@/views/GoldenFlower/GoldenFlower";             //炸金花
+import GoldenFlowerTest from "@/views/GoldenFlower/GoldenFlowerTest";             //炸金花
 
 
 
@@ -19,5 +20,6 @@ export default new Router({
         // {path: 'GoldenFlower', name: 'GoldenFlower', component: GoldenFlower}                // 炸金花
       ]},
     {path: '/GoldenFlower', name: 'GoldenFlower', component: GoldenFlower},                  // 炸金花
+    {path: '/GoldenFlowerTest', name: 'GoldenFlowerTest', component: GoldenFlowerTest},                  // 炸金花
   ]
 })

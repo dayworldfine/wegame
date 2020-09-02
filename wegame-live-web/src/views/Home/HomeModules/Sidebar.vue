@@ -32,6 +32,7 @@ export default {
         {'name': '斗地主', 'icon': 'el-icon-star-off', 'index': '/Home/Landlords'},
         // {'name': '炸金花', 'icon': 'el-icon-star-off', 'index': '/Home/GoldenFlower'},
         {'name': '炸金花', 'icon': 'el-icon-star-off', 'index': '/GoldenFlower'},
+        {'name': '炸金花', 'icon': 'el-icon-star-off', 'index': '/GoldenFlowerTest'},
       ],
     };
   },
