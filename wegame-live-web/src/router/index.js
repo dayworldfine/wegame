@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 //分割线
-import Login from "@/views/Login";                           //登录
+import Login from "@/views/Login/Login";                           //登录
 import Home from "@/views/Home/Home";                        //主页
-import Landlords from "@/views/Landlords";                   //斗地主
-import GoldenFlower from "@/views/GoldenFlower";             //炸金花
+import Landlords from "@/views/Landlords/Landlords";                   //斗地主
+import GoldenFlower from "@/views/GoldenFlower/GoldenFlower";             //炸金花
 
 
 
