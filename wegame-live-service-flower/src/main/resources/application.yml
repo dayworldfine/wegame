@@ -6,7 +6,7 @@ spring:
       #main:
     #allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   datasource:
-    url: jdbc:mysql://localhost:3306/wegame?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/wegame?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: wswbh
 

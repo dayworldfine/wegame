@@ -51,6 +51,7 @@
 <style scoped>
   .login-wrap {
     height: 100%;
+    width: 100%;
     background-color: #324152;
     display: flex;
     justify-content: center;
@@ -62,9 +63,6 @@
     background-color: #ffffff;
     border-radius: 5%;
     padding: 30px;
-  }
-  .login-btn {
-    width: 100%;
-    border-radius: 5px;
+    /*min-width: 960px;*/
   }
 </style>
