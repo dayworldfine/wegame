@@ -1,11 +1,11 @@
 <template>
   <div class="outer">
 
-    <div class="outer-flex outer-flex-one">
+    <div class="outer-flex outer-flex-one" >
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" >
+        <div class="people-left" v-show="showSit[0]==false">
           <div>{{userList[0].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -14,7 +14,7 @@
           <div >{{userList[0].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[0]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -40,7 +40,7 @@
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left">
+        <div class="people-left" v-show="showSit[1]==false">
           <div>{{userList[1].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -49,7 +49,7 @@
           <div >{{userList[1].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[1]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -78,7 +78,7 @@
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" >
+        <div class="people-left" v-show="showSit[2]==false">
           <div>{{userList[0].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -87,7 +87,7 @@
           <div>{{userList[0].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[2]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -113,7 +113,7 @@
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left">
+        <div class="people-left" v-show="showSit[3]==false">
           <div>{{userList[1].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -122,7 +122,7 @@
           <div>{{userList[1].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[3]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -151,7 +151,7 @@
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" >
+        <div class="people-left" v-show="showSit[4]==false">
           <div>{{userList[0].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -160,7 +160,7 @@
           <div >{{userList[0].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[4]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -186,7 +186,7 @@
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left">
+        <div class="people-left" v-show="showSit[5]==false">
           <div>{{userList[1].userNickName}}</div>
           <el-image
             class="people-userImg"
@@ -195,7 +195,7 @@
           <div>{{userList[1].integral}}</div>
         </div>
         <!--右边框-->
-        <div class="people-right">
+        <div class="people-right" v-show="showSit[5]==false">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -310,19 +310,30 @@
         //坐下按钮显示
         showSit: [true, true, true, true, true, true],
         //用户框
-        styleOne: [
-          "display:none",
-          "display:none",
-          "display:none",
-          "display:none",
-          "display:none",
-          "display:none"
-        ],
+        // styleOne: [
+        //   "display:none",
+        //   "display:none",
+        //   "display:none",
+        //   "display:none",
+        //   "display:none",
+        //   "display:none"
+        // ],
+        // styleOne: [true, true, true, true, true, true],
         imgList: [
           {id: "1", url: "/static/card_01.png"},
           {id: "2", url: "/static/card_01.png"},
           {id: "3", url: "/static/card_01.png"},
         ],
+      }
+    },
+    computed:{
+      styleOne(){
+        let arrList=[];
+        this.showSit.forEach((arr)=>{
+          arrList.push(!arr);
+        });
+        console.log("arrList",arrList)
+        return arrList;
       }
     },
     created() {
@@ -332,7 +343,6 @@
 
       Vue.prototype.$socket.$on('socket', (res) => {
         console.log("监听到的socket消息", res)
-
         switch (res.type) {
           case 0:
             this.room(res);
@@ -346,7 +356,7 @@
             this.userSitDown(res);
             break;
           case 4:
-            this.user
+            // this.user
             break;
           case 5:
             this.userSetOut(res);
@@ -397,22 +407,34 @@
       //类型0 系统消息
       room(param) {
         let userList = param.userList;
-        for (let i = 0; i < userList.length; i++) {
-          switch (userList[i].seatSerial) {
-            case 1:
-              this.showSit[0] = false;
-              this.styleOne[0] = "display:inline";
-              this.$forceUpdate()
-              break;
-            case 2:
-              this.showSit[1] = false;
-              this.styleOne[1] = "display:inline"
-              this.$forceUpdate()
-              break;
-            default:
-              break;
-          }
-        }
+        userList.forEach(ar=>{
+            switch (ar.seatSerial) {
+              case 1:
+                this.showSit[0] = false;
+                this.$forceUpdate()
+                break;
+              case 2:
+                this.showSit[1] = false;
+                this.$forceUpdate()
+                break;
+              default:
+                break;
+            }
+        });
+        // for (let i = 0; i < userList.length; i++) {
+        //   switch (userList[i].seatSerial) {
+        //     case 1:
+        //       this.showSit[0] = false;
+        //       this.$forceUpdate()
+        //       break;
+        //     case 2:
+        //       this.showSit[1] = false;
+        //       this.$forceUpdate()
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        // }
       },
       //类型1 用户进入房间
       userInToRoom(param) {
@@ -422,7 +444,7 @@
       userSitDown(param) {
         let subscript = param.seatSerial-1
         this.showSit[subscript] = false;
-        this.styleOne[subscript] = "display:inline";
+        // this.styleOne[subscript] = "display:inline";
         this.userList[subscript]={
           userNickName: param.userNickName,
           userImg: param.userImg,
@@ -496,6 +518,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    margin-top: 50px;
 
   }
   .people-userImg{
