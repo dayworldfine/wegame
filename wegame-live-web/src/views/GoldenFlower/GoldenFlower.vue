@@ -490,11 +490,6 @@
 </script>
 
 <style scoped>
-  .el-row--flex {
-    margin: 0 auto;
-    height: 100%;
-    width: 100%;
-  }
 
   .outer { /*背景*/
     width: 100%;
