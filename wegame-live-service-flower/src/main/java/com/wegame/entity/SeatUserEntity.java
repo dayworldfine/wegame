@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SeatUserEntity {
 
-    private  Integer userCode;
+    private  Integer userId;
 
     private String userImg;
 
@@ -13,7 +13,7 @@ public class SeatUserEntity {
 
     private Integer seatSerial;
 
-    private Integer integral;
+    private Long integral;
 
     private Integer boardA;
 

@@ -5,109 +5,121 @@ import java.io.Serializable;
 public class GamblingDetails implements Serializable {
     /**
      * ID
-	 * 2020-05-26T09:58:35.481
+	 * 2020-09-06T21:55:05.243
      */
-    private String id;
+    private Long id;
 
     /**
-     * 创建日期
-	 * 2020-05-26T09:58:35.481
+     * 创建时间
+	 * 2020-09-06T21:55:05.243
      */
-    private String createDate;
+    private Long createTime;
 
     /**
-     * 最后修改日期
-	 * 2020-05-26T09:58:35.481
+     * 更新时间
+	 * 2020-09-06T21:55:05.243
      */
-    private String lastModifiedTime;
+    private Long updateTime;
 
     /**
      * 版本
-	 * 2020-05-26T09:58:35.481
+	 * 2020-09-06T21:55:05.243
      */
     private Long version;
 
     /**
-     * 比牌用户id
-	 * 2020-05-26T09:58:35.481
+     * 牌局id
+	 * 2020-09-06T21:55:05.243
      */
-    private String compareUser;
+    private Long gamblingId;
 
     /**
-     * 操作类型
-	 * 2020-05-26T09:58:35.481
+     * 比牌用户id
+	 * 2020-09-06T21:55:05.243
      */
-    private Integer doType;
+    private Long compareUserId;
+
+    /**
+     * 操作类型(见字典表操作类型枚举)
+	 * 2020-09-06T21:55:05.243
+     */
+    private Byte operationType;
 
     /**
      * 操作筹码加减
-	 * 2020-05-26T09:58:35.481
+	 * 2020-09-06T21:55:05.243
      */
-    private Integer operatingLeverage;
+    private Long operatingLeverage;
 
     /**
      * 轮次
-	 * 2020-05-26T09:58:35.482
+	 * 2020-09-06T21:55:05.243
      */
     private Integer round;
 
     /**
-     * 座位序号
-	 * 2020-05-26T09:58:35.482
+     * 座位id
+	 * 2020-09-06T21:55:05.243
      */
-    private Integer seatSerial;
+    private Integer seatId;
 
     /**
-     * 用户编码
-	 * 2020-05-26T09:58:35.482
+     * 用户id
+	 * 2020-09-06T21:55:05.243
      */
-    private Integer userCode;
+    private Long userId;
 
     /**
-     * 2020-05-26T09:58:35.482
+     * 同用户同轮次排序
+	 * 2020-09-06T21:55:05.243
+     */
+    private Integer sort;
+
+    /**
+     * 2020-09-06T21:55:05.244
      */
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * ID
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
      * 创建日期
      */
-    public String getCreateDate() {
-        return createDate;
+    public Long getCreateTime() {
+        return createTime;
     }
 
     /**
      * 创建日期
      */
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate == null ? null : createDate.trim();
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
-    public String getLastModifiedTime() {
-        return lastModifiedTime;
+    public Long getUpdateTime() {
+        return updateTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
-    public void setLastModifiedTime(String lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
     }
 
     /**
@@ -125,44 +137,58 @@ public class GamblingDetails implements Serializable {
     }
 
     /**
-     * 比牌用户id
+     * 牌局id
      */
-    public String getCompareUser() {
-        return compareUser;
+    public Long getGamblingId() {
+        return gamblingId;
+    }
+
+    /**
+     * 牌局id
+     */
+    public void setGamblingId(Long gamblingId) {
+        this.gamblingId = gamblingId;
     }
 
     /**
      * 比牌用户id
      */
-    public void setCompareUser(String compareUser) {
-        this.compareUser = compareUser == null ? null : compareUser.trim();
+    public Long getCompareUserId() {
+        return compareUserId;
     }
 
     /**
-     * 操作类型
+     * 比牌用户id
      */
-    public Integer getDoType() {
-        return doType;
+    public void setCompareUserId(Long compareUserId) {
+        this.compareUserId = compareUserId;
     }
 
     /**
-     * 操作类型
+     * 操作类型(见字典表操作类型枚举)
      */
-    public void setDoType(Integer doType) {
-        this.doType = doType;
+    public Byte getOperationType() {
+        return operationType;
+    }
+
+    /**
+     * 操作类型(见字典表操作类型枚举)
+     */
+    public void setOperationType(Byte operationType) {
+        this.operationType = operationType;
     }
 
     /**
      * 操作筹码加减
      */
-    public Integer getOperatingLeverage() {
+    public Long getOperatingLeverage() {
         return operatingLeverage;
     }
 
     /**
      * 操作筹码加减
      */
-    public void setOperatingLeverage(Integer operatingLeverage) {
+    public void setOperatingLeverage(Long operatingLeverage) {
         this.operatingLeverage = operatingLeverage;
     }
 
@@ -181,31 +207,45 @@ public class GamblingDetails implements Serializable {
     }
 
     /**
-     * 座位序号
+     * 座位id
      */
-    public Integer getSeatSerial() {
-        return seatSerial;
+    public Integer getSeatId() {
+        return seatId;
     }
 
     /**
-     * 座位序号
+     * 座位id
      */
-    public void setSeatSerial(Integer seatSerial) {
-        this.seatSerial = seatSerial;
+    public void setSeatId(Integer seatId) {
+        this.seatId = seatId;
     }
 
     /**
-     * 用户编码
+     * 用户id
      */
-    public Integer getUserCode() {
-        return userCode;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
-     * 用户编码
+     * 用户id
      */
-    public void setUserCode(Integer userCode) {
-        this.userCode = userCode;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 同用户同轮次排序
+     */
+    public Integer getSort() {
+        return sort;
+    }
+
+    /**
+     * 同用户同轮次排序
+     */
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     @Override
@@ -215,15 +255,17 @@ public class GamblingDetails implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", version=").append(version);
-        sb.append(", compareUser=").append(compareUser);
-        sb.append(", doType=").append(doType);
+        sb.append(", gamblingId=").append(gamblingId);
+        sb.append(", compareUserId=").append(compareUserId);
+        sb.append(", operationType=").append(operationType);
         sb.append(", operatingLeverage=").append(operatingLeverage);
         sb.append(", round=").append(round);
-        sb.append(", seatSerial=").append(seatSerial);
-        sb.append(", userCode=").append(userCode);
+        sb.append(", seatId=").append(seatId);
+        sb.append(", userId=").append(userId);
+        sb.append(", sort=").append(sort);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

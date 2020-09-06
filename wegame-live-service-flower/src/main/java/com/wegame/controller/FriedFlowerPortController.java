@@ -52,20 +52,20 @@ public class FriedFlowerPortController {
      */
     @PostMapping("/userSitDown")
     public JsonResult userSitDown(int type,
-                                  int roomSerial,
-                                  int userCode,
-                                  int seatSerial,
+                                  int roomId,
+                                  int userId,
+                                  int seatId,
                                   String userImg,
                                   String userNickName,
                                   int integral){
         //查询这个座位是否有人
-        int num = ffs.selSeatHavePeople(roomSerial,seatSerial);
+        int num = ffs.selSeatHavePeople(roomId,seatId);
         if(0<num){
             return JsonResult.failure(401,"该位置已经有人坐下了");
         }else{
-            int mif = ffs.SaveUserSitDown(userCode,seatSerial,roomSerial);
+            int mif = ffs.SaveUserSitDown(userId,seatId,roomId);
             if (0<mif){
-                ffs.sendUserSitDown(type,roomSerial,userCode,seatSerial,userImg,userNickName,integral);
+                ffs.sendUserSitDown(type,roomId,userId,seatId,userImg,userNickName,integral);
                 return  JsonResult.success("成功坐下");
             }else{
                 return JsonResult.failure(402,"被人捷足先登");
@@ -97,21 +97,21 @@ public class FriedFlowerPortController {
      */
     @PostMapping("/userSetOut")
     public JsonResult userSetOut(int type,
-                                 int roomSerial,
-                                 int userCode,
-                                 int seatSerial){
-        int num =  ffs.saveUserSetOut(roomSerial,userCode,seatSerial);
+                                 int roomId,
+                                 int userId,
+                                 int seatId){
+        int num =  ffs.saveUserSetOut(roomId,userId,seatId);
         if (0<num){
             //发送即时通讯有人准备
-            ffs.sendUserSetOut(type,roomSerial,seatSerial);
+            ffs.sendUserSetOut(type,roomId,seatId);
             //查询 是否满足开始游戏条件
-            Map<String,Object> countMap= ffs.selGmaeStartCondition(roomSerial);
+            Map<String,Object> countMap= ffs.selGmaeStartCondition(roomId);
             //如果等于0 说明进入房间的人都准备了 要开始游戏
             int isSetOut= Integer.parseInt(String.valueOf(countMap.get("isSetOut")));
             int isAllOut= Integer.parseInt(String.valueOf(countMap.get("isAllOut")));
             if(isSetOut==isAllOut){
                 //发牌游戏开始
-                 ffs.sendAndSaveGmaeStart(roomSerial, isSetOut);
+                 ffs.sendAndSaveGmaeStart(roomId, isSetOut);
             }
             return JsonResult.success("准备成功");
         }else{

@@ -119,7 +119,7 @@ public class FriedFlowerJsonObject {
                                   int seatSerial ){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("seatSerial",seatSerial);
+        obj.put("seatId",seatSerial);
         return obj;
     }
 

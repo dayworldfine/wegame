@@ -5,115 +5,115 @@ import java.io.Serializable;
 public class GamblingStatistics implements Serializable {
     /**
      * ID
-	 * 2020-05-26T09:58:35.483
+	 * 2020-09-06T21:55:05.252
      */
-    private String id;
+    private Long id;
 
     /**
-     * 创建日期
-	 * 2020-05-26T09:58:35.483
+     * 创建时间
+	 * 2020-09-06T21:55:05.252
      */
-    private String createDate;
+    private Long createTime;
 
     /**
-     * 最后修改日期
-	 * 2020-05-26T09:58:35.483
+     * 更新时间
+	 * 2020-09-06T21:55:05.252
      */
-    private String lastModifiedTime;
+    private Long updateTime;
 
     /**
      * 版本
-	 * 2020-05-26T09:58:35.483
+	 * 2020-09-06T21:55:05.252
      */
     private Long version;
 
     /**
-     * 结束时间
-	 * 2020-05-26T09:58:35.483
+     * 积分计算
+	 * 2020-09-06T21:55:05.252
      */
-    private String endTime;
+    private Long integral;
 
     /**
-     * 积分
-	 * 2020-05-26T09:58:35.483
+     * 牌局id
+	 * 2020-09-06T21:55:05.252
      */
-    private Integer integral;
+    private Long gamblingId;
 
     /**
-     * 房间序号
-	 * 2020-05-26T09:58:35.483
+     * 座位id
+	 * 2020-09-06T21:55:05.252
      */
-    private Integer roomSerial;
+    private Integer seatId;
 
     /**
-     * 座位序号
-	 * 2020-05-26T09:58:35.483
+     * 用户id
+	 * 2020-09-06T21:55:05.253
      */
-    private Integer seatSerial;
+    private Long userId;
+
+    /**
+     * 是否胜利(字段常规判断字段)
+	 * 2020-09-06T21:55:05.253
+     */
+    private Byte isWin;
 
     /**
      * 开始时间
-	 * 2020-05-26T09:58:35.483
+	 * 2020-09-06T21:55:05.253
      */
-    private String startTime;
+    private Long startTime;
 
     /**
-     * 用户编码
-	 * 2020-05-26T09:58:35.483
+     * 结束时间
+	 * 2020-09-06T21:55:05.253
      */
-    private Integer userCode;
+    private Long endTime;
 
     /**
-     * 牌局
-	 * 2020-05-26T09:58:35.483
-     */
-    private String gambling;
-
-    /**
-     * 2020-05-26T09:58:35.483
+     * 2020-09-06T21:55:05.253
      */
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * ID
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
      * 创建日期
      */
-    public String getCreateDate() {
-        return createDate;
+    public Long getCreateTime() {
+        return createTime;
     }
 
     /**
      * 创建日期
      */
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate == null ? null : createDate.trim();
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * 最后修改日期
      */
-    public String getLastModifiedTime() {
-        return lastModifiedTime;
+    public Long getUpdateTime() {
+        return updateTime;
     }
 
     /**
      * 最后修改日期
      */
-    public void setLastModifiedTime(String lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
     }
 
     /**
@@ -131,101 +131,101 @@ public class GamblingStatistics implements Serializable {
     }
 
     /**
-     * 结束时间
+     * 积分计算
      */
-    public String getEndTime() {
-        return endTime;
-    }
-
-    /**
-     * 结束时间
-     */
-    public void setEndTime(String endTime) {
-        this.endTime = endTime == null ? null : endTime.trim();
-    }
-
-    /**
-     * 积分
-     */
-    public Integer getIntegral() {
+    public Long getIntegral() {
         return integral;
     }
 
     /**
-     * 积分
+     * 积分计算
      */
-    public void setIntegral(Integer integral) {
+    public void setIntegral(Long integral) {
         this.integral = integral;
     }
 
     /**
-     * 房间序号
+     * 牌局id
      */
-    public Integer getRoomSerial() {
-        return roomSerial;
+    public Long getGamblingId() {
+        return gamblingId;
     }
 
     /**
-     * 房间序号
+     * 牌局id
      */
-    public void setRoomSerial(Integer roomSerial) {
-        this.roomSerial = roomSerial;
+    public void setGamblingId(Long gamblingId) {
+        this.gamblingId = gamblingId;
     }
 
     /**
-     * 座位序号
+     * 座位id
      */
-    public Integer getSeatSerial() {
-        return seatSerial;
+    public Integer getSeatId() {
+        return seatId;
     }
 
     /**
-     * 座位序号
+     * 座位id
      */
-    public void setSeatSerial(Integer seatSerial) {
-        this.seatSerial = seatSerial;
+    public void setSeatId(Integer seatId) {
+        this.seatId = seatId;
+    }
+
+    /**
+     * 用户id
+     */
+    public Long getUserId() {
+        return userId;
+    }
+
+    /**
+     * 用户id
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 是否胜利(字段常规判断字段)
+     */
+    public Byte getIsWin() {
+        return isWin;
+    }
+
+    /**
+     * 是否胜利(字段常规判断字段)
+     */
+    public void setIsWin(Byte isWin) {
+        this.isWin = isWin;
     }
 
     /**
      * 开始时间
      */
-    public String getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
     /**
      * 开始时间
      */
-    public void setStartTime(String startTime) {
-        this.startTime = startTime == null ? null : startTime.trim();
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
     }
 
     /**
-     * 用户编码
+     * 结束时间
      */
-    public Integer getUserCode() {
-        return userCode;
+    public Long getEndTime() {
+        return endTime;
     }
 
     /**
-     * 用户编码
+     * 结束时间
      */
-    public void setUserCode(Integer userCode) {
-        this.userCode = userCode;
-    }
-
-    /**
-     * 牌局
-     */
-    public String getGambling() {
-        return gambling;
-    }
-
-    /**
-     * 牌局
-     */
-    public void setGambling(String gambling) {
-        this.gambling = gambling == null ? null : gambling.trim();
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -235,16 +235,16 @@ public class GamblingStatistics implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", version=").append(version);
-        sb.append(", endTime=").append(endTime);
         sb.append(", integral=").append(integral);
-        sb.append(", roomSerial=").append(roomSerial);
-        sb.append(", seatSerial=").append(seatSerial);
+        sb.append(", gamblingId=").append(gamblingId);
+        sb.append(", seatId=").append(seatId);
+        sb.append(", userId=").append(userId);
+        sb.append(", isWin=").append(isWin);
         sb.append(", startTime=").append(startTime);
-        sb.append(", userCode=").append(userCode);
-        sb.append(", gambling=").append(gambling);
+        sb.append(", endTime=").append(endTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

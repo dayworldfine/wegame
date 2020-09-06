@@ -1,7 +1,5 @@
 package com.wegame.tools.flower;
 
-import com.wegame.model.Board;
-
 import java.util.List;
 
 public class PlayerUtil {
@@ -51,9 +49,9 @@ public class PlayerUtil {
 	}
 
 	//将List<Player> 类型转换成List<Board> 类型
-	public static List<Board> listPlayerToListBoard(List<Player> playerList){
-
-		return  null;
-	}
+//	public static List<Board> listPlayerToListBoard(List<Player> playerList){
+//
+//		return  null;
+//	}
 
 }

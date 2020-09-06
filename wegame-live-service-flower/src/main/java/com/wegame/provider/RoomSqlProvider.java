@@ -10,15 +10,15 @@ public class RoomSqlProvider {
         sql.INSERT_INTO("t_room");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=BIGINT}");
         }
         
-        if (record.getLastModifiedTime() != null) {
-            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=BIGINT}");
         }
         
         if (record.getVersion() != null) {
@@ -29,13 +29,38 @@ public class RoomSqlProvider {
             sql.VALUES("room_name", "#{roomName,jdbcType=VARCHAR}");
         }
         
-        if (record.getSerial() != null) {
-            sql.VALUES("serial", "#{serial,jdbcType=INTEGER}");
+        if (record.getStatus() != null) {
+            sql.VALUES("status", "#{status,jdbcType=TINYINT}");
+        }
+        
+        return sql.toString();
+    }
+
+    public String updateByPrimaryKeySelective(Room record) {
+        SQL sql = new SQL();
+        sql.UPDATE("t_room");
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getVersion() != null) {
+            sql.SET("version = #{version,jdbcType=BIGINT}");
+        }
+        
+        if (record.getRoomName() != null) {
+            sql.SET("room_name = #{roomName,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.SET("status = #{status,jdbcType=TINYINT}");
         }
+        
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

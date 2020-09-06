@@ -4,20 +4,22 @@ import com.wegame.model.Gambling;
 import com.wegame.provider.GamblingSqlProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GamblingMapper {
     @Insert({
-        "insert into t_gambling (id, create_date, ",
-        "last_modified_time, version, ",
-        "room_serial, status, ",
-        "seat_id)",
-        "values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, ",
-        "#{lastModifiedTime,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
-        "#{roomSerial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, ",
-        "#{seatId,jdbcType=VARCHAR})"
+        "insert into t_gambling (id, create_time, ",
+        "update_time, version, ",
+        "room_id, gambling_status, ",
+        "integral_fundus, integral_sum)",
+        "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, ",
+        "#{updateTime,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, ",
+        "#{roomId,jdbcType=BIGINT}, #{gamblingStatus,jdbcType=TINYINT}, ",
+        "#{integralFundus,jdbcType=BIGINT}, #{integralSum,jdbcType=BIGINT})"
     })
     int insert(Gambling record);
 
-    @InsertProvider(type=GamblingSqlProvider.class, method="insertSelective")
+    @InsertProvider(type= GamblingSqlProvider.class, method="insertSelective")
     int insertSelective(Gambling record);
 }

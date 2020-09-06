@@ -10,16 +10,16 @@
 
         <!-- 配置生成pojo的toString()方法的插件 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
-<!--        <commentGenerator>-->
-<!--            <property name="suppressDate" value="true"x/>-->
-<!--            &lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
-<!--            <property name="suppressAllComments" value="true"/>-->
-<!--        </commentGenerator>-->
+        <!--        <commentGenerator>-->
+        <!--            <property name="suppressDate" value="true"x/>-->
+        <!--            &lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
+        <!--            <property name="suppressAllComments" value="true"/>-->
+        <!--        </commentGenerator>-->
         <!--自定义注释-->
         <commentGenerator type="com.wegame.tools.utils.MyCommentGeneratorUtils">
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/wegame?serverTimezone=Asia/Shanghai" userId="root" password="wswbh">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/wegame?serverTimezone=Asia/Shanghai&amp;useSSL=false" userId="root" password="wswbh">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -40,12 +40,12 @@
 
 
         <table tableName="t_gambling"
-           domainObjectName="Gambling"
-           enableCountByExample="false"
-           enableUpdateByExample="false"
-           enableDeleteByExample="false"
-           enableSelectByExample="false"
-           selectByExampleQueryId="false">
+               domainObjectName="Gambling"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
         </table>
 
         <table tableName="t_gambling_details"
@@ -54,12 +54,29 @@
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               selectByExampleQueryId="false"
-             >
+               selectByExampleQueryId="false">
         </table>
 
         <table tableName="t_gambling_statistics"
                domainObjectName="GamblingStatistics"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="t_gambling_message"
+               domainObjectName="GamblingMessage"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="t_gambling_board"
+               domainObjectName="GamblingBoard"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -94,94 +111,6 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="t_board"
-               domainObjectName="Board"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
 
-        <!--<table tableName="sys_user_info"-->
-           <!--domainObjectName="SysUserInfo"-->
-           <!--enableCountByExample="false"-->
-           <!--enableUpdateByExample="false"-->
-           <!--enableDeleteByExample="false"-->
-           <!--enableSelectByExample="false"-->
-           <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-        <!--<table tableName="user_role"-->
-               <!--domainObjectName="UserRole"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-<!--        <table tableName="sys_role"-->
-<!--               domainObjectName="SysRole"-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               selectByExampleQueryId="false">-->
-<!--        </table>-->
-
-        <!--<table tableName="user_dept"-->
-            <!--domainObjectName="UserDept"-->
-            <!--enableCountByExample="false"-->
-            <!--enableUpdateByExample="false"-->
-            <!--enableDeleteByExample="false"-->
-            <!--enableSelectByExample="false"-->
-            <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-        <!--<table tableName="sys_menu"-->
-               <!--domainObjectName="SysMenu"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-        <!--<table tableName="role_menu"-->
-               <!--domainObjectName="RoleMenu"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-        <!--<table tableName="role_dept"-->
-               <!--domainObjectName="RoleDept"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
-
-<!--        <table tableName="sys_dept"-->
-<!--               domainObjectName="SysDept"-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               selectByExampleQueryId="false">-->
-<!--        </table>-->
-
-        <!--<table tableName="sys_log"-->
-               <!--domainObjectName="SysLog"-->
-               <!--enableCountByExample="false"-->
-               <!--enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false"-->
-               <!--enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
     </context>
 </generatorConfiguration>

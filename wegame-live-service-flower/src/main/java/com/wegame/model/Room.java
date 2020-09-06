@@ -5,91 +5,85 @@ import java.io.Serializable;
 public class Room implements Serializable {
     /**
      * ID
-	 * 2020-05-26T09:58:35.484
+	 * 2020-09-06T21:55:05.260
      */
-    private String id;
+    private Long id;
 
     /**
-     * 创建日期
-	 * 2020-05-26T09:58:35.484
+     * 创建时间
+	 * 2020-09-06T21:55:05.260
      */
-    private String createDate;
+    private Long createTime;
 
     /**
-     * 最后修改日期
-	 * 2020-05-26T09:58:35.485
+     * 更新时间
+	 * 2020-09-06T21:55:05.260
      */
-    private String lastModifiedTime;
+    private Long updateTime;
 
     /**
      * 版本
-	 * 2020-05-26T09:58:35.485
+	 * 2020-09-06T21:55:05.260
      */
     private Long version;
 
     /**
-     * 用户名
-	 * 2020-05-26T09:58:35.485
+     * 房间名称
+	 * 2020-09-06T21:55:05.260
      */
     private String roomName;
 
     /**
-     * 序号
-	 * 2020-05-26T09:58:35.485
+     * 状态(字段房间状态枚举)
+	 * 2020-09-06T21:55:05.261
      */
-    private Integer serial;
+    private Byte status;
 
     /**
-     * 状态
-	 * 2020-05-26T09:58:35.485
-     */
-    private Integer status;
-
-    /**
-     * 2020-05-26T09:58:35.485
+     * 2020-09-06T21:55:05.261
      */
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * ID
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
      * 创建日期
      */
-    public String getCreateDate() {
-        return createDate;
+    public Long getCreateTime() {
+        return createTime;
     }
 
     /**
      * 创建日期
      */
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate == null ? null : createDate.trim();
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * 最后修改日期
      */
-    public String getLastModifiedTime() {
-        return lastModifiedTime;
+    public Long getUpdateTime() {
+        return updateTime;
     }
 
     /**
      * 最后修改日期
      */
-    public void setLastModifiedTime(String lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
     }
 
     /**
@@ -107,44 +101,30 @@ public class Room implements Serializable {
     }
 
     /**
-     * 用户名
+     * 房间名称
      */
     public String getRoomName() {
         return roomName;
     }
 
     /**
-     * 用户名
+     * 房间名称
      */
     public void setRoomName(String roomName) {
         this.roomName = roomName == null ? null : roomName.trim();
     }
 
     /**
-     * 序号
+     * 状态(字段房间状态枚举)
      */
-    public Integer getSerial() {
-        return serial;
-    }
-
-    /**
-     * 序号
-     */
-    public void setSerial(Integer serial) {
-        this.serial = serial;
-    }
-
-    /**
-     * 状态
-     */
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
     /**
-     * 状态
+     * 状态(字段房间状态枚举)
      */
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -155,11 +135,10 @@ public class Room implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", version=").append(version);
         sb.append(", roomName=").append(roomName);
-        sb.append(", serial=").append(serial);
         sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

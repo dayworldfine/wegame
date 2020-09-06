@@ -11,7 +11,7 @@ function connect(number) {
   // let socket = new SockJS('/endpoint-websocket');
   let socket = new SockJS(socketUrl);
   socket.onmessage =function(e){
-    console.error("e",e)
+    console.error("onmessage消息",e)
   }
   stompClient = Stomp.over(socket);
   stompClient.connect({},  (frame)=> {
@@ -65,10 +65,10 @@ function sendContent() {
  * @param userNickName
  * @param integral
  */
-function userInToRoom(type,roomSerial,userId,userImg,userNickName,integral) {
+function userInToRoom(type,roomId,userId,userImg,userNickName,integral) {
   stompClient.send("/friedFlowerClient/userInToRoom", {}, JSON.stringify({
     'type':type,
-    'roomSerial':roomSerial,
+    'roomId':roomId,
     "userId":userId,
     'userImg':userImg,
     'userNickName': userNickName,

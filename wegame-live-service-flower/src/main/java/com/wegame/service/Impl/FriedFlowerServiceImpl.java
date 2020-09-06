@@ -1,10 +1,9 @@
 package com.wegame.service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.wegame.entity.SeatUserEntity;
-import com.wegame.mapper.BoardMapper;
+//import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.RoomMapper;
 import com.wegame.mapper.SeatMapper;
-import com.wegame.model.Board;
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.flower.Card;
@@ -43,8 +42,8 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     @Autowired
     private SeatMapper seatMapper;
 
-    @Autowired
-    private BoardMapper boardMapper;
+//    @Autowired
+//    private BoardMapper boardMapper;
 
 //    @Autowired
 //    private RoomRepository roomRepository;
@@ -58,8 +57,8 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public Room findRoomMessageByRoomSerial(Integer roomSerial) {
-        Room room =  roomMapper.findRoomMessageByRoomSerial(roomSerial);
+    public Room findRoomMessageByRoomSerial(Integer roomId) {
+        Room room =  roomMapper.findRoomMessageByRoomSerial(roomId);
 //        Room room = roomRepository.findRoomMessageByRoomSerial(roomSerial);
         return room;
     }
@@ -85,54 +84,54 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
         /* 0 未开始  1 一开始*/
 //        List<JSONObject> objects = seatRepository.findRoomInfo(room.getSerial());
-        List<SeatUserEntity> objects = seatMapper.findRoomInfo(room.getSerial());
+        List<SeatUserEntity> objects = seatMapper.findRoomInfo(room.getId());
         System.out.println("objects:" + objects);
-        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("roomSerial").toString())),
+        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("roomId").toString())),
                 FriedFlowerJsonObject.room(Integer.parseInt(msg.get("type").toString())-1 , objects));
     }
 
     @Override
-    public int selSeatHavePeople(int roomSerial, int seatSerial) {
+    public int selSeatHavePeople(int roomId, int seatId) {
 //        return roomRepository.selSeatHavePeople(roomSerial, seatSerial);
-        return roomMapper.selSeatHavePeople(roomSerial, seatSerial);
+        return roomMapper.selSeatHavePeople(roomId, seatId);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int SaveUserSitDown(int userCode, int seatSerial,int roomSerial) {
-//        return seatRepository.saveUserSitDown(userCode,seatSerial,roomSerial);
+    public int SaveUserSitDown(int userId, int seatId,int roomId) {
+//        return seatRepository.saveUserSitDown(userId,seatId,roomId);
         return  1;
     }
 
     @Override
-    public void sendUserSitDown(int type, int roomSerial, int userCode, int seatSerial, String userImg, String userNickName, int integral) {
-        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomSerial),
-                FriedFlowerJsonObject.userSitDown(type, userCode, seatSerial, userImg,userNickName,integral));
+    public void sendUserSitDown(int type, int roomId, int userId, int seatId, String userImg, String userNickName, int integral) {
+        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomId),
+                FriedFlowerJsonObject.userSitDown(type, userId, seatId, userImg,userNickName,integral));
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
     @Override
-    public int saveUserSetOut(int roomSerial, int userCode, int seatSerial) {
+    public int saveUserSetOut(int roomId, int userId, int seatId) {
 //        return  seatRepository.saveUserSetOut(roomSerial,userCode,seatSerial);
-       return seatMapper.saveUserSetOut(roomSerial,userCode,seatSerial);
+       return seatMapper.saveUserSetOut(roomId,userId,seatId);
     }
 
 
     @Override
-    public void sendUserSetOut(int type, int roomSerial, int seatSerial) {
-        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomSerial),
-                FriedFlowerJsonObject.userSetOut(type,seatSerial));
+    public void sendUserSetOut(int type, int roomId, int seatId) {
+        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomId),
+                FriedFlowerJsonObject.userSetOut(type,seatId));
     }
 
     @Override
-    public Map<String,Object> selGmaeStartCondition(int roomSerial) {
+    public Map<String,Object> selGmaeStartCondition(int roomId) {
 //        return  seatRepository.selGmaeStartCondition(roomSerial);
-        return  seatMapper.selGmaeStartCondition(roomSerial);
+        return  seatMapper.selGmaeStartCondition(roomId);
 
     }
 
     @Override
-    public void sendAndSaveGmaeStart(int roomSerial, int isSetOut) {
+    public void sendAndSaveGmaeStart(int roomId, int isSetOut) {
         //使用有人数下限制的发牌器
         PlayerProvider playerProvider = new LimitedPlayerProvider();
         //使用花色不参与牌大小比较的计算器
@@ -142,23 +141,23 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         /*输出每个角色的所有*/
         System.out.println("Player:"+players);
         //拼接数据
-        List<Board> boards = new ArrayList<>();
-        Board board ;
-        for (Player p : players){
-            board = new Board();
-            Card[] cards = p.getCards();
-            board.setFirstBoardValue(cards[0].getNumber());
-            board.setFirstBoardColor(cards[0].getFlower());
-            board.setSecondBoardValue(cards[1].getNumber());
-            board.setSecondBoardColor(cards[1].getFlower());
-            board.setThirdlyBoardValue(cards[2].getNumber());
-            board.setThirdlyBoardColor(cards[2].getFlower());
-            board.setType(p.getType());
-            board.setSize((long) p.getValue());
-            boards.add(board);
-        }
-        /*存入数据库*/
-        int num =  boardMapper.insertAll(boards);  //待测试
+//        List<Board> boards = new ArrayList<>();
+//        Board board ;
+//        for (Player p : players){
+//            board = new Board();
+//            Card[] cards = p.getCards();
+//            board.setFirstBoardValue(cards[0].getNumber());
+//            board.setFirstBoardColor(cards[0].getFlower());
+//            board.setSecondBoardValue(cards[1].getNumber());
+//            board.setSecondBoardColor(cards[1].getFlower());
+//            board.setThirdlyBoardValue(cards[2].getNumber());
+//            board.setThirdlyBoardColor(cards[2].getFlower());
+//            board.setType(p.getType());
+//            board.setSize((long) p.getValue());
+//            boards.add(board);
+//        }
+//        /*存入数据库*/
+//        int num =  boardMapper.insertAll(boards);  //待测试
 
 
     }

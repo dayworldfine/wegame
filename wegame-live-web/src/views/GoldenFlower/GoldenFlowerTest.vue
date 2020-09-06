@@ -372,9 +372,9 @@
       setOut(){
         GoldenFlowerService.setOut({
           type:5,
-          roomSerial: 1,
-          userCode:123,
-          seatSerial: 3
+          roomId: 1,
+          userId:123,
+          seatId: 3
         }).then((res)=>{
           if(res.code===200){
 
@@ -388,9 +388,9 @@
         GoldenFlowerService.sitDown(
           {
             type: 3,
-            roomSerial: 1,
-            userCode: 123,
-            seatSerial: number,
+            roomId: 1,
+            userId: 123,
+            seatId: number,
             userImg: '11',
             userNickName: 'wang',
             integral: 11

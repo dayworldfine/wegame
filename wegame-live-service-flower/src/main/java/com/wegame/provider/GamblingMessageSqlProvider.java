@@ -1,13 +1,13 @@
 package com.wegame.provider;
 
-import com.wegame.model.GamblingStatistics;
+import com.wegame.model.GamblingMessage;
 import org.apache.ibatis.jdbc.SQL;
 
-public class GamblingStatisticsSqlProvider {
+public class GamblingMessageSqlProvider {
 
-    public String insertSelective(GamblingStatistics record) {
+    public String insertSelective(GamblingMessage record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("t_gambling_statistics");
+        sql.INSERT_INTO("t_gambling_message");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
@@ -25,40 +25,40 @@ public class GamblingStatisticsSqlProvider {
             sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
-        if (record.getIntegral() != null) {
-            sql.VALUES("integral", "#{integral,jdbcType=BIGINT}");
-        }
-        
         if (record.getGamblingId() != null) {
             sql.VALUES("gambling_id", "#{gamblingId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getSeatId() != null) {
-            sql.VALUES("seat_id", "#{seatId,jdbcType=INTEGER}");
         }
         
         if (record.getUserId() != null) {
             sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getIsWin() != null) {
-            sql.VALUES("is_win", "#{isWin,jdbcType=TINYINT}");
+        if (record.getSeatId() != null) {
+            sql.VALUES("seat_id", "#{seatId,jdbcType=BIGINT}");
         }
         
-        if (record.getStartTime() != null) {
-            sql.VALUES("start_time", "#{startTime,jdbcType=BIGINT}");
+        if (record.getIsBanker() != null) {
+            sql.VALUES("is_banker", "#{isBanker,jdbcType=TINYINT}");
         }
         
-        if (record.getEndTime() != null) {
-            sql.VALUES("end_time", "#{endTime,jdbcType=BIGINT}");
+        if (record.getIsUser() != null) {
+            sql.VALUES("is_user", "#{isUser,jdbcType=TINYINT}");
+        }
+        
+        if (record.getSeeCardStatus() != null) {
+            sql.VALUES("see_card_status", "#{seeCardStatus,jdbcType=TINYINT}");
+        }
+        
+        if (record.getGameStatus() != null) {
+            sql.VALUES("game_status", "#{gameStatus,jdbcType=TINYINT}");
         }
         
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(GamblingStatistics record) {
+    public String updateByPrimaryKeySelective(GamblingMessage record) {
         SQL sql = new SQL();
-        sql.UPDATE("t_gambling_statistics");
+        sql.UPDATE("t_gambling_message");
         
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{createTime,jdbcType=BIGINT}");
@@ -72,32 +72,32 @@ public class GamblingStatisticsSqlProvider {
             sql.SET("version = #{version,jdbcType=BIGINT}");
         }
         
-        if (record.getIntegral() != null) {
-            sql.SET("integral = #{integral,jdbcType=BIGINT}");
-        }
-        
         if (record.getGamblingId() != null) {
             sql.SET("gambling_id = #{gamblingId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getSeatId() != null) {
-            sql.SET("seat_id = #{seatId,jdbcType=INTEGER}");
         }
         
         if (record.getUserId() != null) {
             sql.SET("user_id = #{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getIsWin() != null) {
-            sql.SET("is_win = #{isWin,jdbcType=TINYINT}");
+        if (record.getSeatId() != null) {
+            sql.SET("seat_id = #{seatId,jdbcType=BIGINT}");
         }
         
-        if (record.getStartTime() != null) {
-            sql.SET("start_time = #{startTime,jdbcType=BIGINT}");
+        if (record.getIsBanker() != null) {
+            sql.SET("is_banker = #{isBanker,jdbcType=TINYINT}");
         }
         
-        if (record.getEndTime() != null) {
-            sql.SET("end_time = #{endTime,jdbcType=BIGINT}");
+        if (record.getIsUser() != null) {
+            sql.SET("is_user = #{isUser,jdbcType=TINYINT}");
+        }
+        
+        if (record.getSeeCardStatus() != null) {
+            sql.SET("see_card_status = #{seeCardStatus,jdbcType=TINYINT}");
+        }
+        
+        if (record.getGameStatus() != null) {
+            sql.SET("game_status = #{gameStatus,jdbcType=TINYINT}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");

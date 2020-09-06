@@ -10,44 +10,105 @@ public class GamblingDetailsSqlProvider {
         sql.INSERT_INTO("t_gambling_details");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=BIGINT}");
         }
         
-        if (record.getLastModifiedTime() != null) {
-            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=BIGINT}");
         }
         
         if (record.getVersion() != null) {
             sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
-        if (record.getCompareUser() != null) {
-            sql.VALUES("compare_user", "#{compareUser,jdbcType=VARCHAR}");
+        if (record.getGamblingId() != null) {
+            sql.VALUES("gambling_id", "#{gamblingId,jdbcType=BIGINT}");
         }
         
-        if (record.getDoType() != null) {
-            sql.VALUES("do_type", "#{doType,jdbcType=INTEGER}");
+        if (record.getCompareUserId() != null) {
+            sql.VALUES("compare_user_id", "#{compareUserId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getOperationType() != null) {
+            sql.VALUES("operation_type", "#{operationType,jdbcType=TINYINT}");
         }
         
         if (record.getOperatingLeverage() != null) {
-            sql.VALUES("operating_leverage", "#{operatingLeverage,jdbcType=INTEGER}");
+            sql.VALUES("operating_leverage", "#{operatingLeverage,jdbcType=BIGINT}");
         }
         
         if (record.getRound() != null) {
             sql.VALUES("round", "#{round,jdbcType=INTEGER}");
         }
         
-        if (record.getSeatSerial() != null) {
-            sql.VALUES("seat_serial", "#{seatSerial,jdbcType=INTEGER}");
+        if (record.getSeatId() != null) {
+            sql.VALUES("seat_id", "#{seatId,jdbcType=INTEGER}");
         }
         
-        if (record.getUserCode() != null) {
-            sql.VALUES("user_code", "#{userCode,jdbcType=INTEGER}");
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
+        
+        if (record.getSort() != null) {
+            sql.VALUES("sort", "#{sort,jdbcType=INTEGER}");
+        }
+        
+        return sql.toString();
+    }
+
+    public String updateByPrimaryKeySelective(GamblingDetails record) {
+        SQL sql = new SQL();
+        sql.UPDATE("t_gambling_details");
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getVersion() != null) {
+            sql.SET("version = #{version,jdbcType=BIGINT}");
+        }
+        
+        if (record.getGamblingId() != null) {
+            sql.SET("gambling_id = #{gamblingId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getCompareUserId() != null) {
+            sql.SET("compare_user_id = #{compareUserId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getOperationType() != null) {
+            sql.SET("operation_type = #{operationType,jdbcType=TINYINT}");
+        }
+        
+        if (record.getOperatingLeverage() != null) {
+            sql.SET("operating_leverage = #{operatingLeverage,jdbcType=BIGINT}");
+        }
+        
+        if (record.getRound() != null) {
+            sql.SET("round = #{round,jdbcType=INTEGER}");
+        }
+        
+        if (record.getSeatId() != null) {
+            sql.SET("seat_id = #{seatId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getSort() != null) {
+            sql.SET("sort = #{sort,jdbcType=INTEGER}");
+        }
+        
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

@@ -62,7 +62,7 @@ public class FriedFlowerMegController {
     public String inToRoom(Map<String,Object> msg){
         //发送有人进入消息
         ffs.sendUserInToRoomMessage(msg);
-        Room room =  ffs.findRoomMessageByRoomSerial(Integer.parseInt(msg.get("roomSerial").toString()) );
+        Room room =  ffs.findRoomMessageByRoomSerial(Integer.parseInt(msg.get("roomId").toString()) );
         //所有桌子的信息
         //发送所有桌子的信息
         ffs.sendRoomMessage(room,msg);

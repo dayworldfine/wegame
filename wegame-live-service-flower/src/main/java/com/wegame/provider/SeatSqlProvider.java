@@ -10,40 +10,65 @@ public class SeatSqlProvider {
         sql.INSERT_INTO("t_seat");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=VARCHAR}");
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.VALUES("create_date", "#{createDate,jdbcType=VARCHAR}");
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=BIGINT}");
         }
         
-        if (record.getLastModifiedTime() != null) {
-            sql.VALUES("last_modified_time", "#{lastModifiedTime,jdbcType=VARCHAR}");
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=BIGINT}");
         }
         
         if (record.getVersion() != null) {
             sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
         
-        if (record.getSerial() != null) {
-            sql.VALUES("serial", "#{serial,jdbcType=INTEGER}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+        if (record.getSeatStatus() != null) {
+            sql.VALUES("seat_status", "#{seatStatus,jdbcType=TINYINT}");
         }
         
         if (record.getRoomId() != null) {
-            sql.VALUES("room_id", "#{roomId,jdbcType=VARCHAR}");
+            sql.VALUES("room_id", "#{roomId,jdbcType=BIGINT}");
         }
         
-        if (record.getUserCode() != null) {
-            sql.VALUES("user_code", "#{userCode,jdbcType=INTEGER}");
+        if (record.getUserId() != null) {
+            sql.VALUES("user_id", "#{userId,jdbcType=BIGINT}");
         }
         
-        if (record.getSeeCard() != null) {
-            sql.VALUES("see_card", "#{seeCard,jdbcType=INTEGER}");
+        return sql.toString();
+    }
+
+    public String updateByPrimaryKeySelective(Seat record) {
+        SQL sql = new SQL();
+        sql.UPDATE("t_seat");
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=BIGINT}");
         }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getVersion() != null) {
+            sql.SET("version = #{version,jdbcType=BIGINT}");
+        }
+        
+        if (record.getSeatStatus() != null) {
+            sql.SET("seat_status = #{seatStatus,jdbcType=TINYINT}");
+        }
+        
+        if (record.getRoomId() != null) {
+            sql.SET("room_id = #{roomId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.SET("user_id = #{userId,jdbcType=BIGINT}");
+        }
+        
+        sql.WHERE("id = #{id,jdbcType=BIGINT}");
         
         return sql.toString();
     }

@@ -5,91 +5,99 @@ import java.io.Serializable;
 public class Gambling implements Serializable {
     /**
      * ID
-	 * 2020-05-26T09:58:35.462
+	 * 2020-09-06T21:55:05.220
      */
-    private String id;
+    private Long id;
 
     /**
-     * 创建日期
-	 * 2020-05-26T09:58:35.464
+     * 创建时间
+	 * 2020-09-06T21:55:05.222
      */
-    private String createDate;
+    private Long createTime;
 
     /**
-     * 最后修改日期
-	 * 2020-05-26T09:58:35.464
+     * 更新时间
+	 * 2020-09-06T21:55:05.222
      */
-    private String lastModifiedTime;
+    private Long updateTime;
 
     /**
      * 版本
-	 * 2020-05-26T09:58:35.464
+	 * 2020-09-06T21:55:05.222
      */
     private Long version;
 
     /**
-     * 房间序号
-	 * 2020-05-26T09:58:35.464
+     * 房间id
+	 * 2020-09-06T21:55:05.222
      */
-    private Integer roomSerial;
+    private Long roomId;
 
     /**
-     * 状态
-	 * 2020-05-26T09:58:35.464
+     * 状态(字典牌局状态枚举)
+	 * 2020-09-06T21:55:05.222
      */
-    private Integer status;
+    private Byte gamblingStatus;
 
     /**
-     * 庄家座位序号
-	 * 2020-05-26T09:58:35.464
+     * 积分底注
+
+
+	 * 2020-09-06T21:55:05.222
      */
-    private String seatId;
+    private Long integralFundus;
 
     /**
-     * 2020-05-26T09:58:35.464
+     * 牌局总积分
+	 * 2020-09-06T21:55:05.222
+     */
+    private Long integralSum;
+
+    /**
+     * 2020-09-06T21:55:05.222
      */
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * ID
      */
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
      * 创建日期
      */
-    public String getCreateDate() {
-        return createDate;
+    public Long getCreateTime() {
+        return createTime;
     }
 
     /**
      * 创建日期
      */
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate == null ? null : createDate.trim();
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
     /**
      * 最后修改日期
      */
-    public String getLastModifiedTime() {
-        return lastModifiedTime;
+    public Long getUpdateTime() {
+        return updateTime;
     }
 
     /**
      * 最后修改日期
      */
-    public void setLastModifiedTime(String lastModifiedTime) {
-        this.lastModifiedTime = lastModifiedTime == null ? null : lastModifiedTime.trim();
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
     }
 
     /**
@@ -107,45 +115,63 @@ public class Gambling implements Serializable {
     }
 
     /**
-     * 房间序号
+     * 房间id
      */
-    public Integer getRoomSerial() {
-        return roomSerial;
+    public Long getRoomId() {
+        return roomId;
     }
 
     /**
-     * 房间序号
+     * 房间id
      */
-    public void setRoomSerial(Integer roomSerial) {
-        this.roomSerial = roomSerial;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
     /**
-     * 状态
+     * 状态(字典牌局状态枚举)
      */
-    public Integer getStatus() {
-        return status;
+    public Byte getGamblingStatus() {
+        return gamblingStatus;
     }
 
     /**
-     * 状态
+     * 状态(字典牌局状态枚举)
      */
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setGamblingStatus(Byte gamblingStatus) {
+        this.gamblingStatus = gamblingStatus;
     }
 
     /**
-     * 庄家座位序号
+     * 积分底注
+
+
      */
-    public String getSeatId() {
-        return seatId;
+    public Long getIntegralFundus() {
+        return integralFundus;
     }
 
     /**
-     * 庄家座位序号
+     * 积分底注
+
+
      */
-    public void setSeatId(String seatId) {
-        this.seatId = seatId == null ? null : seatId.trim();
+    public void setIntegralFundus(Long integralFundus) {
+        this.integralFundus = integralFundus;
+    }
+
+    /**
+     * 牌局总积分
+     */
+    public Long getIntegralSum() {
+        return integralSum;
+    }
+
+    /**
+     * 牌局总积分
+     */
+    public void setIntegralSum(Long integralSum) {
+        this.integralSum = integralSum;
     }
 
     @Override
@@ -155,12 +181,13 @@ public class Gambling implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", createDate=").append(createDate);
-        sb.append(", lastModifiedTime=").append(lastModifiedTime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", version=").append(version);
-        sb.append(", roomSerial=").append(roomSerial);
-        sb.append(", status=").append(status);
-        sb.append(", seatId=").append(seatId);
+        sb.append(", roomId=").append(roomId);
+        sb.append(", gamblingStatus=").append(gamblingStatus);
+        sb.append(", integralFundus=").append(integralFundus);
+        sb.append(", integralSum=").append(integralSum);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

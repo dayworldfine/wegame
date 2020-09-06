@@ -3,10 +3,15 @@ package com.wegame.mapper;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.model.Seat;
 import com.wegame.provider.SeatSqlProvider;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,66 +19,103 @@ import java.util.Map;
 
 @Repository
 public interface SeatMapper {
+
+    @Delete({
+        "delete from t_seat",
+        "where id = #{id,jdbcType=BIGINT}"
+    })
+    int deleteByPrimaryKey(Long id);
+
     @Insert({
-        "insert into t_seat (id, create_date, ",
-        "last_modified_time, version, ",
-        "serial, status, ",
-        "room_id, user_code, ",
-        "see_card)",
-        "values (#{id,jdbcType=VARCHAR}, #{create_date,jdbcType=VARCHAR}, ",
-        "#{last_modified_time,jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, ",
-        "#{serial,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, ",
-        "#{room_Id,jdbcType=VARCHAR}, #{user_code,jdbcType=INTEGER}, ",
-        "#{see_card,jdbcType=INTEGER})"
+        "insert into t_seat (id, create_time, ",
+        "update_time, version, ",
+        "seat_status, room_id, ",
+        "user_id)",
+        "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, ",
+        "#{updateTime,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, ",
+        "#{seatStatus,jdbcType=TINYINT}, #{roomId,jdbcType=BIGINT}, ",
+        "#{userId,jdbcType=BIGINT})"
     })
     int insert(Seat record);
 
-    @InsertProvider(type=SeatSqlProvider.class, method="insertSelective")
+    @InsertProvider(type= SeatSqlProvider.class, method="insertSelective")
     int insertSelective(Seat record);
 
+    @Select({
+        "select",
+        "id, create_time, update_time, version, seat_status, room_id, user_id",
+        "from t_seat",
+        "where id = #{id,jdbcType=BIGINT}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.BIGINT),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.BIGINT),
+        @Result(column="version", property="version", jdbcType=JdbcType.BIGINT),
+        @Result(column="seat_status", property="seatStatus", jdbcType=JdbcType.TINYINT),
+        @Result(column="room_id", property="roomId", jdbcType=JdbcType.BIGINT),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT)
+    })
+    Seat selectByPrimaryKey(Long id);
+
+    @UpdateProvider(type=SeatSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(Seat record);
+
+    @Update({
+        "update t_seat",
+        "set create_time = #{createTime,jdbcType=BIGINT},",
+          "update_time = #{updateTime,jdbcType=BIGINT},",
+          "version = #{version,jdbcType=BIGINT},",
+          "seat_status = #{seatStatus,jdbcType=TINYINT},",
+          "room_id = #{roomId,jdbcType=BIGINT},",
+          "user_id = #{userId,jdbcType=BIGINT}",
+        "where id = #{id,jdbcType=BIGINT}"
+    })
+    int updateByPrimaryKey(Seat record);
+
     /**
-      * 查看房间信息
-      * @param serial
-      * @return
-      */
-    @Select("SELECT u.code as user_code, u.head_portrait as userImg, u.nick_name as userNickName,\n" +
-            "s.serial%6 as seatSerial, u.integral as integral, \n" +
-            "s.status as status\n" +
+     * 查看房间信息
+     * @param roomId
+     * @return
+     */
+    @Select("SELECT u.id as userId, u.head_portrait as userImg, u.nick_name as userNickName,\n" +
+            "s.id%6 as seatSerial, u.integral as integral, \n" +
+            "s.seat_status as status\n" +
             "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.room_id\n" +
-            "LEFT JOIN t_user u ON u.code = s.user_code\n" +
-            "WHERE r.serial= #{serial,jdbcType=INTEGER}")
-    List<SeatUserEntity> findRoomInfo(Integer serial);
+            "LEFT JOIN t_user u ON u.id = s.user_id\n" +
+            "WHERE r.id= #{roomId,jdbcType=INTEGER}")
+    List<SeatUserEntity> findRoomInfo(long roomId);
 
     /**
      * 准备
-     * @param roomSerial
-     * @param userCode
-     * @param seatSerial
+     * @param roomId
+     * @param userId
+     * @param seatId
      * @return
      */
     @Update("update t_seat t\n" +
             "LEFT JOIN t_room r\n" +
             "ON t.room_id = r.ID\n" +
-            "SET t.status = 2\n" +
-            "WHERE r.serial = #{roomSerial,jdbcType=INTEGER}\n" +
-            "AND t.user_code = #{userCode,jdbcType=INTEGER}\n" +
-            "AND t.serial = #{seatSerial,jdbcType=INTEGER}\n" +
-            "AND t.status !=2")
-    int saveUserSetOut(int roomSerial, int userCode, int seatSerial);
+            "SET t.seat_status = 2\n" +
+            "WHERE r.id = #{roomId,jdbcType=INTEGER}\n" +
+            "AND t.user_id = #{userId,jdbcType=INTEGER}\n" +
+            "AND t.id = #{seatId,jdbcType=INTEGER}\n" +
+            "AND t.seat_status !=2")
+    int saveUserSetOut(int roomId, int userId, int seatId);
 
 
     /**
      * 查询房间人数和已准备人数
-     * @param roomSerial
+     * @param roomId
      * @return
      */
     @Select("SELECT \n" +
-            "SUM(CASE WHEN t.status = 2 THEN 1 ELSE 0 END ) AS 'isSetOut',\n" +
+            "SUM(CASE WHEN t.seat_status = 2 THEN 1 ELSE 0 END ) AS 'isSetOut',\n" +
             "count(*) AS 'isAllOut' \n" +
             "FROM t_seat t\n" +
             "LEFT JOIN t_room r\n" +
             "ON t.room_id = r.ID\n" +
-            "WHERE r.serial = #{roomSerial,jdbcType=INTEGER}\n" +
-            "AND t.user_code IS NOT NULL")
-    Map<String, Object> selGmaeStartCondition(int roomSerial);
+            "WHERE r.id = #{roomId,jdbcType=INTEGER}\n" +
+            "AND t.user_id IS NOT NULL")
+    Map<String, Object> selGmaeStartCondition(int roomId);
 }
