@@ -11,9 +11,11 @@ public class SeatUserEntity {
 
     private String userNickName;
 
-    private Integer seatSerial;
+    private Integer seatId;
 
     private Long integral;
+
+    private Integer seatStatus;
 
     private Integer boardA;
 

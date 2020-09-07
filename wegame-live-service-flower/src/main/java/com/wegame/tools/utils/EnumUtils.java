@@ -212,7 +212,8 @@ public class EnumUtils {
     public static enum SEAT_STATUS_ENUM {
         FREE("空闲", 0, "FREE"),
         NOT_READY("坐下未准备", 1, "NOT_READY"),
-        READY("坐下已准备", 2, "READY");
+        READY("坐下已准备", 2, "READY"),
+        IS_GAME("正在游戏中",3,"IS_GAME");
         private String name;
         private int value;
         private String code;

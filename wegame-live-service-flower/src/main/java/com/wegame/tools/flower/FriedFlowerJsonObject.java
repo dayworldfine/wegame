@@ -253,12 +253,12 @@ public class FriedFlowerJsonObject {
 
     /**
      * 根据房间序号返回订阅号后缀
-     * @param serial
+     * @param roomId
      * @return
      */
-    public static String serial(int serial){
+    public static String serial(int roomId){
         String roomSerial ="";
-        switch (serial){
+        switch (roomId){
             case 1:
                 roomSerial = "one";
                 break;

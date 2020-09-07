@@ -1,6 +1,7 @@
 package com.wegame.controller;
 
 
+import com.wegame.config.BaseController;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/friedFlowerPort")
-public class FriedFlowerPortController {
+public class FriedFlowerPortController extends BaseController {
 
     @Autowired
     private FriedFlowerService ffs;
@@ -100,6 +101,8 @@ public class FriedFlowerPortController {
                                  int roomId,
                                  int userId,
                                  int seatId){
+//        String asd ="123123.23123";
+//        Integer.valueOf(asd);
         int num =  ffs.saveUserSetOut(roomId,userId,seatId);
         if (0<num){
             //发送即时通讯有人准备
@@ -109,7 +112,7 @@ public class FriedFlowerPortController {
             //如果等于0 说明进入房间的人都准备了 要开始游戏
             int isSetOut= Integer.parseInt(String.valueOf(countMap.get("isSetOut")));
             int isAllOut= Integer.parseInt(String.valueOf(countMap.get("isAllOut")));
-            if(isSetOut==isAllOut){
+            if(isSetOut==isAllOut && isSetOut!=0){
                 //发牌游戏开始
                  ffs.sendAndSaveGmaeStart(roomId, isSetOut);
             }

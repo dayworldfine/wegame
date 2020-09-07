@@ -79,8 +79,8 @@ public interface SeatMapper {
      * @return
      */
     @Select("SELECT u.id as userId, u.head_portrait as userImg, u.nick_name as userNickName,\n" +
-            "s.id%6 as seatSerial, u.integral as integral, \n" +
-            "s.seat_status as status\n" +
+            "s.id as seatId, u.integral as integral, \n" +
+            "s.seat_status as seatStatus\n" +
             "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.room_id\n" +
             "LEFT JOIN t_user u ON u.id = s.user_id\n" +
             "WHERE r.id= #{roomId,jdbcType=INTEGER}")

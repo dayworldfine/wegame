@@ -1,5 +1,6 @@
 package com.wegame.controller;
 
+import com.wegame.config.BaseController;
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.vo.Message;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 
 @RestController
-public class FriedFlowerMegController {
+public class FriedFlowerMegController extends BaseController {
 
     @Autowired
     private FriedFlowerService ffs;

@@ -5,16 +5,17 @@
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[0]==false">
-          <div>{{userList[0].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[0]==1||seatStatusList[0]==2||seatStatusList[0]==3">
+          <div class="people-left-name">{{userList[0].userNickName}}</div>
           <el-image
             class="people-userImg"
             :src="userList[0].userImg"
             fit="fill"></el-image>
           <div >{{userList[0].integral}}</div>
+          <div class="people-setOut" v-show="seatStatusList[0]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[0]==false">
+        <div class="people-right" v-show="seatStatusList[0]==3">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
@@ -35,22 +36,23 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[0]">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(0)" v-show="seatStatusList[0]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[1]==false">
-          <div>{{userList[1].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[1]==1||seatStatusList[1]==2||seatStatusList[1]==3">
+          <div class="people-left-name">{{userList[1].userNickName}}</div>
           <el-image
             class="people-userImg"
             :src="userList[1].userImg"
             fit="fill"></el-image>
           <div >{{userList[1].integral}}</div>
+          <div class="people-setOut" v-show="seatStatusList[1]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[1]==false">
-          <div class="people-right-status">{{userList[0].status}}</div>
+        <div class="people-right" v-show="seatStatusList[1]==3">
+          <div class="people-right-status">{{userList[1].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
               <el-image
@@ -64,13 +66,13 @@
               <el-image src="/static/ante_coin.png" fit="fill"></el-image>
             </div>
             <div class="chip-font">
-              {{userList[0].payIntegral}}
+              {{userList[1].payIntegral}}
             </div>
           </div>
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[1]" >坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="seatStatusList[1]==0" >坐下</el-button>
         </div>
       </div>
     </div>
@@ -78,17 +80,18 @@
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[2]==false">
-          <div>{{userList[0].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[5]==1||seatStatusList[5]==2||seatStatusList[5]==3">
+          <div class="people-left-name">{{userList[5].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[0].userImg"
+            :src="userList[5].userImg"
             fit="fill"></el-image>
-          <div>{{userList[0].integral}}</div>
+          <div>{{userList[2].integral}}</div>
+          <div class="people-setOut" v-show="seatStatusList[5]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[2]==false">
-          <div class="people-right-status">{{userList[0].status}}</div>
+        <div class="people-right" v-show="seatStatusList[5]==3">
+          <div class="people-right-status">{{userList[5].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
               <el-image
@@ -102,28 +105,29 @@
               <el-image src="/static/ante_coin.png" fit="fill"></el-image>
             </div>
             <div class="chip-font">
-              {{userList[0].payIntegral}}
+              {{userList[5].payIntegral}}
             </div>
           </div>
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[2]">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(5)" v-show="seatStatusList[5]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[3]==false">
-          <div>{{userList[1].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[2]==1||seatStatusList[2]==2||seatStatusList[2]==3">
+          <div class="people-left-name">{{userList[2].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[1].userImg"
+            :src="userList[2].userImg"
             fit="fill"></el-image>
-          <div>{{userList[1].integral}}</div>
+          <div>{{userList[2].integral}}</div>
+          <div class="people-setOut" v-show="seatStatusList[2]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[3]==false">
-          <div class="people-right-status">{{userList[0].status}}</div>
+        <div class="people-right" v-show="seatStatusList[2]==3">
+          <div class="people-right-status">{{userList[2].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
               <el-image
@@ -137,13 +141,13 @@
               <el-image src="/static/ante_coin.png" fit="fill"></el-image>
             </div>
             <div class="chip-font">
-              {{userList[0].payIntegral}}
+              {{userList[2].payIntegral}}
             </div>
           </div>
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[3]">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(2)" v-show="seatStatusList[2]==0">坐下</el-button>
         </div>
       </div>
     </div>
@@ -151,17 +155,18 @@
       <!--每个人物-->
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[4]==false">
-          <div>{{userList[0].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[4]==1||seatStatusList[4]==2||seatStatusList[4]==3">
+          <div class="people-left-name">{{userList[4].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[0].userImg"
+            :src="userList[4].userImg"
             fit="fill"></el-image>
-          <div >{{userList[0].integral}}</div>
+          <div >{{userList[4].integral}}</div>
+          <div class="people-setOut" v-show="seatStatusList[4]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[4]==false">
-          <div class="people-right-status">{{userList[0].status}}</div>
+        <div class="people-right" v-show="seatStatusList[4]==3">
+          <div class="people-right-status">{{userList[4].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
               <el-image
@@ -175,28 +180,29 @@
               <el-image src="/static/ante_coin.png" fit="fill"></el-image>
             </div>
             <div class="chip-font">
-              {{userList[0].payIntegral}}
+              {{userList[4].payIntegral}}
             </div>
           </div>
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[4]">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(4)" v-show="seatStatusList[4]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" >
         <!--左边框-->
-        <div class="people-left" v-show="showSit[5]==false">
-          <div>{{userList[1].userNickName}}</div>
+        <div class="people-left" v-show="seatStatusList[3]==1||seatStatusList[3]==2||seatStatusList[3]==3">
+          <div class="people-left-name">{{userList[3].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[1].userImg"
+            :src="userList[3].userImg"
             fit="fill"></el-image>
-          <div>{{userList[1].integral}}</div>
+          <div>{{userList[5].integral}}</div>
+          <<div class="people-setOut" v-show="seatStatusList[3]==2">准备</div>
         </div>
         <!--右边框-->
-        <div class="people-right" v-show="showSit[5]==false">
-          <div class="people-right-status">{{userList[0].status}}</div>
+        <div class="people-right" v-show="seatStatusList[3]==3">
+          <div class="people-right-status">{{userList[3].status}}</div>
           <div class="people-board-imageList">
             <template v-for="item in imgList">
               <el-image
@@ -210,13 +216,13 @@
               <el-image src="/static/ante_coin.png" fit="fill"></el-image>
             </div>
             <div class="chip-font">
-              {{userList[0].payIntegral}}
+              {{userList[3].payIntegral}}
             </div>
           </div>
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="showSit[5]">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(3)" v-show="seatStatusList[3]==0">坐下</el-button>
         </div>
       </div>
     </div>
@@ -263,7 +269,7 @@
         </div>
         <div class="entire-button six-button">
           <div>
-            <el-button type="primary" round class="background-button" @click="setOut">准备</el-button>
+            <el-button type="primary" round class="background-button" @click="setOut()">准备</el-button>
           </div>
           <div class="font-button">
             222
@@ -289,7 +295,7 @@
             userImg: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
             status: 11,
             integral: 2,
-            userCode: 12,
+            userId: 12,
             board: [0, 0, 0],
             payIntegral: 1
           },
@@ -298,17 +304,17 @@
             userImg: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
             status: 11,
             integral: 2,
-            userCode: 12,
+            userId: 12,
             board: [0, 0, 0],
             payIntegral: 1
           },
-          {userNickName:'',userImg:'',status: 0,integral:2,userCode:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userCode:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userCode:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userCode:0,board:[],payIntegral: 1}
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
+          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
+          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
+          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1}
           ],
         //坐下按钮显示
-        showSit: [true, true, true, true, true, true],
+        seatStatusList: [0, 0, 0, 0, 0, 0],
         //用户框
         // styleOne: [
         //   "display:none",
@@ -318,7 +324,6 @@
         //   "display:none",
         //   "display:none"
         // ],
-        // styleOne: [true, true, true, true, true, true],
         imgList: [
           {id: "1", url: "/static/card_01.png"},
           {id: "2", url: "/static/card_01.png"},
@@ -408,14 +413,30 @@
       room(param) {
         let userList = param.userList;
         userList.forEach(ar=>{
-            switch (ar.seatSerial) {
+            switch ((ar.seatId-1)%6) {
+              case 0:
+                this.seatStatusList[0] = ar.seatStatus;
+                this.$forceUpdate();
+                break;
               case 1:
-                this.showSit[0] = false;
-                this.$forceUpdate()
+                this.seatStatusList[1] = ar.seatStatus;
+                this.$forceUpdate();
                 break;
               case 2:
-                this.showSit[1] = false;
-                this.$forceUpdate()
+                this.seatStatusList[2] = ar.seatStatus;
+                this.$forceUpdate();
+                break;
+              case 3:
+                this.seatStatusList[3] = ar.seatStatus;
+                this.$forceUpdate();
+                break;
+              case 4:
+                this.seatStatusList[4] = ar.seatStatus;
+                this.$forceUpdate();
+                break;
+              case 5:
+                this.seatStatusList[5] = ar.seatStatus;
+                this.$forceUpdate();
                 break;
               default:
                 break;
@@ -442,30 +463,24 @@
       },
       //类型3 用户坐下
       userSitDown(param) {
-        let subscript = param.seatSerial-1
-        this.showSit[subscript] = false;
+        let subscript = (param.seatId-1)%6;
+        this.seatStatusList[subscript] = 1;
         // this.styleOne[subscript] = "display:inline";
         this.userList[subscript]={
           userNickName: param.userNickName,
           userImg: param.userImg,
           status: 0,
           integral: param.integral,
-          userCode: param.userCode,
+          userId: param.userId,
           board: [0, 0, 0],
           payIntegral: 0},
         this.$forceUpdate()
       },
       //类型5 用户准备
       userSetOut(param){
-        this.userList[param.seatSerial-1].status=2
+        this.seatStatusList[(param.seatId-1)%6]=2
+        this.$forceUpdate()
       }
-    },
-
-    computed: {
-
-      // showSitSix(){
-      //   if (this.styleOne[5]=="display:none"){return false}else{return true}
-      // }
     },
 
 
@@ -522,9 +537,23 @@
 
   }
   .people-userImg{
-    width: 105px;
+    width: 116px;
     height: 76px;
-    margin: auto;
+    /*margin: auto;*/
+  }
+  .people-setOut{
+    border: 5px solid #e5e908;
+    position: absolute;
+    width: 116px;
+    height: 76px;
+    margin-top: 36px;
+    text-align: center;
+    font-size: 30px;
+    color: #e5e908;
+    line-height: 67px;
+    background-color: transparent;
+    box-shadow: 0 0 50px #1d4eab inset;
+    box-sizing: border-box;
   }
   .people-left{
     width: 116px;
@@ -535,6 +564,9 @@
     flex-direction: column;
     text-align: center;
     box-sizing: border-box;
+  }
+  .people-left-name{
+    height: 35px;
   }
   .people-right{
     width: 234px;
