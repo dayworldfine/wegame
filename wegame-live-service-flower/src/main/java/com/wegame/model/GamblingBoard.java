@@ -5,90 +5,90 @@ import java.io.Serializable;
 public class GamblingBoard implements Serializable {
     /**
      * ID
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.864
      */
     private Long id;
 
     /**
      * 创建时间
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Long createTime;
 
     /**
      * 更新时间
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Long updateTime;
 
     /**
      * 牌局信息id
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Long gamblingMessageId;
 
     /**
      * 牌值大小
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Long boardSize;
 
     /**
      * 牌值类型(字典牌值类型枚举)
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Byte boardType;
 
     /**
      * 是否特殊牌(字段常规判断枚举)
-	 * 2020-09-06T21:55:05.257
+	 * 2020-09-08T20:55:36.867
      */
     private Byte isSpecial;
 
     /**
      * A32也是顺子(字段常规判断枚举)
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
     private Byte isA32;
 
     /**
      * 第一张牌花色类型(字典花色类型枚举)
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
     private Byte firstBoardColor;
 
     /**
      * 第一张牌值
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
-    private Integer firstBoardValue;
+    private Integer firstBoardNumber;
 
     /**
      * 第二张牌花色类型(字典花色类型枚举)
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
     private Byte secondBoardColor;
 
     /**
      * 第二张牌值
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
-    private Integer secondBoardValue;
+    private Integer secondBoardNumber;
 
     /**
      * 第三张牌花色类型(字典花色类型枚举)
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
     private Byte thirdlyBoardColor;
 
     /**
      * 第三张牌值
-	 * 2020-09-06T21:55:05.258
+	 * 2020-09-08T20:55:36.868
      */
-    private Integer thirdlyBoardValue;
+    private Integer thirdlyBoardNumber;
 
     /**
-     * 2020-09-06T21:55:05.258
+     * 2020-09-08T20:55:36.868
      */
     private static final long serialVersionUID = 1L;
 
@@ -107,28 +107,28 @@ public class GamblingBoard implements Serializable {
     }
 
     /**
-     * 创建日期
+     * 创建时间
      */
     public Long getCreateTime() {
         return createTime;
     }
 
     /**
-     * 创建日期
+     * 创建时间
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
     public Long getUpdateTime() {
         return updateTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
@@ -221,15 +221,15 @@ public class GamblingBoard implements Serializable {
     /**
      * 第一张牌值
      */
-    public Integer getFirstBoardValue() {
-        return firstBoardValue;
+    public Integer getFirstBoardNumber() {
+        return firstBoardNumber;
     }
 
     /**
      * 第一张牌值
      */
-    public void setFirstBoardValue(Integer firstBoardValue) {
-        this.firstBoardValue = firstBoardValue;
+    public void setFirstBoardNumber(Integer firstBoardNumber) {
+        this.firstBoardNumber = firstBoardNumber;
     }
 
     /**
@@ -249,15 +249,15 @@ public class GamblingBoard implements Serializable {
     /**
      * 第二张牌值
      */
-    public Integer getSecondBoardValue() {
-        return secondBoardValue;
+    public Integer getSecondBoardNumber() {
+        return secondBoardNumber;
     }
 
     /**
      * 第二张牌值
      */
-    public void setSecondBoardValue(Integer secondBoardValue) {
-        this.secondBoardValue = secondBoardValue;
+    public void setSecondBoardNumber(Integer secondBoardNumber) {
+        this.secondBoardNumber = secondBoardNumber;
     }
 
     /**
@@ -277,15 +277,15 @@ public class GamblingBoard implements Serializable {
     /**
      * 第三张牌值
      */
-    public Integer getThirdlyBoardValue() {
-        return thirdlyBoardValue;
+    public Integer getThirdlyBoardNumber() {
+        return thirdlyBoardNumber;
     }
 
     /**
      * 第三张牌值
      */
-    public void setThirdlyBoardValue(Integer thirdlyBoardValue) {
-        this.thirdlyBoardValue = thirdlyBoardValue;
+    public void setThirdlyBoardNumber(Integer thirdlyBoardNumber) {
+        this.thirdlyBoardNumber = thirdlyBoardNumber;
     }
 
     @Override
@@ -303,11 +303,11 @@ public class GamblingBoard implements Serializable {
         sb.append(", isSpecial=").append(isSpecial);
         sb.append(", isA32=").append(isA32);
         sb.append(", firstBoardColor=").append(firstBoardColor);
-        sb.append(", firstBoardValue=").append(firstBoardValue);
+        sb.append(", firstBoardNumber=").append(firstBoardNumber);
         sb.append(", secondBoardColor=").append(secondBoardColor);
-        sb.append(", secondBoardValue=").append(secondBoardValue);
+        sb.append(", secondBoardNumber=").append(secondBoardNumber);
         sb.append(", thirdlyBoardColor=").append(thirdlyBoardColor);
-        sb.append(", thirdlyBoardValue=").append(thirdlyBoardValue);
+        sb.append(", thirdlyBoardNumber=").append(thirdlyBoardNumber);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

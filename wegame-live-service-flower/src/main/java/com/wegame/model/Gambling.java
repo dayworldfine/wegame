@@ -5,56 +5,54 @@ import java.io.Serializable;
 public class Gambling implements Serializable {
     /**
      * ID
-	 * 2020-09-06T21:55:05.220
+	 * 2020-09-08T23:15:19.363
      */
     private Long id;
 
     /**
      * 创建时间
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long createTime;
 
     /**
      * 更新时间
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long updateTime;
 
     /**
      * 版本
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long version;
 
     /**
      * 房间id
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long roomId;
 
     /**
      * 状态(字典牌局状态枚举)
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
-    private Byte gamblingStatus;
+    private Integer gamblingStatus;
 
     /**
      * 积分底注
-
-
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long integralFundus;
 
     /**
      * 牌局总积分
-	 * 2020-09-06T21:55:05.222
+	 * 2020-09-08T23:15:19.366
      */
     private Long integralSum;
 
     /**
-     * 2020-09-06T21:55:05.222
+     * 2020-09-08T23:15:19.367
      */
     private static final long serialVersionUID = 1L;
 
@@ -73,28 +71,28 @@ public class Gambling implements Serializable {
     }
 
     /**
-     * 创建日期
+     * 创建时间
      */
     public Long getCreateTime() {
         return createTime;
     }
 
     /**
-     * 创建日期
+     * 创建时间
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
     public Long getUpdateTime() {
         return updateTime;
     }
 
     /**
-     * 最后修改日期
+     * 更新时间
      */
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
@@ -131,21 +129,19 @@ public class Gambling implements Serializable {
     /**
      * 状态(字典牌局状态枚举)
      */
-    public Byte getGamblingStatus() {
+    public Integer getGamblingStatus() {
         return gamblingStatus;
     }
 
     /**
      * 状态(字典牌局状态枚举)
      */
-    public void setGamblingStatus(Byte gamblingStatus) {
+    public void setGamblingStatus(Integer gamblingStatus) {
         this.gamblingStatus = gamblingStatus;
     }
 
     /**
      * 积分底注
-
-
      */
     public Long getIntegralFundus() {
         return integralFundus;
@@ -153,8 +149,6 @@ public class Gambling implements Serializable {
 
     /**
      * 积分底注
-
-
      */
     public void setIntegralFundus(Long integralFundus) {
         this.integralFundus = integralFundus;

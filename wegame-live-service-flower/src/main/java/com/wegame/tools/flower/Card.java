@@ -55,4 +55,11 @@ public class Card {
 		this.flower = flower;
 	}
 
+	@Override
+	public String toString() {
+		return "Card{" +
+				"number=" + number +
+				", flower=" + flower +
+				'}';
+	}
 }

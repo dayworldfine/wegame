@@ -1,5 +1,7 @@
 package com.wegame.tools.flower;
 
+import java.util.Arrays;
+
 /**
  * 玩家，对应一副牌
  *
@@ -67,4 +69,14 @@ public class Player {
 		this.isA32 = isA32;
 	}
 
+	@Override
+	public String toString() {
+		return "Player{" +
+				"cards=" + Arrays.toString(cards) +
+				", type=" + type +
+				", isSpecial=" + isSpecial +
+				", isA32=" + isA32 +
+				", value=" + value +
+				'}';
+	}
 }

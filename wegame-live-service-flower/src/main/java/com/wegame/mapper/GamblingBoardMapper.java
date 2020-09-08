@@ -26,16 +26,16 @@ public interface GamblingBoardMapper {
         "update_time, gambling_message_id, ",
         "board_size, board_type, ",
         "is_special, is_a32, ",
-        "first_board_color, first_board_value, ",
-        "second_board_color, second_board_value, ",
-        "thirdly_board_color, thirdly_board_value)",
+        "first_board_color, first_board_number, ",
+        "second_board_color, second_board_number, ",
+        "thirdly_board_color, thirdly_board_number)",
         "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, ",
         "#{updateTime,jdbcType=BIGINT}, #{gamblingMessageId,jdbcType=BIGINT}, ",
         "#{boardSize,jdbcType=BIGINT}, #{boardType,jdbcType=TINYINT}, ",
         "#{isSpecial,jdbcType=TINYINT}, #{isA32,jdbcType=TINYINT}, ",
-        "#{firstBoardColor,jdbcType=TINYINT}, #{firstBoardValue,jdbcType=INTEGER}, ",
-        "#{secondBoardColor,jdbcType=TINYINT}, #{secondBoardValue,jdbcType=INTEGER}, ",
-        "#{thirdlyBoardColor,jdbcType=TINYINT}, #{thirdlyBoardValue,jdbcType=INTEGER})"
+        "#{firstBoardColor,jdbcType=TINYINT}, #{firstBoardNumber,jdbcType=INTEGER}, ",
+        "#{secondBoardColor,jdbcType=TINYINT}, #{secondBoardNumber,jdbcType=INTEGER}, ",
+        "#{thirdlyBoardColor,jdbcType=TINYINT}, #{thirdlyBoardNumber,jdbcType=INTEGER})"
     })
     int insert(GamblingBoard record);
 
@@ -45,8 +45,8 @@ public interface GamblingBoardMapper {
     @Select({
         "select",
         "id, create_time, update_time, gambling_message_id, board_size, board_type, is_special, ",
-        "is_a32, first_board_color, first_board_value, second_board_color, second_board_value, ",
-        "thirdly_board_color, thirdly_board_value",
+        "is_a32, first_board_color, first_board_number, second_board_color, second_board_number, ",
+        "thirdly_board_color, thirdly_board_number",
         "from t_gambling_board",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -60,11 +60,11 @@ public interface GamblingBoardMapper {
         @Result(column="is_special", property="isSpecial", jdbcType=JdbcType.TINYINT),
         @Result(column="is_a32", property="isA32", jdbcType=JdbcType.TINYINT),
         @Result(column="first_board_color", property="firstBoardColor", jdbcType=JdbcType.TINYINT),
-        @Result(column="first_board_value", property="firstBoardValue", jdbcType=JdbcType.INTEGER),
+        @Result(column="first_board_number", property="firstBoardNumber", jdbcType=JdbcType.INTEGER),
         @Result(column="second_board_color", property="secondBoardColor", jdbcType=JdbcType.TINYINT),
-        @Result(column="second_board_value", property="secondBoardValue", jdbcType=JdbcType.INTEGER),
+        @Result(column="second_board_number", property="secondBoardNumber", jdbcType=JdbcType.INTEGER),
         @Result(column="thirdly_board_color", property="thirdlyBoardColor", jdbcType=JdbcType.TINYINT),
-        @Result(column="thirdly_board_value", property="thirdlyBoardValue", jdbcType=JdbcType.INTEGER)
+        @Result(column="thirdly_board_number", property="thirdlyBoardNumber", jdbcType=JdbcType.INTEGER)
     })
     GamblingBoard selectByPrimaryKey(Long id);
 
@@ -81,11 +81,11 @@ public interface GamblingBoardMapper {
           "is_special = #{isSpecial,jdbcType=TINYINT},",
           "is_a32 = #{isA32,jdbcType=TINYINT},",
           "first_board_color = #{firstBoardColor,jdbcType=TINYINT},",
-          "first_board_value = #{firstBoardValue,jdbcType=INTEGER},",
+          "first_board_number = #{firstBoardNumber,jdbcType=INTEGER},",
           "second_board_color = #{secondBoardColor,jdbcType=TINYINT},",
-          "second_board_value = #{secondBoardValue,jdbcType=INTEGER},",
+          "second_board_number = #{secondBoardNumber,jdbcType=INTEGER},",
           "thirdly_board_color = #{thirdlyBoardColor,jdbcType=TINYINT},",
-          "thirdly_board_value = #{thirdlyBoardValue,jdbcType=INTEGER}",
+          "thirdly_board_number = #{thirdlyBoardNumber,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(GamblingBoard record);

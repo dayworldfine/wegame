@@ -45,24 +45,24 @@ public class GamblingBoardSqlProvider {
             sql.VALUES("first_board_color", "#{firstBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getFirstBoardValue() != null) {
-            sql.VALUES("first_board_value", "#{firstBoardValue,jdbcType=INTEGER}");
+        if (record.getFirstBoardNumber() != null) {
+            sql.VALUES("first_board_number", "#{firstBoardNumber,jdbcType=INTEGER}");
         }
         
         if (record.getSecondBoardColor() != null) {
             sql.VALUES("second_board_color", "#{secondBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getSecondBoardValue() != null) {
-            sql.VALUES("second_board_value", "#{secondBoardValue,jdbcType=INTEGER}");
+        if (record.getSecondBoardNumber() != null) {
+            sql.VALUES("second_board_number", "#{secondBoardNumber,jdbcType=INTEGER}");
         }
         
         if (record.getThirdlyBoardColor() != null) {
             sql.VALUES("thirdly_board_color", "#{thirdlyBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getThirdlyBoardValue() != null) {
-            sql.VALUES("thirdly_board_value", "#{thirdlyBoardValue,jdbcType=INTEGER}");
+        if (record.getThirdlyBoardNumber() != null) {
+            sql.VALUES("thirdly_board_number", "#{thirdlyBoardNumber,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -104,24 +104,24 @@ public class GamblingBoardSqlProvider {
             sql.SET("first_board_color = #{firstBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getFirstBoardValue() != null) {
-            sql.SET("first_board_value = #{firstBoardValue,jdbcType=INTEGER}");
+        if (record.getFirstBoardNumber() != null) {
+            sql.SET("first_board_number = #{firstBoardNumber,jdbcType=INTEGER}");
         }
         
         if (record.getSecondBoardColor() != null) {
             sql.SET("second_board_color = #{secondBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getSecondBoardValue() != null) {
-            sql.SET("second_board_value = #{secondBoardValue,jdbcType=INTEGER}");
+        if (record.getSecondBoardNumber() != null) {
+            sql.SET("second_board_number = #{secondBoardNumber,jdbcType=INTEGER}");
         }
         
         if (record.getThirdlyBoardColor() != null) {
             sql.SET("thirdly_board_color = #{thirdlyBoardColor,jdbcType=TINYINT}");
         }
         
-        if (record.getThirdlyBoardValue() != null) {
-            sql.SET("thirdly_board_value = #{thirdlyBoardValue,jdbcType=INTEGER}");
+        if (record.getThirdlyBoardNumber() != null) {
+            sql.SET("thirdly_board_number = #{thirdlyBoardNumber,jdbcType=INTEGER}");
         }
         
         sql.WHERE("id = #{id,jdbcType=BIGINT}");

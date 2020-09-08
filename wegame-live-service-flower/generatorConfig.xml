@@ -19,7 +19,7 @@
         <commentGenerator type="com.wegame.tools.utils.MyCommentGeneratorUtils">
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/wegame?serverTimezone=Asia/Shanghai&amp;useSSL=false" userId="root" password="wswbh">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/wegame?serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;tinyInt1isBit=false" userId="root" password="wswbh">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -46,70 +46,71 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
+        <columnOverride column="gambling_status" javaType="java.lang.Integer"/>
         </table>
 
-        <table tableName="t_gambling_details"
-               domainObjectName="GamblingDetails"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_gambling_details"-->
+<!--               domainObjectName="GamblingDetails"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_gambling_statistics"
-               domainObjectName="GamblingStatistics"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_gambling_statistics"-->
+<!--               domainObjectName="GamblingStatistics"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_gambling_message"
-               domainObjectName="GamblingMessage"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_gambling_message"-->
+<!--               domainObjectName="GamblingMessage"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_gambling_board"
-               domainObjectName="GamblingBoard"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_gambling_board"-->
+<!--               domainObjectName="GamblingBoard"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_room"
-               domainObjectName="Room"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_room"-->
+<!--               domainObjectName="Room"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_seat"
-               domainObjectName="Seat"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_seat"-->
+<!--               domainObjectName="Seat"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
-        <table tableName="t_user"
-               domainObjectName="User"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+<!--        <table tableName="t_user"-->
+<!--               domainObjectName="User"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
 
     </context>
