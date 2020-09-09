@@ -37,25 +37,25 @@ public class GamblingBoard implements Serializable {
      * 牌值类型(字典牌值类型枚举)
 	 * 2020-09-08T20:55:36.867
      */
-    private Byte boardType;
+    private Integer boardType;
 
     /**
      * 是否特殊牌(字段常规判断枚举)
 	 * 2020-09-08T20:55:36.867
      */
-    private Byte isSpecial;
+    private Integer isSpecial;
 
     /**
      * A32也是顺子(字段常规判断枚举)
 	 * 2020-09-08T20:55:36.868
      */
-    private Byte isA32;
+    private Integer isA32;
 
     /**
      * 第一张牌花色类型(字典花色类型枚举)
 	 * 2020-09-08T20:55:36.868
      */
-    private Byte firstBoardColor;
+    private Integer firstBoardColor;
 
     /**
      * 第一张牌值
@@ -67,7 +67,7 @@ public class GamblingBoard implements Serializable {
      * 第二张牌花色类型(字典花色类型枚举)
 	 * 2020-09-08T20:55:36.868
      */
-    private Byte secondBoardColor;
+    private Integer secondBoardColor;
 
     /**
      * 第二张牌值
@@ -79,7 +79,7 @@ public class GamblingBoard implements Serializable {
      * 第三张牌花色类型(字典花色类型枚举)
 	 * 2020-09-08T20:55:36.868
      */
-    private Byte thirdlyBoardColor;
+    private Integer thirdlyBoardColor;
 
     /**
      * 第三张牌值
@@ -165,56 +165,56 @@ public class GamblingBoard implements Serializable {
     /**
      * 牌值类型(字典牌值类型枚举)
      */
-    public Byte getBoardType() {
+    public Integer getBoardType() {
         return boardType;
     }
 
     /**
      * 牌值类型(字典牌值类型枚举)
      */
-    public void setBoardType(Byte boardType) {
+    public void setBoardType(Integer boardType) {
         this.boardType = boardType;
     }
 
     /**
      * 是否特殊牌(字段常规判断枚举)
      */
-    public Byte getIsSpecial() {
+    public Integer getIsSpecial() {
         return isSpecial;
     }
 
     /**
      * 是否特殊牌(字段常规判断枚举)
      */
-    public void setIsSpecial(Byte isSpecial) {
+    public void setIsSpecial(Integer isSpecial) {
         this.isSpecial = isSpecial;
     }
 
     /**
      * A32也是顺子(字段常规判断枚举)
      */
-    public Byte getIsA32() {
+    public Integer getIsA32() {
         return isA32;
     }
 
     /**
      * A32也是顺子(字段常规判断枚举)
      */
-    public void setIsA32(Byte isA32) {
+    public void setIsA32(Integer isA32) {
         this.isA32 = isA32;
     }
 
     /**
      * 第一张牌花色类型(字典花色类型枚举)
      */
-    public Byte getFirstBoardColor() {
+    public Integer getFirstBoardColor() {
         return firstBoardColor;
     }
 
     /**
      * 第一张牌花色类型(字典花色类型枚举)
      */
-    public void setFirstBoardColor(Byte firstBoardColor) {
+    public void setFirstBoardColor(Integer firstBoardColor) {
         this.firstBoardColor = firstBoardColor;
     }
 
@@ -235,14 +235,14 @@ public class GamblingBoard implements Serializable {
     /**
      * 第二张牌花色类型(字典花色类型枚举)
      */
-    public Byte getSecondBoardColor() {
+    public Integer getSecondBoardColor() {
         return secondBoardColor;
     }
 
     /**
      * 第二张牌花色类型(字典花色类型枚举)
      */
-    public void setSecondBoardColor(Byte secondBoardColor) {
+    public void setSecondBoardColor(Integer secondBoardColor) {
         this.secondBoardColor = secondBoardColor;
     }
 
@@ -263,14 +263,14 @@ public class GamblingBoard implements Serializable {
     /**
      * 第三张牌花色类型(字典花色类型枚举)
      */
-    public Byte getThirdlyBoardColor() {
+    public Integer getThirdlyBoardColor() {
         return thirdlyBoardColor;
     }
 
     /**
      * 第三张牌花色类型(字典花色类型枚举)
      */
-    public void setThirdlyBoardColor(Byte thirdlyBoardColor) {
+    public void setThirdlyBoardColor(Integer thirdlyBoardColor) {
         this.thirdlyBoardColor = thirdlyBoardColor;
     }
 

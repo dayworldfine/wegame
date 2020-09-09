@@ -49,25 +49,25 @@ public class GamblingMessage implements Serializable {
      * 是否庄家座位(字典常规判断枚举)
 	 * 2020-09-06T21:55:05.256
      */
-    private Byte isBanker;
+    private Integer isBanker;
 
     /**
      * 是否有玩家(字典常规判断枚举)
 	 * 2020-09-06T21:55:05.256
      */
-    private Byte isUser;
+    private Integer isUser;
 
     /**
      * 看牌状态(字段常规判断枚举)
 	 * 2020-09-06T21:55:05.256
      */
-    private Byte seeCardStatus;
+    private Integer seeCardStatus;
 
     /**
      * 牌局游戏状态(字典牌局游戏状态枚举)
 	 * 2020-09-06T21:55:05.256
      */
-    private Byte gameStatus;
+    private Integer gameStatus;
 
     /**
      * 2020-09-06T21:55:05.256
@@ -175,56 +175,56 @@ public class GamblingMessage implements Serializable {
     /**
      * 是否庄家座位(字典常规判断枚举)
      */
-    public Byte getIsBanker() {
+    public Integer getIsBanker() {
         return isBanker;
     }
 
     /**
      * 是否庄家座位(字典常规判断枚举)
      */
-    public void setIsBanker(Byte isBanker) {
+    public void setIsBanker(Integer isBanker) {
         this.isBanker = isBanker;
     }
 
     /**
      * 是否有玩家(字典常规判断枚举)
      */
-    public Byte getIsUser() {
+    public Integer getIsUser() {
         return isUser;
     }
 
     /**
      * 是否有玩家(字典常规判断枚举)
      */
-    public void setIsUser(Byte isUser) {
+    public void setIsUser(Integer isUser) {
         this.isUser = isUser;
     }
 
     /**
      * 看牌状态(字段常规判断枚举)
      */
-    public Byte getSeeCardStatus() {
+    public Integer getSeeCardStatus() {
         return seeCardStatus;
     }
 
     /**
      * 看牌状态(字段常规判断枚举)
      */
-    public void setSeeCardStatus(Byte seeCardStatus) {
+    public void setSeeCardStatus(Integer seeCardStatus) {
         this.seeCardStatus = seeCardStatus;
     }
 
     /**
      * 牌局游戏状态(字典牌局游戏状态枚举)
      */
-    public Byte getGameStatus() {
+    public Integer getGameStatus() {
         return gameStatus;
     }
 
     /**
      * 牌局游戏状态(字典牌局游戏状态枚举)
      */
-    public void setGameStatus(Byte gameStatus) {
+    public void setGameStatus(Integer gameStatus) {
         this.gameStatus = gameStatus;
     }
 

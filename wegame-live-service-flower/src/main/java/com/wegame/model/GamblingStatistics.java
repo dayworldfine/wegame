@@ -55,7 +55,7 @@ public class GamblingStatistics implements Serializable {
      * 是否胜利(字段常规判断字段)
 	 * 2020-09-06T21:55:05.253
      */
-    private Byte isWin;
+    private Integer isWin;
 
     /**
      * 开始时间
@@ -189,14 +189,14 @@ public class GamblingStatistics implements Serializable {
     /**
      * 是否胜利(字段常规判断字段)
      */
-    public Byte getIsWin() {
+    public Integer getIsWin() {
         return isWin;
     }
 
     /**
      * 是否胜利(字段常规判断字段)
      */
-    public void setIsWin(Byte isWin) {
+    public void setIsWin(Integer isWin) {
         this.isWin = isWin;
     }
 

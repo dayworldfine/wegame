@@ -135,11 +135,12 @@ public class EnumUtils {
 
     //操作类型枚举
     public static enum OPERATION_ENUM {
-        DIS_CARD("弃牌", 0, "DIS_CARD"),
-        SEE_CARD("看牌", 1, "SEE_CARD"),
-        COMPARE_CARD("比牌", 2, "COMPARE_CARD"),
-        FOLLOW_CARD("跟注", 3, "FOLLOW_CARD"),
-        ADD_CARD("加注", 4, "ADD_CARD");
+        START_ADD("开局默认底注", 0, "START_ADD"),
+        DIS_CARD("弃牌", 1, "DIS_CARD"),
+        SEE_CARD("看牌", 2, "SEE_CARD"),
+        COMPARE_CARD("比牌", 3, "COMPARE_CARD"),
+        FOLLOW_CARD("跟注", 4, "FOLLOW_CARD"),
+        ADD_CARD("加注", 5, "ADD_CARD");
 
         private String name;
         private int value;

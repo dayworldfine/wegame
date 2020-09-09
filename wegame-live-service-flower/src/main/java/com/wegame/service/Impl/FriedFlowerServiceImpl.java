@@ -1,13 +1,12 @@
 package com.wegame.service.Impl;
-import com.alibaba.fastjson.JSONObject;
 import com.wegame.entity.SeatUserEntity;
 //import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.*;
 import com.wegame.model.Gambling;
-import com.wegame.model.GamblingMessage;
+import com.wegame.model.GamblingDetails;
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
-import com.wegame.tools.flower.Card;
+import com.wegame.tools.common.GamblingDefault;
 import com.wegame.tools.flower.DisorganizeUtil;
 import com.wegame.tools.flower.FriedFlowerJsonObject;
 import com.wegame.tools.flower.Player;
@@ -15,15 +14,13 @@ import com.wegame.tools.flower.calculator.impl.NonFlowerValueCalculator;
 import com.wegame.tools.flower.compare.PlayerComparator;
 import com.wegame.tools.flower.provider.PlayerProvider;
 import com.wegame.tools.flower.provider.impl.LimitedPlayerProvider;
-import com.wegame.tools.utils.SnowUtils;
+import com.wegame.tools.utils.EnumUtils;
 import com.wegame.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -153,13 +150,28 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         System.err.println("Player:"+players);
         //这里打乱下用户数组的数据  和牌的数据再插入到数据库
         players= DisorganizeUtil.disorganizePlayers(players);
-        //1.插入牌局数据
+
+        //1.插入牌局数据 t_gambling 表
         Gambling gambling = new Gambling();
         gambling.setRoomId((long)roomId);
-//        gambling.setGamblingStatus();
-//        gamblingMapper.insert()
-        //2.插入牌局信息数据
-        //3.插入牌局牌信息
+        gambling.setGamblingStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
+        gambling.setIntegralFundus(GamblingDefault.INTEGRAL_FUNDUS);
+        gambling.setIntegralSum(GamblingDefault.INTEGRAL_SUM);
+
+        GamblingDetails gamblingDetails = new GamblingDetails();
+        gamblingDetails.setId(12l);
+        gambling.getGamblingDetails().add(gamblingDetails);
+
+//        Gambling gambling1 = gamblingMapper.singleByIdsasa();
+//        System.err.println("gambling1:"+gambling1);
+//        gamblingMapper.insertChildren(gambling);
+
+        //2.插入牌局信息数据 t_gambling_message
+            //庄家座位暂时处理成随机
+
+        //3.插入牌局牌信息牌
+        //4.插入牌局信息开局底注信息
+        //5.减少用户积分
         //4.返回信息给控制层
 
 

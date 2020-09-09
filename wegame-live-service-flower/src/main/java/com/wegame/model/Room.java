@@ -37,7 +37,7 @@ public class Room implements Serializable {
      * 状态(字段房间状态枚举)
 	 * 2020-09-06T21:55:05.261
      */
-    private Byte status;
+    private Integer status;
 
     /**
      * 2020-09-06T21:55:05.261
@@ -117,14 +117,14 @@ public class Room implements Serializable {
     /**
      * 状态(字段房间状态枚举)
      */
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
     /**
      * 状态(字段房间状态枚举)
      */
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

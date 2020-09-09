@@ -2,8 +2,7 @@ package com.wegame.mapper;
 
 import com.wegame.model.Gambling;
 import com.wegame.provider.GamblingSqlProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,4 +21,59 @@ public interface GamblingMapper {
 
     @InsertProvider(type= GamblingSqlProvider.class, method="insertSelective")
     int insertSelective(Gambling record);
+
+    /**
+     * 查询所有牌局
+     * @return
+     */
+    @Select("select * ,(select * from t_gambling+details) as gamblingSet from t_gambling")
+    @Results(id = "GamblingText",value = {
+            @Result(column="id", property="id", id=true),
+            @Result(column="create_time", property="createTime"),
+            @Result(column="update_time", property="updateTime"),
+            @Result(column="version", property="version"),
+            @Result(column="room_id", property="roomId"),
+            @Result(column="gambling_status", property="gamblingStatus"),
+            @Result(column="integral_fundus", property="integralFundus"),
+            @Result(column="integral_sum", property="integralSum"),
+            @Result(column ="id",property = "gamblingSet",many=@Many(select="com.wegame.mapper.GamblingDetailsMapper.queryByGamblingId"))
+    })
+    Gambling singleById();
+
+    /**
+     *  //这里@ResultMap里面的值指向上面的 id
+     * @return
+     */
+    @Select("select * from t_gambling")
+    @ResultMap(value="GamblingText")
+    Gambling singleByIdsss();
+
+    int insertChildren(Gambling gambling);
+
+//    @Select("select \n" +
+//            "id as id,\n" +
+//            "create_time as createTime,\n" +
+//            "update_time as updateTime,\n" +
+//            "version as version,\n" +
+//            "room_id as roomId,\n" +
+//            "gambling_status as gamblingStatus,\n" +
+//            "integral_fundus as integralFundus,\n" +
+//            "integral_sum as integralSum\n" +
+//            "(\n" +
+//            "SELECT \n" +
+//            "id as id,\n" +
+//            "create_time as createTime,\n" +
+//            "update_time as updateTime,\n" +
+//            "version as version,\n" +
+//            "gambling_id as gamblingId,\n" +
+//            "compare_user_id as compareUserId,\n" +
+//            "operation_type as operationType,\n" +
+//            "operating_leverage as operatingLeverage,\n" +
+//            "round as round,\n" +
+//            "seat_id as seatId,\n" +
+//            "user_id as userId,\n" +
+//            "sort as sort\n" +
+//            "FROM t_gambling_details ) as gamblingDetails\n" +
+//            "from t_gambling")
+//    Gambling singleByIdsasa();
 }

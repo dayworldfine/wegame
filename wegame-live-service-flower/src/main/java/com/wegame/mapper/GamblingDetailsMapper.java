@@ -13,6 +13,8 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface GamblingDetailsMapper {
     @Delete({
@@ -83,5 +85,11 @@ public interface GamblingDetailsMapper {
     })
     int updateByPrimaryKey(GamblingDetails record);
 
-
+    /**
+     * 根据牌局id查询所有牌局详情
+     * @param gamblingId
+     * @return
+     */
+    @Select("select * from t_gambling_details where gambling_id = #{gamblingId,jdbcType=BIGINT}")
+    List<GamblingDetails> queryByGamblingId(Long gamblingId);
 }

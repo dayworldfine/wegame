@@ -43,7 +43,7 @@ public class GamblingDetails implements Serializable {
      * 操作类型(见字典表操作类型枚举)
 	 * 2020-09-06T21:55:05.243
      */
-    private Byte operationType;
+    private Integer operationType;
 
     /**
      * 操作筹码加减
@@ -167,14 +167,14 @@ public class GamblingDetails implements Serializable {
     /**
      * 操作类型(见字典表操作类型枚举)
      */
-    public Byte getOperationType() {
+    public Integer getOperationType() {
         return operationType;
     }
 
     /**
      * 操作类型(见字典表操作类型枚举)
      */
-    public void setOperationType(Byte operationType) {
+    public void setOperationType(Integer operationType) {
         this.operationType = operationType;
     }
 

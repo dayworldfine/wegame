@@ -31,7 +31,7 @@ public class Seat implements Serializable {
      * 座位状态(字典座位状态枚举)
 	 * 2020-09-06T21:55:05.262
      */
-    private Byte seatStatus;
+    private Integer seatStatus;
 
     /**
      * 房间id
@@ -109,14 +109,14 @@ public class Seat implements Serializable {
     /**
      * 座位状态(字典座位状态枚举)
      */
-    public Byte getSeatStatus() {
+    public Integer getSeatStatus() {
         return seatStatus;
     }
 
     /**
      * 座位状态(字典座位状态枚举)
      */
-    public void setSeatStatus(Byte seatStatus) {
+    public void setSeatStatus(Integer seatStatus) {
         this.seatStatus = seatStatus;
     }
 
