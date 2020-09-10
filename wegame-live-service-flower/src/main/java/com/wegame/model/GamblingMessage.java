@@ -1,8 +1,17 @@
 package com.wegame.model;
 
+import com.wegame.tools.utils.SnowUtils;
+
 import java.io.Serializable;
 
 public class GamblingMessage implements Serializable {
+
+    public GamblingMessage(){
+        this.id= SnowUtils.generateId();
+        this.createTime=System.currentTimeMillis();
+        this.updateTime=System.currentTimeMillis();
+        this.version=1l;
+    }
     /**
      * ID
 	 * 2020-09-06T21:55:05.255

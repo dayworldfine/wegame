@@ -2,14 +2,20 @@ package com.wegame.controller;
 
 
 import com.wegame.config.BaseController;
+import com.wegame.dto.SeatUserDto;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.JsonResult;
+import com.wegame.tools.utils.EnumUtils;
+import com.wegame.tools.utils.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName：FriedFlowerPortController
@@ -108,14 +114,20 @@ public class FriedFlowerPortController extends BaseController {
             //发送即时通讯有人准备
             ffs.sendUserSetOut(type,roomId,seatId);
             //查询 是否满足开始游戏条件
-            Map<String,Object> countMap= ffs.selGmaeStartCondition(roomId);
+            List<SeatUserDto> countMap= ffs.selGmaeStartCondition(roomId);
             //如果等于0 说明进入房间的人都准备了 要开始游戏
-            int isSetOut= Integer.parseInt(String.valueOf(countMap.get("isSetOut")));
-            int isAllOut= Integer.parseInt(String.valueOf(countMap.get("isAllOut")));
-            if(isSetOut==isAllOut && isSetOut!=0){
+            List<SeatUserDto> SeatUserDtoCount = countMap.stream()
+                    .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId())
+                    .collect(Collectors.toList());
+            List<SeatUserDto> SeatUserDtoCountSetOut = countMap.stream()
+                    .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId() &&p.getSeatStatus()== EnumUtils.SEAT_STATUS_ENUM.READY.getValue())
+                    .collect(Collectors.toList());
+            //如果人数相等且不等于0
+            if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()&&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)){
                 //发牌游戏开始
-                 ffs.sendAndSaveGmaeStart(roomId, isSetOut);
+                 ffs.sendAndSaveGmaeStart(roomId, SeatUserDtoCountSetOut,SeatUserDtoCount);
             }
+
             return JsonResult.success("准备成功");
         }else{
             return JsonResult.failure(401,"准备失败");

@@ -48,32 +48,5 @@ public interface GamblingMapper {
     @ResultMap(value="GamblingText")
     Gambling singleByIdsss();
 
-    int insertChildren(Gambling gambling);
 
-//    @Select("select \n" +
-//            "id as id,\n" +
-//            "create_time as createTime,\n" +
-//            "update_time as updateTime,\n" +
-//            "version as version,\n" +
-//            "room_id as roomId,\n" +
-//            "gambling_status as gamblingStatus,\n" +
-//            "integral_fundus as integralFundus,\n" +
-//            "integral_sum as integralSum\n" +
-//            "(\n" +
-//            "SELECT \n" +
-//            "id as id,\n" +
-//            "create_time as createTime,\n" +
-//            "update_time as updateTime,\n" +
-//            "version as version,\n" +
-//            "gambling_id as gamblingId,\n" +
-//            "compare_user_id as compareUserId,\n" +
-//            "operation_type as operationType,\n" +
-//            "operating_leverage as operatingLeverage,\n" +
-//            "round as round,\n" +
-//            "seat_id as seatId,\n" +
-//            "user_id as userId,\n" +
-//            "sort as sort\n" +
-//            "FROM t_gambling_details ) as gamblingDetails\n" +
-//            "from t_gambling")
-//    Gambling singleByIdsasa();
 }

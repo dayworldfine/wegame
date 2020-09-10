@@ -68,8 +68,6 @@ public class Gambling implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private Set<GamblingDetails> gamblingDetails =new HashSet<>();
-
     /**
      * ID
      */
@@ -182,46 +180,26 @@ public class Gambling implements Serializable {
         this.integralSum = integralSum;
     }
 
-    public Set<GamblingDetails> getGamblingDetails() {
-        return gamblingDetails;
-    }
 
-    public void setGamblingDetails(Set<GamblingDetails> gamblingDetails) {
-        this.gamblingDetails = gamblingDetails;
-    }
-
-    //    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(getClass().getSimpleName());
-//        sb.append(" [");
-//        sb.append("Hash = ").append(hashCode());
-//        sb.append(", id=").append(id);
-//        sb.append(", createTime=").append(createTime);
-//        sb.append(", updateTime=").append(updateTime);
-//        sb.append(", version=").append(version);
-//        sb.append(", roomId=").append(roomId);
-//        sb.append(", gamblingStatus=").append(gamblingStatus);
-//        sb.append(", integralFundus=").append(integralFundus);
-//        sb.append(", integralSum=").append(integralSum);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append("]");
-//        return sb.toString();
-//    }
-
-
-    @Override
+        @Override
     public String toString() {
-        return "Gambling{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", version=" + version +
-                ", roomId=" + roomId +
-                ", gamblingStatus=" + gamblingStatus +
-                ", integralFundus=" + integralFundus +
-                ", integralSum=" + integralSum +
-                ", gamblingDetails=" + gamblingDetails +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", version=").append(version);
+        sb.append(", roomId=").append(roomId);
+        sb.append(", gamblingStatus=").append(gamblingStatus);
+        sb.append(", integralFundus=").append(integralFundus);
+        sb.append(", integralSum=").append(integralSum);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
+
+
+
 }

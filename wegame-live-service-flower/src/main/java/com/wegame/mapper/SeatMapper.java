@@ -1,5 +1,6 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.model.Seat;
 import com.wegame.provider.SeatSqlProvider;
@@ -84,7 +85,7 @@ public interface SeatMapper {
             "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.room_id\n" +
             "LEFT JOIN t_user u ON u.id = s.user_id\n" +
             "WHERE r.id= #{roomId,jdbcType=INTEGER}")
-    List<SeatUserEntity> findRoomInfo(long roomId);
+    List<SeatUserEntity> listRoomInfo(long roomId);
 
     /**
      * 准备
@@ -96,26 +97,27 @@ public interface SeatMapper {
     @Update("update t_seat t\n" +
             "LEFT JOIN t_room r\n" +
             "ON t.room_id = r.ID\n" +
-            "SET t.seat_status = 2\n" +
+            "SET t.seat_status = 2, t.update_time= #{timeMillis,jdbcType=BIGINT}\n" +
             "WHERE r.id = #{roomId,jdbcType=INTEGER}\n" +
             "AND t.user_id = #{userId,jdbcType=INTEGER}\n" +
             "AND t.id = #{seatId,jdbcType=INTEGER}\n" +
             "AND t.seat_status !=2")
-    int saveUserSetOut(int roomId, int userId, int seatId);
+    int updateUserSetOut(int roomId, int userId, int seatId,long timeMillis);
 
 
     /**
-     * 查询房间人数和已准备人数
+     * 查询房间所有座位信息
      * @param roomId
      * @return
      */
     @Select("SELECT \n" +
-            "SUM(CASE WHEN t.seat_status = 2 THEN 1 ELSE 0 END ) AS 'isSetOut',\n" +
-            "count(*) AS 'isAllOut' \n" +
-            "FROM t_seat t\n" +
-            "LEFT JOIN t_room r\n" +
-            "ON t.room_id = r.ID\n" +
-            "WHERE r.id = #{roomId,jdbcType=INTEGER}\n" +
-            "AND t.user_id IS NOT NULL")
-    Map<String, Object> selGmaeStartCondition(int roomId);
+            "t.id as id ,\n" +
+            "t.seat_status as seatStatus,\n" +
+            "t.user_id as userId\n" +
+            "FROM\n" +
+            "t_seat t \n" +
+            "INNER JOIN t_room r \n" +
+            "on t.room_id =r.id\n" +
+            "WHERE r.id =#{roomId,jdbcType=BIGINT}")
+    List<SeatUserDto> selGmaeStartCondition(int roomId);
 }

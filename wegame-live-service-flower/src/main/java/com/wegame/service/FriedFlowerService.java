@@ -1,6 +1,7 @@
 package com.wegame.service;
 
 
+import com.wegame.dto.SeatUserDto;
 import com.wegame.model.Room;
 import com.wegame.model.Seat;
 import com.wegame.vo.Message;
@@ -102,13 +103,13 @@ public interface FriedFlowerService {
      * @param roomSerial
      * @return
      */
-    Map<String,Object> selGmaeStartCondition(int roomSerial);
+    List<SeatUserDto> selGmaeStartCondition(int roomSerial);
 
 
     /**
      * 发牌游戏开始
      * @param roomSerial
      */
-    void sendAndSaveGmaeStart(int roomSerial, int isSetOut);
+    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> SeatUserDtoCountSetOut,List<SeatUserDto> SeatUserDtoCount);
 
 }

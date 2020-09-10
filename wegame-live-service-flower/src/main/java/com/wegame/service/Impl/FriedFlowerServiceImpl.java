@@ -1,9 +1,11 @@
 package com.wegame.service.Impl;
+import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
 //import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.*;
 import com.wegame.model.Gambling;
 import com.wegame.model.GamblingDetails;
+import com.wegame.model.GamblingMessage;
 import com.wegame.model.Room;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.common.GamblingDefault;
@@ -21,8 +23,10 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @ClassName：FriedFlowerServiceImpl
@@ -88,7 +92,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
         /* 0 未开始  1 一开始*/
 //        List<JSONObject> objects = seatRepository.findRoomInfo(room.getSerial());
-        List<SeatUserEntity> objects = seatMapper.findRoomInfo(room.getId());
+        List<SeatUserEntity> objects = seatMapper.listRoomInfo(room.getId());
         System.out.println("objects:" + objects);
         template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("roomId").toString())),
                 FriedFlowerJsonObject.room(Integer.parseInt(msg.get("type").toString())-1 , objects));
@@ -117,7 +121,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     @Override
     public int saveUserSetOut(int roomId, int userId, int seatId) {
 //        return  seatRepository.saveUserSetOut(roomSerial,userCode,seatSerial);
-       return seatMapper.saveUserSetOut(roomId,userId,seatId);
+       return seatMapper.updateUserSetOut(roomId,userId,seatId,System.currentTimeMillis());
     }
 
 
@@ -128,20 +132,19 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public Map<String,Object> selGmaeStartCondition(int roomId) {
+    public List<SeatUserDto> selGmaeStartCondition(int roomId) {
 //        return  seatRepository.selGmaeStartCondition(roomSerial);
         return  seatMapper.selGmaeStartCondition(roomId);
-
     }
 
     @Override
-    public void sendAndSaveGmaeStart(int roomId, int isSetOut) {
+    public void sendAndSaveGmaeStart(int roomId,List<SeatUserDto> SeatUserDtoCountSetOut,List<SeatUserDto> SeatUserDtoCount) {
         //使用有人数下限制的发牌器
         PlayerProvider playerProvider = new LimitedPlayerProvider();
         //使用花色不参与牌大小比较的计算器
         PlayerComparator playerComparator = new PlayerComparator(new NonFlowerValueCalculator());
         //创建多副牌
-        List<Player> players = playerProvider.getPlayers(isSetOut);
+        List<Player> players = playerProvider.getPlayers(SeatUserDtoCountSetOut.size());
         /*输出每个角色的所有*/
         System.err.println("Player:"+players);
         //算好牌值
@@ -157,17 +160,16 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         gambling.setGamblingStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
         gambling.setIntegralFundus(GamblingDefault.INTEGRAL_FUNDUS);
         gambling.setIntegralSum(GamblingDefault.INTEGRAL_SUM);
-
-        GamblingDetails gamblingDetails = new GamblingDetails();
-        gamblingDetails.setId(12l);
-        gambling.getGamblingDetails().add(gamblingDetails);
-
-//        Gambling gambling1 = gamblingMapper.singleByIdsasa();
-//        System.err.println("gambling1:"+gambling1);
-//        gamblingMapper.insertChildren(gambling);
+        gamblingMapper.insert(gambling);
 
         //2.插入牌局信息数据 t_gambling_message
             //庄家座位暂时处理成随机
+        int bankerIndex = new Random().nextInt(SeatUserDtoCountSetOut.size());
+//        Lists List<GamblingMessage> gamblingMessageList
+//        GamblingMessage gamblingMessage = new GamblingMessage();
+
+
+
 
         //3.插入牌局牌信息牌
         //4.插入牌局信息开局底注信息
