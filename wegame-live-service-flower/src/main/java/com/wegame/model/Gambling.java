@@ -9,10 +9,6 @@ import java.util.Set;
 public class Gambling implements Serializable {
 
     public Gambling() {
-        this.id = SnowUtils.generateId();
-        this.createTime=System.currentTimeMillis();
-        this.updateTime=System.currentTimeMillis();
-        this.version=1l;
     }
 
     /**

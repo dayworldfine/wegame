@@ -8,9 +8,10 @@ package com.wegame.tools.common;
  * @Version: v1.0
  **/
 public class GamblingDefault {
+    public static final int INT_ZERO=0;
+
     /*默认牌局底注*/
     public  static final long INTEGRAL_FUNDUS =1l;
-    public  static final long INTEGRAL_SUM =0l;
 
     /*默认属性*/
     public static final long LONG_ZERO=0l;

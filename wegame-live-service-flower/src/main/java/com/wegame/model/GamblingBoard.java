@@ -1,8 +1,13 @@
 package com.wegame.model;
 
+import com.wegame.tools.utils.SnowUtils;
+
 import java.io.Serializable;
 
 public class GamblingBoard implements Serializable {
+
+    public GamblingBoard(){
+    }
     /**
      * ID
 	 * 2020-09-08T20:55:36.864
@@ -20,6 +25,12 @@ public class GamblingBoard implements Serializable {
 	 * 2020-09-08T20:55:36.867
      */
     private Long updateTime;
+
+    /**
+     * 版本
+     * 2020-09-06T21:55:05.255
+     */
+    private Long version;
 
     /**
      * 牌局信息id
@@ -288,28 +299,32 @@ public class GamblingBoard implements Serializable {
         this.thirdlyBoardNumber = thirdlyBoardNumber;
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", gamblingMessageId=").append(gamblingMessageId);
-        sb.append(", boardSize=").append(boardSize);
-        sb.append(", boardType=").append(boardType);
-        sb.append(", isSpecial=").append(isSpecial);
-        sb.append(", isA32=").append(isA32);
-        sb.append(", firstBoardColor=").append(firstBoardColor);
-        sb.append(", firstBoardNumber=").append(firstBoardNumber);
-        sb.append(", secondBoardColor=").append(secondBoardColor);
-        sb.append(", secondBoardNumber=").append(secondBoardNumber);
-        sb.append(", thirdlyBoardColor=").append(thirdlyBoardColor);
-        sb.append(", thirdlyBoardNumber=").append(thirdlyBoardNumber);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "GamblingBoard{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                ", gamblingMessageId=" + gamblingMessageId +
+                ", boardSize=" + boardSize +
+                ", boardType=" + boardType +
+                ", isSpecial=" + isSpecial +
+                ", isA32=" + isA32 +
+                ", firstBoardColor=" + firstBoardColor +
+                ", firstBoardNumber=" + firstBoardNumber +
+                ", secondBoardColor=" + secondBoardColor +
+                ", secondBoardNumber=" + secondBoardNumber +
+                ", thirdlyBoardColor=" + thirdlyBoardColor +
+                ", thirdlyBoardNumber=" + thirdlyBoardNumber +
+                '}';
     }
 }

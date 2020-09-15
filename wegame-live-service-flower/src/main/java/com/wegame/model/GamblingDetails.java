@@ -1,8 +1,14 @@
 package com.wegame.model;
 
+import com.wegame.tools.utils.SnowUtils;
+
 import java.io.Serializable;
 
 public class GamblingDetails implements Serializable {
+
+    public GamblingDetails(){
+    }
+
     /**
      * ID
 	 * 2020-09-06T21:55:05.243
@@ -61,7 +67,7 @@ public class GamblingDetails implements Serializable {
      * 座位id
 	 * 2020-09-06T21:55:05.243
      */
-    private Integer seatId;
+    private Long seatId;
 
     /**
      * 用户id
@@ -209,14 +215,14 @@ public class GamblingDetails implements Serializable {
     /**
      * 座位id
      */
-    public Integer getSeatId() {
+    public Long getSeatId() {
         return seatId;
     }
 
     /**
      * 座位id
      */
-    public void setSeatId(Integer seatId) {
+    public void setSeatId(Long seatId) {
         this.seatId = seatId;
     }
 
@@ -250,24 +256,19 @@ public class GamblingDetails implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", version=").append(version);
-        sb.append(", gamblingId=").append(gamblingId);
-        sb.append(", compareUserId=").append(compareUserId);
-        sb.append(", operationType=").append(operationType);
-        sb.append(", operatingLeverage=").append(operatingLeverage);
-        sb.append(", round=").append(round);
-        sb.append(", seatId=").append(seatId);
-        sb.append(", userId=").append(userId);
-        sb.append(", sort=").append(sort);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "GamblingDetails{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                ", gamblingId=" + gamblingId +
+                ", compareUserId=" + compareUserId +
+                ", operationType=" + operationType +
+                ", operatingLeverage=" + operatingLeverage +
+                ", round=" + round +
+                ", seatId=" + seatId +
+                ", userId=" + userId +
+                ", sort=" + sort +
+                '}';
     }
 }

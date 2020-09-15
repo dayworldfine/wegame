@@ -4,10 +4,7 @@ import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
 //import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.*;
-import com.wegame.model.Gambling;
-import com.wegame.model.GamblingDetails;
-import com.wegame.model.GamblingMessage;
-import com.wegame.model.Room;
+import com.wegame.model.*;
 import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.common.GamblingDefault;
 import com.wegame.tools.flower.DisorganizeUtil;
@@ -18,7 +15,9 @@ import com.wegame.tools.flower.compare.PlayerComparator;
 import com.wegame.tools.flower.provider.PlayerProvider;
 import com.wegame.tools.flower.provider.impl.LimitedPlayerProvider;
 import com.wegame.tools.utils.EnumUtils;
+import com.wegame.tools.utils.SnowUtils;
 import com.wegame.vo.Message;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -58,6 +57,12 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
     @Autowired
     private GamblingBoardMapper gamblingBoardMapper;
+
+    @Autowired
+    private GamblingDetailsMapper gamblingDetailsMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
 
     @Override
@@ -157,48 +162,87 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
         //1.插入牌局数据 t_gambling 表
         Gambling gambling = new Gambling();
+        gambling.setId(SnowUtils.generateId());
+        gambling.setCreateTime(System.currentTimeMillis());
+        gambling.setUpdateTime(System.currentTimeMillis());
+        gambling.setVersion(1l);
         gambling.setRoomId((long)roomId);
         gambling.setGamblingStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
         gambling.setIntegralFundus(GamblingDefault.INTEGRAL_FUNDUS);
-        gambling.setIntegralSum(GamblingDefault.INTEGRAL_SUM);
+        gambling.setIntegralSum(GamblingDefault.INTEGRAL_FUNDUS*SeatUserDtoCountSetOut.size());
         gamblingMapper.insert(gambling);
 
-        //2.插入牌局信息数据 t_gambling_message
-            //庄家座位暂时处理成随机
-        int bankerIndex = new Random().nextInt(SeatUserDtoCountSetOut.size());
         List<GamblingMessage> gamblingMessageList = Lists.newArrayList();
+        List<GamblingBoard> gamblingBoardList = Lists.newArrayList();
+        int bankerIndex = new Random().nextInt(SeatUserDtoCountSetOut.size());
         for (int i=0;i<SeatUserDtoCount.size();i++){
+            //2.插入牌局信息数据 t_gambling_message
+            //庄家座位暂时处理成随机
             SeatUserDto sud = SeatUserDtoCount.get(i);
-            GamblingMessage gamblingMessage = new GamblingMessage();
-            gamblingMessage.setGamblingId(gambling.getId());
-            gamblingMessage.setUserId(sud.getUserId());
-            gamblingMessage.setSeatId(sud.getId());
-            if (bankerIndex==i){
-                gamblingMessage.setIsBanker(EnumUtils.JUDGE_ENUM.YES.getValue());
-            }else {
-                gamblingMessage.setIsBanker(EnumUtils.JUDGE_ENUM.NO.getValue());
-            }
+            GamblingMessage gm = new GamblingMessage();
+            gm.setId(SnowUtils.generateId());
+            gm.setCreateTime(System.currentTimeMillis());
+            gm.setUpdateTime(System.currentTimeMillis());
+            gm.setVersion(1l);
+            gm.setGamblingId(gambling.getId());
+            gm.setUserId(sud.getUserId());
+            gm.setSeatId(sud.getId());
+            gm.setIsBanker(bankerIndex==i?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
+            gm.setSeeCardStatus(EnumUtils.JUDGE_ENUM.NO.getValue());
+            gm.setGameStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
             if (sud.getUserId()==GamblingDefault.LONG_ZERO){
-                gamblingMessage.setIsUser(EnumUtils.JUDGE_ENUM.NO.getValue());
+                gm.setIsUser(EnumUtils.JUDGE_ENUM.NO.getValue());
             }else {
-                gamblingMessage.setIsUser(EnumUtils.JUDGE_ENUM.YES.getValue());
+                gm.setIsUser(EnumUtils.JUDGE_ENUM.YES.getValue());
+                //如有有角色还要添加牌局的牌
+                //3.插入牌局牌信息表
+                GamblingBoard gb = new GamblingBoard();
+                Player player = players.get(i);
+                gb.setId(SnowUtils.generateId());
+                gb.setCreateTime(System.currentTimeMillis());
+                gb.setUpdateTime(System.currentTimeMillis());
+                gb.setVersion(1l);
+                gb.setGamblingMessageId(gm.getId());
+                gb.setBoardSize((long) player.getValue());
+                gb.setBoardType(player.getType());
+                gb.setIsSpecial(player.isSpecial()? EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
+                gb.setIsA32(player.isA32()?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
+                gb.setFirstBoardColor(player.getCards()[0].getFlower());
+                gb.setFirstBoardNumber(player.getCards()[0].getNumber());
+                gb.setSecondBoardColor(player.getCards()[1].getFlower());
+                gb.setSecondBoardNumber(player.getCards()[1].getNumber());
+                gb.setThirdlyBoardColor(player.getCards()[2].getFlower());
+                gb.setThirdlyBoardNumber(player.getCards()[2].getNumber());
+                gamblingBoardList.add(gb);
             }
-            gamblingMessage.setSeeCardStatus(EnumUtils.JUDGE_ENUM.NO.getValue());
-            gamblingMessage.setGameStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
-            gamblingMessageList.add(gamblingMessage);
+            gamblingMessageList.add(gm);
+
         }
         int i = gamblingMessageMapper.insertGamblingMessageList(gamblingMessageList);
+        int j =gamblingBoardMapper.insertGamblingBoardList(gamblingBoardList);
 
-//        Lists List<GamblingMessage> gamblingMessageList
-//        GamblingMessage gamblingMessage = new GamblingMessage();
-
-
-
-
-        //3.插入牌局牌信息牌
         //4.插入牌局信息开局底注信息
-        //5.减少用户积分
-        //4.返回信息给控制层
+        List<GamblingDetails> gamblingDetailsList = Lists.newArrayList();
+        SeatUserDtoCountSetOut.forEach(a->{
+            GamblingDetails gd = new GamblingDetails();
+            gd.setId(SnowUtils.generateId());
+            gd.setCreateTime(System.currentTimeMillis());
+            gd.setUpdateTime(System.currentTimeMillis());
+            gd.setVersion(1l);
+            gd.setGamblingId(gambling.getId());
+            gd.setCompareUserId(GamblingDefault.LONG_ZERO);
+            gd.setOperationType(EnumUtils.OPERATION_ENUM.START_ADD.getValue());
+            gd.setOperatingLeverage(GamblingDefault.INTEGRAL_FUNDUS);
+            gd.setRound(GamblingDefault.INT_ZERO);
+            gd.setSeatId(a.getId());
+            gd.setUserId(a.getUserId());
+            gd.setSort(GamblingDefault.INT_ZERO);
+            gamblingDetailsList.add(gd);
+            //5.减少用户积分
+            int num= userMapper.updateUserIntegral(a.getUserId(),1l);
+        });
+        int k =gamblingDetailsMapper.insertGamblingDetailsList(gamblingDetailsList);
+        //6.返回信息给控制层
 
 
 
