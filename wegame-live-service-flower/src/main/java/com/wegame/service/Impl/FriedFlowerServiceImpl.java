@@ -1,4 +1,5 @@
 package com.wegame.service.Impl;
+import com.google.common.collect.Lists;
 import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
 //import com.wegame.mapper.BoardMapper;
@@ -79,7 +80,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
     @Override
     public void sendUserInToRoomMessage(Map<String, Object> msg) {
-        template.convertAndSend("/friedFlower/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("type").toString())),
+        template.convertAndSend("/friedFlower/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("roomId").toString())),
                 FriedFlowerJsonObject.userInToRoom(Integer.parseInt(msg.get("type").toString()),
                         msg.get("userId").toString(),
                         msg.get("userImg").toString(),
@@ -138,7 +139,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public void sendAndSaveGmaeStart(int roomId,List<SeatUserDto> SeatUserDtoCountSetOut,List<SeatUserDto> SeatUserDtoCount) {
+    public void sendAndSaveGmaeStart(int roomId,List<SeatUserDto> SeatUserDtoCount,List<SeatUserDto> SeatUserDtoCountSetOut) {
         //使用有人数下限制的发牌器
         PlayerProvider playerProvider = new LimitedPlayerProvider();
         //使用花色不参与牌大小比较的计算器
@@ -165,6 +166,29 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         //2.插入牌局信息数据 t_gambling_message
             //庄家座位暂时处理成随机
         int bankerIndex = new Random().nextInt(SeatUserDtoCountSetOut.size());
+        List<GamblingMessage> gamblingMessageList = Lists.newArrayList();
+        for (int i=0;i<SeatUserDtoCount.size();i++){
+            SeatUserDto sud = SeatUserDtoCount.get(i);
+            GamblingMessage gamblingMessage = new GamblingMessage();
+            gamblingMessage.setGamblingId(gambling.getId());
+            gamblingMessage.setUserId(sud.getUserId());
+            gamblingMessage.setSeatId(sud.getId());
+            if (bankerIndex==i){
+                gamblingMessage.setIsBanker(EnumUtils.JUDGE_ENUM.YES.getValue());
+            }else {
+                gamblingMessage.setIsBanker(EnumUtils.JUDGE_ENUM.NO.getValue());
+            }
+            if (sud.getUserId()==GamblingDefault.LONG_ZERO){
+                gamblingMessage.setIsUser(EnumUtils.JUDGE_ENUM.NO.getValue());
+            }else {
+                gamblingMessage.setIsUser(EnumUtils.JUDGE_ENUM.YES.getValue());
+            }
+            gamblingMessage.setSeeCardStatus(EnumUtils.JUDGE_ENUM.NO.getValue());
+            gamblingMessage.setGameStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
+            gamblingMessageList.add(gamblingMessage);
+        }
+        int i = gamblingMessageMapper.insertGamblingMessageList(gamblingMessageList);
+
 //        Lists List<GamblingMessage> gamblingMessageList
 //        GamblingMessage gamblingMessage = new GamblingMessage();
 

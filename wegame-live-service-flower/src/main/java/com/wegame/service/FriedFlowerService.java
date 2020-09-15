@@ -110,6 +110,6 @@ public interface FriedFlowerService {
      * 发牌游戏开始
      * @param roomSerial
      */
-    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> SeatUserDtoCountSetOut,List<SeatUserDto> SeatUserDtoCount);
+    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> SeatUserDtoCount,List<SeatUserDto> SeatUserDtoCountSetOut);
 
 }

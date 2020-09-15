@@ -125,7 +125,7 @@ public class FriedFlowerPortController extends BaseController {
             //如果人数相等且不等于0
             if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()&&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)){
                 //发牌游戏开始
-                 ffs.sendAndSaveGmaeStart(roomId, SeatUserDtoCountSetOut,SeatUserDtoCount);
+                 ffs.sendAndSaveGmaeStart(roomId, SeatUserDtoCount,SeatUserDtoCountSetOut);
             }
 
             return JsonResult.success("准备成功");

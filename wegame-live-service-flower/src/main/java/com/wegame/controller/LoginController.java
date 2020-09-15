@@ -3,6 +3,7 @@ package com.wegame.controller;
 
 import com.wegame.tools.JsonResult;
 import com.wegame.tools.utils.MD5Utiles;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,9 @@ public class LoginController {
                             String passWord){
         System.out.println(MD5Utiles.StringMD5("123456"));
         System.out.println(MD5Utiles.StringMD5(MD5Utiles.StringMD5("123456")));
-        return null;
+//        return null;
+        return JsonResult.success();
+
 //        Subject subject = SecurityUtils.getSubject();
 //        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName,passWord);
 //        try {
@@ -56,5 +59,6 @@ public class LoginController {
 //            return JsonResult.paramError("账号密码错误");
 //        }
     }
+
 
 }
