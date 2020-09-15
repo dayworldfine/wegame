@@ -246,27 +246,6 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
 
 
-        //拼接数据
-
-//        List<Board> boards = new ArrayList<>();
-//        Board board ;
-//        for (Player p : players){
-//            board = new Board();
-//            Card[] cards = p.getCards();
-//            board.setFirstBoardValue(cards[0].getNumber());
-//            board.setFirstBoardColor(cards[0].getFlower());
-//            board.setSecondBoardValue(cards[1].getNumber());
-//            board.setSecondBoardColor(cards[1].getFlower());
-//            board.setThirdlyBoardValue(cards[2].getNumber());
-//            board.setThirdlyBoardColor(cards[2].getFlower());
-//            board.setType(p.getType());
-//            board.setSize((long) p.getValue());
-//            boards.add(board);
-//        }
-//        /*存入数据库*/
-//        int num =  boardMapper.insertAll(boards);  //待测试
-
-
     }
 
 }
