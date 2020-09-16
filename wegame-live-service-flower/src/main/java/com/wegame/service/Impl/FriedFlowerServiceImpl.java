@@ -1,8 +1,8 @@
 package com.wegame.service.Impl;
 import com.google.common.collect.Lists;
+import com.wegame.dto.RoomMsgDto;
 import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
-//import com.wegame.mapper.BoardMapper;
 import com.wegame.mapper.*;
 import com.wegame.model.*;
 import com.wegame.service.FriedFlowerService;
@@ -17,13 +17,12 @@ import com.wegame.tools.flower.provider.impl.LimitedPlayerProvider;
 import com.wegame.tools.utils.EnumUtils;
 import com.wegame.tools.utils.SnowUtils;
 import com.wegame.vo.Message;
-import org.checkerframework.checker.units.qual.A;
+import com.wegame.vo.RoomMsgVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -160,6 +159,8 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         //这里打乱下用户数组的数据  和牌的数据再插入到数据库
         players= DisorganizeUtil.disorganizePlayers(players);
 
+
+
         //1.插入牌局数据 t_gambling 表
         Gambling gambling = new Gambling();
         gambling.setId(SnowUtils.generateId());
@@ -170,7 +171,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         gambling.setGamblingStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
         gambling.setIntegralFundus(GamblingDefault.INTEGRAL_FUNDUS);
         gambling.setIntegralSum(GamblingDefault.INTEGRAL_FUNDUS*SeatUserDtoCountSetOut.size());
-        gamblingMapper.insert(gambling);
+        int insert = gamblingMapper.insert(gambling);
 
         List<GamblingMessage> gamblingMessageList = Lists.newArrayList();
         List<GamblingBoard> gamblingBoardList = Lists.newArrayList();
@@ -240,12 +241,36 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
             gamblingDetailsList.add(gd);
             //5.减少用户积分
             int num= userMapper.updateUserIntegral(a.getUserId(),1l);
+            if (num<1){
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
         int k =gamblingDetailsMapper.insertGamblingDetailsList(gamblingDetailsList);
-        //6.返回信息给控制层
+        //校验插入的数据是否正常
+        if (insert!=1 ||
+                i<SeatUserDtoCount.size() ||
+                j<SeatUserDtoCountSetOut.size() ||
+                k<SeatUserDtoCountSetOut.size()
+        ){
+            try {
+                throw  new Exception();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+        //查询这个房间的全部信息
+        RoomMsgVo roomMsgVo = new RoomMsgVo();
+        RoomMsgDto roomMsgDto = gamblingMapper.getRoomMsgByRoomId(roomId);
+        BeanUtils.copyProperties(roomMsgDto,roomMsgVo);
 
-
+        //发送全局消息
+//        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomId),
+//                FriedFlowerJsonObject.gameStart(11,));
     }
 
 }

@@ -7,6 +7,7 @@ import com.wegame.service.FriedFlowerService;
 import com.wegame.tools.JsonResult;
 import com.wegame.tools.utils.EnumUtils;
 import com.wegame.tools.utils.ValidateUtil;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
@@ -113,21 +116,28 @@ public class FriedFlowerPortController extends BaseController {
         if (0<num){
             //发送即时通讯有人准备
             ffs.sendUserSetOut(type,roomId,seatId);
-            //查询 是否满足开始游戏条件
-            List<SeatUserDto> countMap= ffs.selGmaeStartCondition(roomId);
-            //如果等于0 说明进入房间的人都准备了 要开始游戏
-            List<SeatUserDto> SeatUserDtoCount = countMap.stream()
-                    .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId())
-                    .collect(Collectors.toList());
-            List<SeatUserDto> SeatUserDtoCountSetOut = countMap.stream()
-                    .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId() &&p.getSeatStatus()== EnumUtils.SEAT_STATUS_ENUM.READY.getValue())
-                    .collect(Collectors.toList());
-            //如果人数相等且不等于0
-            if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()&&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)){
-                //发牌游戏开始
-                 ffs.sendAndSaveGmaeStart(roomId, SeatUserDtoCount,SeatUserDtoCountSetOut);
-            }
+            ExecutorService cachePool = Executors.newCachedThreadPool();
+            cachePool.execute(new Runnable() {
+                @SneakyThrows
+                @Override
+                public void run() {
+                    //查询 是否满足开始游戏条件
+                    List<SeatUserDto> countMap= ffs.selGmaeStartCondition(roomId);
+                    //如果等于0 说明进入房间的人都准备了 要开始游戏
+                    List<SeatUserDto> SeatUserDtoCount = countMap.stream()
+                            .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId())
+                            .collect(Collectors.toList());
+                    List<SeatUserDto> SeatUserDtoCountSetOut = countMap.stream()
+                            .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId() &&p.getSeatStatus()== EnumUtils.SEAT_STATUS_ENUM.READY.getValue())
+                            .collect(Collectors.toList());
+                    //如果人数相等且不等于0
+                    if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()&&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)){
+                        //发牌游戏开始
+                    ffs.sendAndSaveGmaeStart(roomId, SeatUserDtoCount,SeatUserDtoCountSetOut);
 
+                    }
+                }
+            });
             return JsonResult.success("准备成功");
         }else{
             return JsonResult.failure(401,"准备失败");

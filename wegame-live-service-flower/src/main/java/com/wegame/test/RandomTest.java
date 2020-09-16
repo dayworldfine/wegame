@@ -9,7 +9,7 @@ import java.util.Random;
  * @Data 2020/9/10 22:34
  * @Version: v1.0
  **/
-public class RandomUtil {
+public class RandomTest {
 
     public static void main(String[] args) {
         System.out.println("test1:"+ new Random().nextInt(2));

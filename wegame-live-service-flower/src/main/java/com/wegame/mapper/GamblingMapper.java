@@ -1,7 +1,9 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.RoomMsgDto;
 import com.wegame.model.Gambling;
 import com.wegame.provider.GamblingSqlProvider;
+import com.wegame.vo.RoomMsgVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -49,4 +51,17 @@ public interface GamblingMapper {
     Gambling singleByIdsss();
 
 
+    /*查询房间信息*/
+    @Select("SELECT \n" +
+            "id as gamblingId,\n" +
+            "room_id as roomId,\n" +
+            "gambling_status as gamblingStatus,\n" +
+            "integral_fundus as integralFundus,\n" +
+            "integral_sum as integralSum\n" +
+            "FROM\n" +
+            "t_gambling \n" +
+            "WHERE room_id = ${roomId,jdbcType=BIGINT}\n" +
+            "AND gambling_status=0\n" +
+            "LIMIT 1")
+    RoomMsgDto getRoomMsgByRoomId(int roomId);
 }
