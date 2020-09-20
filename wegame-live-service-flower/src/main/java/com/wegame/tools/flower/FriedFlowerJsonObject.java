@@ -2,6 +2,7 @@ package com.wegame.tools.flower;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wegame.entity.SeatUserEntity;
+import com.wegame.vo.RoomMsgVo;
 
 import java.util.List;
 
@@ -226,14 +227,14 @@ public class FriedFlowerJsonObject {
     /**
      * 游戏开始
      * @param type
-     * @param boardList
+     * @param roomMsgVo
      * @return
      */
-    public static JSONObject gameStart(String type,
-                                JSONObject[] boardList){
+    public static JSONObject gameStart(int type,
+                                       RoomMsgVo roomMsgVo){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("userList",boardList);
+        obj.put("userList",roomMsgVo);
         return obj;
     }
 

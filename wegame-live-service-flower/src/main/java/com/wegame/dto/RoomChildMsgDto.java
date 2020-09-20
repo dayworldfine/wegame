@@ -22,7 +22,7 @@ public class RoomChildMsgDto {
     private Integer seeCardStatus;
     private Integer gameStatus;
 
-    private String boardSize;
+    private Integer boardSize;
     private Integer boardType;
     private Integer isSpecial;
     private Integer isA32;

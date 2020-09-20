@@ -1,11 +1,14 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.RoomChildMsgDto;
 import com.wegame.dto.RoomMsgDto;
 import com.wegame.model.Gambling;
 import com.wegame.provider.GamblingSqlProvider;
 import com.wegame.vo.RoomMsgVo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface GamblingMapper {
@@ -60,8 +63,45 @@ public interface GamblingMapper {
             "integral_sum as integralSum\n" +
             "FROM\n" +
             "t_gambling \n" +
-            "WHERE room_id = ${roomId,jdbcType=BIGINT}\n" +
+            "WHERE room_id = #{roomId,jdbcType=BIGINT}\n" +
             "AND gambling_status=0\n" +
             "LIMIT 1")
     RoomMsgDto getRoomMsgByRoomId(int roomId);
+
+    /**
+     * 根据牌局信息查询牌局所有信息
+     * @param gamblingId
+     * @return
+     */
+    @Select("SELECT \n" +
+            "t.id as userId,\n" +
+            "t.head_portrait as headPortrait,\n" +
+            "t.integral as integral,\n" +
+            "t.nick_name as nickName,\n" +
+            "tgm.seat_id as seatId,\n" +
+            "tgm.is_banker as isBanker,\n" +
+            "tgm.is_user as isUser,\n" +
+            "tgm.see_card_status as seeCardStatus,\n" +
+            "tgm.game_status as gameStatus,\n" +
+            "tgb.board_size as boardSize,\n" +
+            "tgb.board_type as boardType,\n" +
+            "tgb.is_special as isSpecial,\n" +
+            "tgb.is_a32 as isA32,\n" +
+            "tgb.first_board_color as firstBoardColor,\n" +
+            "tgb.first_board_number as firstBoardNumber,\n" +
+            "tgb.second_board_color as secondBoardColor,\n" +
+            "tgb.second_board_number as secondBoardNumber,\n" +
+            "tgb.thirdly_board_color as thirdlyBoardColor,\n" +
+            "tgb.thirdly_board_number as thirdlyBoardNumber\n" +
+            "FROM\n" +
+            "t_gambling_message tgm\n" +
+            "INNER JOIN \n" +
+            "t_gambling_board  tgb\n" +
+            "on  tgm.id=tgb.gambling_message_id\n" +
+            "INNER JOIN \n" +
+            "t_user t\n" +
+            "on tgm.user_id =t.id\n" +
+            "WHERE \n" +
+            "tgm.gambling_id = #{gamblingId,jdbcType=BIGINT}\n")
+    List<RoomChildMsgDto> listRoomMsgByGamblingId(String gamblingId);
 }

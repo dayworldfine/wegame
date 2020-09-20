@@ -13,7 +13,7 @@ public class Player {
 	public Card[] cards = new Card[3];
 	// 牌类型
 	private int type;
-	// 是否为特殊牌
+	// 是否为特殊牌235  这个要自行处离 算法上不提供
 	private boolean isSpecial = false;
 	// A32也是顺子，比花色时，从3开始比较
 	private boolean isA32 = false;

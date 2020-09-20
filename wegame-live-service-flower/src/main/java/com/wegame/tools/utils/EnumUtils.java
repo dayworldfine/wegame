@@ -214,7 +214,8 @@ public class EnumUtils {
         FREE("空闲", 0, "FREE"),
         NOT_READY("坐下未准备", 1, "NOT_READY"),
         READY("坐下已准备", 2, "READY"),
-        IS_GAME("正在游戏中",3,"IS_GAME");
+        IS_GAME("有人正在游戏中",3,"IS_GAME"),
+        IS_NOT_GAME("没人正在游戏中",4,"IS_NOT_GAME");
         private String name;
         private int value;
         private String code;

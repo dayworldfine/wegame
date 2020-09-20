@@ -1,9 +1,9 @@
 package com.wegame.service;
 
 
+import com.wegame.config.BaseService;
 import com.wegame.dto.SeatUserDto;
 import com.wegame.model.Room;
-import com.wegame.model.Seat;
 import com.wegame.vo.Message;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
  * @Data 2020/2/12 14:39
  * @Version: v1.0
  **/
-public interface FriedFlowerService {
+public interface FriedFlowerService  extends  BaseService{
 
     /**
     * @Author wbh
@@ -110,6 +110,6 @@ public interface FriedFlowerService {
      * 发牌游戏开始
      * @param roomSerial
      */
-    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> SeatUserDtoCount,List<SeatUserDto> SeatUserDtoCountSetOut);
+    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> countMap,List<SeatUserDto> SeatUserDtoCountSetOut);
 
 }

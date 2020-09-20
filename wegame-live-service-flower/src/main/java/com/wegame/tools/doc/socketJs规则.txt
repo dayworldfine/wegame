@@ -1,6 +1,6 @@
 参考资料：http://jmesnil.net/stomp-websocket/doc/
 	     https://www.cnblogs.com/luoxuemei/p/10115679.html
-
+按后端这份为准
 ----------------------------------------------炸金花逻辑---------------------------------------------------------------------
 用户进入炸金花页面:
 1.连接websocket
@@ -19,48 +19,50 @@
     游戏结束：   消息类型12
 
 
+
+
 消息体参数：
 "type":""                       //消息类型
-"userCode":""                     //用户id
+"userId":""                     //用户id
 "userImg":""                    //用户头像
 "userNickName"                  //用户昵称
-"seatSerial":""                       //座位
+"seatId":""                       //座位
 "userList":[]                   //用户集合
 "money":""                      //发送人筹码
 "board":[]                      //牌
-"beuserCode":""                   //比较的userCode
-"beseatSerial":""                     //比较的座位
+"beUserId":""                   //比较的userId
+"beSeatId":""                     //比较的座位
 "userList":""                   //用户信息集合
-"roomSerial":""                 //房间序号
+"roomId":""                 //房间序号
 
 消息类型对应消息体:
 0. 系统消息(发送当前房间资料)
 {
-  "type":"0","userList":[{"userCode":"",
+  "type":"0","userList":[{"userId":"",
                           "userImg":"",
                           "userNickName":"",
-                          "seatSerial":"",
+                          "seatId":"",
                           "integral":"",
                           "boardA":"",
                           "boardB":"",
                           "boardC":"",
                           "status:""}]
 }
-1. 用户进入房间     {"type":"1","roomSerial":"","userCode":"", "userImg":"","userNickName":"","integral":""}
-2. 用户退出房间     {"type":"2","roomSerial":"","userCode":""}
-3. 用户坐下         {"type":"3","roomSerial":"","userCode":"", "userImg":"","userNickName":"","seatSerial":"","integral":""}
-4. 用户站起来       {"type":"4","roomSerial":"","userCode":"","seatSerial":""}
-5. 用户准备         {"type":"5","roomSerial":"","userCode":"","seatSerial":""}
-6. 用户看牌         {"type":"6","roomSerial":"","userCode":"","seatSerial":"",board:[]}
-7. 用户跟注         {"type":"7","roomSerial":"","userCode":"","seatSerial":"","integral":""}
-8. 用户加注         {"type":"8","roomSerial":"","userCode":"","seatSerial":"","integral":""}
-9. 用户比牌         {"type":"9","roomSerial":"","userCode":"","seatSerial":"","beUserCode":"","beseatSerial":""}
-10. 用户弃牌        {"type":"10","roomSerial":"","userCode":"","seatSerial":""}
-11. 游戏开始        {"type":"11","roomSerial":"","boardList":[{"userCode":"","seatSerial":"","board":[]}]}
-12. 游戏结束        {"type":"12","roomSerial":"","userList":[{"userCode":"",
+1. 用户进入房间     {"type":"1","roomId":"","userId":"", "userImg":"","userNickName":"","integral":""}
+2. 用户退出房间     {"type":"2","roomId":"","userId":""}
+3. 用户坐下         {"type":"3","roomId":"","userId":"", "userImg":"","userNickName":"","seatId":"","integral":""}
+4. 用户站起来       {"type":"4","roomId":"","userId":"","seatId":""}
+5. 用户准备         {"type":"5","roomId":"","userId":"","seatId":""}
+6. 用户看牌         {"type":"6","roomId":"","userId":"","seatId":"",board:[]}
+7. 用户跟注         {"type":"7","roomId":"","userId":"","seatId":"","integral":""}
+8. 用户加注         {"type":"8","roomId":"","userId":"","seatId":"","integral":""}
+9. 用户比牌         {"type":"9","roomId":"","userId":"","seatId":"","beUserId":"","beSeatId":""}
+10. 用户弃牌        {"type":"10","roomId":"","userId":"","seatId":""}
+11. 游戏开始        {"type":"11","roomId":"","boardList":[{"userId":"","seatId":"","board":[]}]}
+12. 游戏结束        {"type":"12","roomId":"","userList":[{"userId":"",
                                                              "userImg":"",
                                                              "userNickName":"",
-                                                             "seatSerial":"",
+                                                             "seatId":"",
                                                              "money":"",
                                                              "board":"",
                                                              "status:""}]}
@@ -94,5 +96,10 @@
 9. 用户比牌
 10. 用户弃牌
 
+座位状态:
+0.空闲
+1.坐下未准备
+2.坐下已准备
+3.正在游戏中
 
 

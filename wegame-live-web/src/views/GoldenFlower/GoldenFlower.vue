@@ -358,9 +358,9 @@
           "display:none"
         ],
         imgList: [
-          {id: "1", url: "/static/card_01.png"},
-          {id: "2", url: "/static/card_01.png"},
-          {id: "3", url: "/static/card_01.png"},
+          {id: "1", url: "/static/card_014.png"},
+          {id: "2", url: "/static/card_014.png"},
+          {id: "3", url: "/static/card_014.png"},
         ],
       }
     },

@@ -3,7 +3,7 @@
 
     <div class="outer-flex outer-flex-one" >
       <!--每个人物-->
-      <div class="people" >
+      <div class="people">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[0]==1||seatStatusList[0]==2||seatStatusList[0]==3">
           <div class="people-left-name">{{userList[0].userNickName}}</div>
@@ -18,10 +18,10 @@
         <div class="people-right" v-show="seatStatusList[0]==3">
           <div class="people-right-status">{{userList[0].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[0].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -54,10 +54,10 @@
         <div class="people-right" v-show="seatStatusList[1]==3">
           <div class="people-right-status">{{userList[1].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[1].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -86,17 +86,17 @@
             class="people-userImg"
             :src="userList[5].userImg"
             fit="fill"></el-image>
-          <div>{{userList[2].integral}}</div>
+          <div>{{userList[5].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[5]==2">准备</div>
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[5]==3">
           <div class="people-right-status">{{userList[5].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[5].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -129,10 +129,10 @@
         <div class="people-right" v-show="seatStatusList[2]==3">
           <div class="people-right-status">{{userList[2].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[2].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -168,10 +168,10 @@
         <div class="people-right" v-show="seatStatusList[4]==3">
           <div class="people-right-status">{{userList[4].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[4].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -197,17 +197,17 @@
             class="people-userImg"
             :src="userList[3].userImg"
             fit="fill"></el-image>
-          <div>{{userList[5].integral}}</div>
+          <div>{{userList[3].integral}}</div>
           <<div class="people-setOut" v-show="seatStatusList[3]==2">准备</div>
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[3]==3">
           <div class="people-right-status">{{userList[3].status}}</div>
           <div class="people-board-imageList">
-            <template v-for="item in imgList">
+            <template v-for="item in userList[3].board">
               <el-image
                 class="people-board-image"
-                :src="item.url"
+                :src="'/static/board/card_'+item.color+item.number+'.png'"
                 fit="fill"></el-image>
             </template>
           </div>
@@ -291,44 +291,24 @@
       return {
         userList:[
           {
-            userNickName: '111',
+            userNickName: '',
             userImg: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
             status: 11,
             integral: 2,
             userId: 12,
-            board: [0, 0, 0],
-            payIntegral: 1
+            board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
+            payIntegral: 1,
+
           },
-          {
-            userNickName: '111',
-            userImg: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
-            status: 11,
-            integral: 2,
-            userId: 12,
-            board: [0, 0, 0],
-            payIntegral: 1
-          },
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1},
-          {userNickName:'',userImg:'',status: 0,integral:2,userId:0,board:[],payIntegral: 1}
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
+          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
           ],
         //坐下按钮显示
-        seatStatusList: [0, 0, 0, 0, 0, 0],
-        //用户框
-        // styleOne: [
-        //   "display:none",
-        //   "display:none",
-        //   "display:none",
-        //   "display:none",
-        //   "display:none",
-        //   "display:none"
-        // ],
-        imgList: [
-          {id: "1", url: "/static/card_01.png"},
-          {id: "2", url: "/static/card_01.png"},
-          {id: "3", url: "/static/card_01.png"},
-        ],
+        seatStatusList: [0, 0, 0, 0, 0, 0], // 0 空闲 1坐下未准备 2 坐下已准备 3 正在游戏中
+
       }
     },
     computed:{
@@ -365,6 +345,9 @@
             break;
           case 5:
             this.userSetOut(res);
+            break;
+          case 11:
+            this.gameStart(res);
             break;
           default:
             break;
@@ -478,8 +461,31 @@
       },
       //类型5 用户准备
       userSetOut(param){
-        this.seatStatusList[(param.seatId-1)%6]=2
+        this.seatStatusList[(param.seatId-1)%6]=2;
         this.$forceUpdate()
+      },
+      //游戏开始
+      //1.关闭座位
+      //2.改变有的用户的牌
+      gameStart(param){
+        let data =  param.userList.roomChildMsgVoList;
+        //先隐藏所有座位，然后把有玩家的座位显示出来
+        this.seatStatusList=[99,99,99,99,99,99];
+        data.forEach(a=>{
+          let seatSerial = (a.seatId-1)%6;
+          this.seatStatusList[seatSerial]=3;
+          this.userList[seatSerial].userNickName = a.nickName;
+          this.userList[seatSerial].userImg = a.headPortrait;
+          this.userList[seatSerial].status = a.gameStatus;
+          this.userList[seatSerial].userId = a.userId;
+          this.userList[seatSerial].payIntegral = data.integralFundus;
+          this.userList[seatSerial].board[0].color=a.firstBoardColor;
+          this.userList[seatSerial].board[0].number=a.firstBoardNumber;
+          this.userList[seatSerial].board[1].color=a.secondBoardColor;
+          this.userList[seatSerial].board[1].number=a.secondBoardNumber;
+          this.userList[seatSerial].board[2].color=a.thirdlyBoardColor;
+          this.userList[seatSerial].board[2].number=a.thirdlyBoardNumber;
+        });
       }
     },
 

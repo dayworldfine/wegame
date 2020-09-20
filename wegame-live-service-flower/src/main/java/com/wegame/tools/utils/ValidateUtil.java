@@ -1,5 +1,6 @@
 package com.wegame.tools.utils;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
 
@@ -68,6 +69,41 @@ public class ValidateUtil {
     public static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
     }
+
+    /**
+     * 判断对象中属性值是否全为空
+     *
+     * @param object
+     * @return
+     */
+    public static boolean isEmpty(Object object) {
+        if (null == object) {
+            return true;
+        }
+
+        try {
+            for (Field f : object.getClass().getDeclaredFields()) {
+                f.setAccessible(true);
+
+                System.out.print(f.getName() + ":");
+                System.out.println(f.get(object));
+
+                if (f.get(object) != null && isEmpty(f.get(object).toString())) {
+                    return false;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean isNotEmpty(Object object) {
+        return !isEmpty(object);
+    }
+
 
 
 

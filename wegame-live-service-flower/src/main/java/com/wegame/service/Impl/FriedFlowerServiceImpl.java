@@ -1,5 +1,6 @@
 package com.wegame.service.Impl;
 import com.google.common.collect.Lists;
+import com.wegame.dto.RoomChildMsgDto;
 import com.wegame.dto.RoomMsgDto;
 import com.wegame.dto.SeatUserDto;
 import com.wegame.entity.SeatUserEntity;
@@ -16,7 +17,9 @@ import com.wegame.tools.flower.provider.PlayerProvider;
 import com.wegame.tools.flower.provider.impl.LimitedPlayerProvider;
 import com.wegame.tools.utils.EnumUtils;
 import com.wegame.tools.utils.SnowUtils;
+import com.wegame.tools.utils.ValidateUtil;
 import com.wegame.vo.Message;
+import com.wegame.vo.RoomChildMsgVo;
 import com.wegame.vo.RoomMsgVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName：FriedFlowerServiceImpl
@@ -38,6 +42,7 @@ import java.util.Random;
 @Transactional(rollbackFor = Exception.class)
 @Service
 public class FriedFlowerServiceImpl implements FriedFlowerService {
+
 
     @Autowired
     private SimpMessagingTemplate template;
@@ -143,7 +148,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public void sendAndSaveGmaeStart(int roomId,List<SeatUserDto> SeatUserDtoCount,List<SeatUserDto> SeatUserDtoCountSetOut) {
+    public void sendAndSaveGmaeStart(int roomId,List<SeatUserDto> countMap,List<SeatUserDto> SeatUserDtoCountSetOut) {
         //使用有人数下限制的发牌器
         PlayerProvider playerProvider = new LimitedPlayerProvider();
         //使用花色不参与牌大小比较的计算器
@@ -175,11 +180,15 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
         List<GamblingMessage> gamblingMessageList = Lists.newArrayList();
         List<GamblingBoard> gamblingBoardList = Lists.newArrayList();
+        //生成是庄家的userId ,用userId进行判断
         int bankerIndex = new Random().nextInt(SeatUserDtoCountSetOut.size());
-        for (int i=0;i<SeatUserDtoCount.size();i++){
+        List<Long> collect = SeatUserDtoCountSetOut.stream().map(p -> p.getUserId()).collect(Collectors.toList());
+        Long[] userIds = collect.toArray(new Long[collect.size()]);
+        long bankerUser =  userIds[bankerIndex];
+        for (int i=0;i<countMap.size();i++){
             //2.插入牌局信息数据 t_gambling_message
             //庄家座位暂时处理成随机
-            SeatUserDto sud = SeatUserDtoCount.get(i);
+            SeatUserDto sud = countMap.get(i);
             GamblingMessage gm = new GamblingMessage();
             gm.setId(SnowUtils.generateId());
             gm.setCreateTime(System.currentTimeMillis());
@@ -188,7 +197,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
             gm.setGamblingId(gambling.getId());
             gm.setUserId(sud.getUserId());
             gm.setSeatId(sud.getId());
-            gm.setIsBanker(bankerIndex==i?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
+            gm.setIsBanker(sud.getUserId().equals(bankerUser)?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
             gm.setSeeCardStatus(EnumUtils.JUDGE_ENUM.NO.getValue());
             gm.setGameStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
             if (sud.getUserId()==GamblingDefault.LONG_ZERO){
@@ -252,7 +261,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         int k =gamblingDetailsMapper.insertGamblingDetailsList(gamblingDetailsList);
         //校验插入的数据是否正常
         if (insert!=1 ||
-                i<SeatUserDtoCount.size() ||
+                i<countMap.size() ||
                 j<SeatUserDtoCountSetOut.size() ||
                 k<SeatUserDtoCountSetOut.size()
         ){
@@ -266,11 +275,28 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         //查询这个房间的全部信息
         RoomMsgVo roomMsgVo = new RoomMsgVo();
         RoomMsgDto roomMsgDto = gamblingMapper.getRoomMsgByRoomId(roomId);
+        if (ValidateUtil.isEmpty(roomMsgDto)){
+            LOGGER.error("错误信息为 [{}]","roomMsgDto为空");
+            return;
+        }
         BeanUtils.copyProperties(roomMsgDto,roomMsgVo);
 
+        List<RoomChildMsgDto> roomChildMsgDtoList = gamblingMapper.listRoomMsgByGamblingId(roomMsgDto.getGamblingId());
+        if (ValidateUtil.isEmpty(roomChildMsgDtoList)){
+            LOGGER.error("错误信息为 [{}]","roomChildMsgDtoList为空");
+            return;
+        }
+        roomChildMsgDtoList.forEach(a->{
+            RoomChildMsgVo roomChildMsgVo = new RoomChildMsgVo();
+            BeanUtils.copyProperties(a,roomChildMsgVo);
+            roomMsgVo.getRoomChildMsgVoList().add(roomChildMsgVo);
+        });
+
+//        gamblingMapper
+
         //发送全局消息
-//        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomId),
-//                FriedFlowerJsonObject.gameStart(11,));
+        template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(roomId),
+                FriedFlowerJsonObject.gameStart(11,roomMsgVo));
     }
 
 }
