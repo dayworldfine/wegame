@@ -95,10 +95,10 @@ public interface GamblingMapper {
             "tgb.thirdly_board_number as thirdlyBoardNumber\n" +
             "FROM\n" +
             "t_gambling_message tgm\n" +
-            "INNER JOIN \n" +
+            "LEFT JOIN \n" +
             "t_gambling_board  tgb\n" +
             "on  tgm.id=tgb.gambling_message_id\n" +
-            "INNER JOIN \n" +
+            "LEFT JOIN \n" +
             "t_user t\n" +
             "on tgm.user_id =t.id\n" +
             "WHERE \n" +

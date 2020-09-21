@@ -9,7 +9,7 @@
           <div class="people-left-name">{{userList[0].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[0].userImg"
+            :src="userList[0].headPortrait"
             fit="fill"></el-image>
           <div >{{userList[0].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[0]==2">准备</div>
@@ -45,7 +45,7 @@
           <div class="people-left-name">{{userList[1].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[1].userImg"
+            :src="userList[1].headPortrait"
             fit="fill"></el-image>
           <div >{{userList[1].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[1]==2">准备</div>
@@ -84,7 +84,7 @@
           <div class="people-left-name">{{userList[5].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[5].userImg"
+            :src="userList[5].headPortrait"
             fit="fill"></el-image>
           <div>{{userList[5].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[5]==2">准备</div>
@@ -120,7 +120,7 @@
           <div class="people-left-name">{{userList[2].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[2].userImg"
+            :src="userList[2].headPortrait"
             fit="fill"></el-image>
           <div>{{userList[2].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[2]==2">准备</div>
@@ -159,7 +159,7 @@
           <div class="people-left-name">{{userList[4].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[4].userImg"
+            :src="userList[4].headPortrait"
             fit="fill"></el-image>
           <div >{{userList[4].integral}}</div>
           <div class="people-setOut" v-show="seatStatusList[4]==2">准备</div>
@@ -195,7 +195,7 @@
           <div class="people-left-name">{{userList[3].userNickName}}</div>
           <el-image
             class="people-userImg"
-            :src="userList[3].userImg"
+            :src="userList[3].headPortrait"
             fit="fill"></el-image>
           <div>{{userList[3].integral}}</div>
           <<div class="people-setOut" v-show="seatStatusList[3]==2">准备</div>
@@ -292,22 +292,28 @@
         userList:[
           {
             userNickName: '',
-            userImg: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
-            status: 11,
-            integral: 2,
+            headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
+            gameStatus: 11,
+            integral: 0,
             userId: 12,
             board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
-            payIntegral: 1,
-
+            payIntegral: "0",
+            isA32:0,
+            isBanker:0,
+            isSpecial:0,
+            seeCardStatus:0,
+            boardSize:0,
+            boardType:0,
+            isUser:0,
           },
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
-          {userNickName:'',userImg:'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',status: 0,integral:2,userId:0,board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],payIntegral: 1},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
           ],
         //坐下按钮显示
-        seatStatusList: [0, 0, 0, 0, 0, 0], // 0 空闲 1坐下未准备 2 坐下已准备 3 正在游戏中
+        seatStatusList: [0, 0, 0, 0, 0, 0], // 0 空闲 1坐下未准备 2 坐下已准备 3 正在游戏中 4没人正在游戏中
 
       }
     },
@@ -469,27 +475,37 @@
       //2.改变有的用户的牌
       gameStart(param){
         let data =  param.userList.roomChildMsgVoList;
-        //先隐藏所有座位，然后把有玩家的座位显示出来
-        this.seatStatusList=[99,99,99,99,99,99];
         data.forEach(a=>{
           let seatSerial = (a.seatId-1)%6;
-          this.seatStatusList[seatSerial]=3;
-          this.userList[seatSerial].userNickName = a.nickName;
-          this.userList[seatSerial].userImg = a.headPortrait;
-          this.userList[seatSerial].status = a.gameStatus;
-          this.userList[seatSerial].userId = a.userId;
-          this.userList[seatSerial].payIntegral = data.integralFundus;
-          this.userList[seatSerial].board[0].color=a.firstBoardColor;
-          this.userList[seatSerial].board[0].number=a.firstBoardNumber;
-          this.userList[seatSerial].board[1].color=a.secondBoardColor;
-          this.userList[seatSerial].board[1].number=a.secondBoardNumber;
-          this.userList[seatSerial].board[2].color=a.thirdlyBoardColor;
-          this.userList[seatSerial].board[2].number=a.thirdlyBoardNumber;
+          if (a.isUser==1){
+            this.seatStatusList[seatSerial]=3;
+            this.userList[seatSerial].userNickName = a.nickName;
+            this.userList[seatSerial].headPortrait = a.headPortrait;
+            this.userList[seatSerial].gameStatus = a.gameStatus;
+            this.userList[seatSerial].integral = data.integral;
+            this.userList[seatSerial].userId = a.userId;
+            this.userList[seatSerial].payIntegral = data.integralFundus;
+            this.userList[seatSerial].isA32 = a.isA32;
+            this.userList[seatSerial].isBanker = a.isBanker;
+            this.userList[seatSerial].isSpecial = a.isSpecial;
+            this.userList[seatSerial].seeCardStatus = a.seeCardStatus;
+            this.userList[seatSerial].boardSize = a.boardSize;
+            this.userList[seatSerial].boardType = a.boardType;
+            this.userList[seatSerial].isUser = a.isUser;
+
+            this.userList[seatSerial].board[0].color=a.firstBoardColor;
+            this.userList[seatSerial].board[0].number=a.firstBoardNumber;
+            this.userList[seatSerial].board[1].color=a.secondBoardColor;
+            this.userList[seatSerial].board[1].number=a.secondBoardNumber;
+            this.userList[seatSerial].board[2].color=a.thirdlyBoardColor;
+            this.userList[seatSerial].board[2].number=a.thirdlyBoardNumber;
+          }else {
+            this.seatStatusList[seatSerial]=4;
+          }
+
         });
       }
     },
-
-
   }
 </script>
 
