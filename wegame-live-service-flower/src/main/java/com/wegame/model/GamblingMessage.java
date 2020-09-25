@@ -63,6 +63,12 @@ public class GamblingMessage implements Serializable {
     private Integer isUser;
 
     /**
+     * 是否轮到操作(字典常规判断枚举)
+     * 2020-09-06T21:55:05.256
+     */
+    private Integer isTurn;
+
+    /**
      * 看牌状态(字段常规判断枚举)
 	 * 2020-09-06T21:55:05.256
      */
@@ -163,6 +169,14 @@ public class GamblingMessage implements Serializable {
         this.userId = userId;
     }
 
+    public Integer getIsTurn() {
+        return isTurn;
+    }
+
+    public void setIsTurn(Integer isTurn) {
+        this.isTurn = isTurn;
+    }
+
     /**
      * 座位id
      */
@@ -235,23 +249,19 @@ public class GamblingMessage implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", version=").append(version);
-        sb.append(", gamblingId=").append(gamblingId);
-        sb.append(", userId=").append(userId);
-        sb.append(", seatId=").append(seatId);
-        sb.append(", isBanker=").append(isBanker);
-        sb.append(", isUser=").append(isUser);
-        sb.append(", seeCardStatus=").append(seeCardStatus);
-        sb.append(", gameStatus=").append(gameStatus);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "GamblingMessage{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                ", gamblingId=" + gamblingId +
+                ", userId=" + userId +
+                ", seatId=" + seatId +
+                ", isBanker=" + isBanker +
+                ", isUser=" + isUser +
+                ", isTurn=" + isTurn +
+                ", seeCardStatus=" + seeCardStatus +
+                ", gameStatus=" + gameStatus +
+                '}';
     }
 }

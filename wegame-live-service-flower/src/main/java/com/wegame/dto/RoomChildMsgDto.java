@@ -19,6 +19,7 @@ public class RoomChildMsgDto {
     private String seatId;
     private Integer isBanker;
     private Integer isUser;
+    private Integer isTurn;
     private Integer seeCardStatus;
     private Integer gameStatus;
 

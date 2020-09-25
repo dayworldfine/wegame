@@ -65,6 +65,7 @@ public interface GamblingMapper {
             "t_gambling \n" +
             "WHERE room_id = #{roomId,jdbcType=BIGINT}\n" +
             "AND gambling_status=0\n" +
+            "order by create_time desc\n"+
             "LIMIT 1")
     RoomMsgDto getRoomMsgByRoomId(int roomId);
 
@@ -81,6 +82,7 @@ public interface GamblingMapper {
             "tgm.seat_id as seatId,\n" +
             "tgm.is_banker as isBanker,\n" +
             "tgm.is_user as isUser,\n" +
+            "tgm.is_turn as isTurn,\n" +
             "tgm.see_card_status as seeCardStatus,\n" +
             "tgm.game_status as gameStatus,\n" +
             "tgb.board_size as boardSize,\n" +

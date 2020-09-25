@@ -21,13 +21,13 @@ public interface GamblingMessageMapper {
             "update_time, version, ",
             "gambling_id, user_id, ",
             "seat_id, is_banker, ",
-            "is_user, see_card_status, ",
+            "is_user, is_turn, see_card_status, ",
             "game_status)",
             "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, ",
             "#{updateTime,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, ",
             "#{gamblingId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, ",
             "#{seatId,jdbcType=BIGINT}, #{isBanker,jdbcType=TINYINT}, ",
-            "#{isUser,jdbcType=TINYINT}, #{seeCardStatus,jdbcType=TINYINT}, ",
+            "#{isUser,jdbcType=TINYINT}, #{isTurn,jdbcType=TINYINT}, #{seeCardStatus,jdbcType=TINYINT}, ",
             "#{gameStatus,jdbcType=TINYINT})"
     })
     int insert(GamblingMessage record);
@@ -38,7 +38,7 @@ public interface GamblingMessageMapper {
     @Select({
             "select",
             "id, create_time, update_time, version, gambling_id, user_id, seat_id, is_banker, ",
-            "is_user, see_card_status, game_status",
+            "is_user, is_turn, see_card_status, game_status",
             "from t_gambling_message",
             "where id = #{id,jdbcType=BIGINT}"
     })
@@ -52,6 +52,7 @@ public interface GamblingMessageMapper {
             @Result(column = "seat_id", property = "seatId", jdbcType = JdbcType.BIGINT),
             @Result(column = "is_banker", property = "isBanker", jdbcType = JdbcType.TINYINT),
             @Result(column = "is_user", property = "isUser", jdbcType = JdbcType.TINYINT),
+            @Result(column = "is_turn", property = "isTurn", jdbcType = JdbcType.TINYINT),
             @Result(column = "see_card_status", property = "seeCardStatus", jdbcType = JdbcType.TINYINT),
             @Result(column = "game_status", property = "gameStatus", jdbcType = JdbcType.TINYINT)
     })
@@ -70,6 +71,7 @@ public interface GamblingMessageMapper {
             "seat_id = #{seatId,jdbcType=BIGINT},",
             "is_banker = #{isBanker,jdbcType=TINYINT},",
             "is_user = #{isUser,jdbcType=TINYINT},",
+            "is_turn = #{isTurn,jdbcType=TINYINT},",
             "see_card_status = #{seeCardStatus,jdbcType=TINYINT},",
             "game_status = #{gameStatus,jdbcType=TINYINT}",
             "where id = #{id,jdbcType=BIGINT}"
@@ -88,6 +90,7 @@ public interface GamblingMessageMapper {
                     "seat_id," +
                     "is_banker," +
                     "is_user," +
+                    "is_turn," +
                     "see_card_status," +
                     "game_status) values ",
             "<foreach collection='gamblingMessageList' item='item' index='index' separator=','>",
@@ -101,6 +104,7 @@ public interface GamblingMessageMapper {
                     "#{item.seatId}," +
                     "#{item.isBanker}," +
                     "#{item.isUser}," +
+                    "#{item.isTurn}," +
                     "#{item.seeCardStatus}," +
                     "#{item.gameStatus}" +
             ")",

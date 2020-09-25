@@ -198,6 +198,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
             gm.setUserId(sud.getUserId());
             gm.setSeatId(sud.getId());
             gm.setIsBanker(sud.getUserId().equals(bankerUser)?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
+            gm.setIsTurn(sud.getUserId().equals(bankerUser)?EnumUtils.JUDGE_ENUM.YES.getValue():EnumUtils.JUDGE_ENUM.NO.getValue());
             gm.setSeeCardStatus(EnumUtils.JUDGE_ENUM.NO.getValue());
             gm.setGameStatus(EnumUtils.GAMBLING_STATUS_ENUM.PROCEED.getValue());
             if (sud.getUserId()==GamblingDefault.LONG_ZERO){
