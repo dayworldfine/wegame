@@ -83,4 +83,18 @@ public interface UserMapper {
             "where id = #{userId,jdbcType=BIGINT}"
     })
     int updateUserIntegral(Long userId, Long Integral);
+
+    /**
+     * 根据名字查询实体
+     * @param userName
+     * @return
+     */
+    @Select({
+            "select ",
+            "id,create_time,update_time,version,head_portrait,integral,nick_name,",
+            "user_name,pwd,phone ",
+            "from t_user ",
+            "where user_name = #{userName,jdbcType=VARCHAR}"
+    })
+    User findByUserName(String userName);
 }

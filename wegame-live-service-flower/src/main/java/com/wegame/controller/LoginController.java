@@ -1,11 +1,16 @@
 package com.wegame.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.wegame.tools.JsonResult;
 import com.wegame.tools.utils.MD5Utiles;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * @ClassName：Loogin
@@ -41,23 +46,19 @@ public class LoginController {
     @PostMapping("/login")
     public JsonResult login(String userName,
                             String passWord){
-        System.out.println(MD5Utiles.StringMD5("123456"));
-        System.out.println(MD5Utiles.StringMD5(MD5Utiles.StringMD5("123456")));
-//        return null;
-        return JsonResult.success();
 
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName,passWord);
-//        try {
-//            subject.login(usernamePasswordToken);
-//            System.out.println("token:"+subject.getSession().getId());
-//            JSONObject object = new JSONObject();
-//            object.put("token",subject.getSession().getId());
-//            return JsonResult.success(object);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return JsonResult.paramError("账号密码错误");
-//        }
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName,passWord);
+        try {
+            subject.login(usernamePasswordToken);
+            System.out.println("token:"+subject.getSession().getId());
+            JSONObject object = new JSONObject();
+            object.put("token",subject.getSession().getId());
+            return JsonResult.success(object);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.paramError("账号密码错误");
+        }
     }
 
 
