@@ -122,4 +122,12 @@ public interface GamblingDetailsMapper {
             "</script>"
     })
     int insertGamblingDetailsList(@Param(value = "gamblingDetailsList") List<GamblingDetails> gamblingDetailsList);
+
+    /*查询最后个轮次的所有操作信息*/
+    @Select({
+            "select * from ",
+            "t_gambling_details where gambling_id = #{gamblingId,jdbcType=BIGINT} ",
+            "order by create_time desc limit 1"
+    })
+    GamblingDetails selectByGamblingIdLastRound(long gamblingId);
 }

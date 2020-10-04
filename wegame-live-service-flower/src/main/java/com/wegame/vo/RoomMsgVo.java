@@ -19,5 +19,6 @@ public class RoomMsgVo {
     private String integralFundus;
     private String integralSum;
     private String gamblingId;
+    private Long round;
     private List<RoomChildMsgVo> roomChildMsgVoList = Lists.newArrayList();
 }

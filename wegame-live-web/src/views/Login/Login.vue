@@ -37,6 +37,9 @@
             console.log("res",res)
             if(res.code===200){
               sessionStorage.setItem('token',res.data.token)
+              // localStorage.setItem('token',res.data.token);
+              sessionStorage.setItem('userId',res.data.userId);
+              // localStorage.setItem('userId',res.data.userId);
               this.$router.push({name:'Home'})
             }else{
               this.$message.error(res.message);

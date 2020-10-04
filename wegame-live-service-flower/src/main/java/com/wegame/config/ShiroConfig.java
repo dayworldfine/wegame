@@ -119,7 +119,7 @@ public class ShiroConfig {
         RedisCacheManager  redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(getRedisManager());
         //设置过期时间，单位是秒，
-        redisCacheManager.setExpire(20);
+        redisCacheManager.setExpire(30*60);
         return redisCacheManager;
     }
 
@@ -169,7 +169,7 @@ public class ShiroConfig {
         CustomSessionManager customSessionManager = new CustomSessionManager();
 
         //超时时间,默认30分钟，会话超时,方法里面的单位是毫秒
-        customSessionManager.setGlobalSessionTimeout(20000);
+//        customSessionManager.setGlobalSessionTimeout(20000);
 
         //配置session持久化
         customSessionManager.setSessionDAO(redisSessionDAO());

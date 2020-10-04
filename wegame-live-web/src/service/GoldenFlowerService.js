@@ -43,8 +43,71 @@ const setOut = (param={})=>{
   })
 };
 
+/**
+ * 看牌
+ * @param param
+ * @returns {Promise}
+ */
+const seeCard = (param={})=>{
+  return new Promise((resolve,reject) => {
+    http.post({
+      url: '/friedFlowerPort/userSeeCard',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
+/**
+ * 跟注
+ * @param param
+ * @returns {Promise}
+ */
+const withChip = (param={})=>{
+    return new Promise((resolve,reject) => {
+      http.post({
+        url: '/friedFlowerPort/userWithChip',
+        data: param
+      }).then((res) => {
+        console.log("resolve",res)
+        resolve(res)
+      },err =>{
+        console.log("reject1",err)
+        reject(err)
+      })
+    })
+  };
+
+/**
+ * 跟注
+ * @param param
+ * @returns {Promise}
+ */
+const disCard = (param={})=>{
+  return new Promise((resolve,reject) => {
+    http.post({
+      url: '/friedFlowerPort/userDisCard',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
 export default {
-  sitDown,                   /*坐下*/
+  sitDown,                    /*坐下*/
   setOut,                     /*准备*/
+  seeCard,                    /*准备*/
+  withChip,                   /*跟注*/
+  disCard,                    /*弃牌*/
 }
 

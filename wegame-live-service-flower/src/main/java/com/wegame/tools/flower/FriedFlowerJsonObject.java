@@ -128,19 +128,16 @@ public class FriedFlowerJsonObject {
      * 用户看牌
      * @param type
      * @param userId
-     * @param seat
-     * @param board
+     * @param seatId
      * @return
      */
-    public static JSONObject userSeeCard(String type,
+    public static JSONObject userSeeCard(int type,
                                   String userId,
-                                  String seat,
-                                  String[] board){
+                                  String seatId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
-        obj.put("seat",seat);
-        obj.put("board",board);
+        obj.put("seatId",seatId);
         return obj;
     }
 
@@ -148,19 +145,23 @@ public class FriedFlowerJsonObject {
      * 用户跟注
      * @param type
      * @param userId
-     * @param seat
-     * @param money
+     * @param seatId
+     * @param integralFundus
      * @return
      */
-    public static JSONObject userSeeCard(String type,
+    public static JSONObject userWithChip(int type,
                                   String userId,
-                                  String seat,
-                                  String money){
+                                  String seatId,
+                                  String integralFundus,
+                                  int roundNum,
+                                      String  trueUserId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
-        obj.put("seat",seat);
-        obj.put("money",money);
+        obj.put("seatId",seatId);
+        obj.put("integralFundus",integralFundus);
+        obj.put("round",roundNum);
+        obj.put("trueUserId",trueUserId);
         return obj;
     }
 
@@ -172,7 +173,7 @@ public class FriedFlowerJsonObject {
      * @param money
      * @return
      */
-    public static JSONObject userAddChip(String type,
+    public static JSONObject userAddChip(int type,
                                   String userId,
                                   String seat,
                                   String money){
@@ -211,16 +212,20 @@ public class FriedFlowerJsonObject {
      * 用户弃牌
      * @param type
      * @param userId
-     * @param seat
+     * @param seatId
      * @return
      */
-    public static JSONObject userDisCard(String type,
+    public static JSONObject userDisCard(int type,
                                    String userId,
-                                   String seat){
+                                   String seatId,
+                                         int round,
+                                         String trueUserId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
-        obj.put("seat",seat);
+        obj.put("seatId",seatId);
+        obj.put("round",round);
+        obj.put("trueUserId",trueUserId);
         return obj;
     }
 

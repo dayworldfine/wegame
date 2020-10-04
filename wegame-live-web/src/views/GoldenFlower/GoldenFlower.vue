@@ -16,7 +16,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[0]==3">
-          <div class="people-right-status">{{userList[0].status}}</div>
+          <div class="people-right-status">{{textOne}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[0].board">
               <el-image
@@ -52,7 +52,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[1]==3">
-          <div class="people-right-status">{{userList[1].status}}</div>
+          <div class="people-right-status">{{textTwo}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[1].board">
               <el-image
@@ -91,7 +91,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[5]==3">
-          <div class="people-right-status">{{userList[5].status}}</div>
+          <div class="people-right-status">{{textSix}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[5].board">
               <el-image
@@ -127,7 +127,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[2]==3">
-          <div class="people-right-status">{{userList[2].status}}</div>
+          <div class="people-right-status">{{textThree}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[2].board">
               <el-image
@@ -166,7 +166,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[4]==3">
-          <div class="people-right-status">{{userList[4].status}}</div>
+          <div class="people-right-status">{{textFive}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[4].board">
               <el-image
@@ -202,7 +202,7 @@
         </div>
         <!--右边框-->
         <div class="people-right" v-show="seatStatusList[3]==3">
-          <div class="people-right-status">{{userList[3].status}}</div>
+          <div class="people-right-status">{{textFour}}</div>
           <div class="people-board-imageList">
             <template v-for="item in userList[3].board">
               <el-image
@@ -228,40 +228,41 @@
     </div>
     <div class="outer-bottom">
         <div class="entire-button one-button">
-          <div>
-            <el-button type="danger" round class="background-button">X</el-button>
+          <div @click="disCard()">
+            <el-button type="danger" round class="background-button" :disabled="userMsg.gameStatus!=3 || userMsg.isTrue==0">弃牌</el-button>
           </div>
           <div class="font-button">
             弃牌
           </div>
         </div>
-        <div class="entire-button two-button">
+        <div class="entire-button two-button" >
           <div>
-            <el-button type="primary" round class="background-button">1</el-button>
+            <el-button type="primary" round class="background-button" :disabled="userMsg.isCompare==1 || userMsg.isTrue==0">比牌</el-button>
           </div>
           <div class="font-button">
             比牌
           </div>
         </div>
-        <div class="entire-button three-button">
+        <div class="entire-button three-button"  >
           <div>
-            <el-button type="primary" round class="background-button">看牌</el-button>
+            <el-button type="primary" round class="background-button" @click="seeCard()"
+                       :disabled="userMsg.seeCardStatus==1 || userMsg.isTrue==0"> 看牌</el-button>
           </div>
-          <div class="font-button">
+          <div class="font-button" >
             看牌
           </div>
         </div>
         <div class="entire-button four-button">
           <div>
-            <el-button type="warning" round class="background-button">+</el-button>
+            <el-button type="warning" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">+</el-button>
           </div>
           <div class="font-button">
             加注
           </div>
         </div>
         <div class="entire-button five-button">
-          <div>
-            <el-button type="success" round class="background-button">1</el-button>
+          <div @click="userWithChip()">
+            <el-button type="success" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">1</el-button>
           </div>
           <div class="font-button">
             跟注
@@ -269,7 +270,7 @@
         </div>
         <div class="entire-button six-button">
           <div>
-            <el-button type="primary" round class="background-button" @click="setOut()">准备</el-button>
+            <el-button type="primary" round class="background-button" @click="setOut()" >准备</el-button>
           </div>
           <div class="font-button">
             222
@@ -289,6 +290,22 @@
     name: "GoldenFlower",
     data() {
       return {
+        userMsg:{
+          seeCardStatus:0,
+          isCompare:0,
+          isIntegral:0,
+          gameStatus:3,
+          isTrue:0,
+          round:0,    //是否第一轮 是的话无法比牌
+          isUserIndex:0,   //下标是多少
+          roomId:1,
+          seatId:1,
+          gamblingId:0,
+          board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
+          integralFundus:1,
+          sort:1,
+        },
+        //用户列表
         userList:[
           {
             userNickName: '',
@@ -352,6 +369,12 @@
           case 5:
             this.userSetOut(res);
             break;
+          case 6:
+            this.userSeeCardA(res);
+            break;
+          case 7:
+            this.userWithChipA(res);
+            break;
           case 11:
             this.gameStart(res);
             break;
@@ -398,6 +421,77 @@
           }
         })
       },
+      //点击看牌的方法
+      seeCard(){
+        /* 1.给所有人发送有人看牌消息
+        *  2.显示自己的牌*/
+        GoldenFlowerService.seeCard(
+          {
+            type: 6,
+            roomId: this.userMsg.roomId,
+            seatId: this.userMsg.seatId,
+            gamblingId:this.userMsg.gamblingId,
+            round:this.userMsg.round,
+            sort:this.userMsg.sort,
+          }
+        ).then((res) => {
+          console.log("res", res)
+          if(res.code===200){
+            let seatIndex =  (this.userMsg.seatId-1)%6;
+            this.userList[seatIndex].board[0].color = this.userMsg.board[0].color;
+            this.userList[seatIndex].board[0].number = this.userMsg.board[0].number;
+            this.userList[seatIndex].board[1].color = this.userMsg.board[1].color;
+            this.userList[seatIndex].board[1].number = this.userMsg.board[1].number;
+            this.userList[seatIndex].board[2].color = this.userMsg.board[2].color;
+            this.userList[seatIndex].board[2].number = this.userMsg.board[2].number;
+            this.userMsg.sort+=1;
+          }else{
+            this.$message.error(res.message)
+          }
+        })
+      },
+      //跟注
+      userWithChip(){
+        GoldenFlowerService.withChip(
+          {
+            type: 7,
+            roomId: this.userMsg.roomId,
+            seatId: this.userMsg.seatId,
+            gamblingId:this.userMsg.gamblingId,
+            round:this.userMsg.round,
+            integralFundus:this.userMsg.integralFundus,
+            sort:this.userMsg.sort,
+          }
+        ).then((res) => {
+          console.log("res", res)
+          if(res.code===200){
+            this.userMsg.sort=1;
+          }else{
+            this.$message.error(res.message)
+          }
+        })
+      },
+      disCard(){
+        GoldenFlowerService.disCard(
+          {
+            type: 10,
+            roomId: this.userMsg.roomId,
+            seatId: this.userMsg.seatId,
+            gamblingId:this.userMsg.gamblingId,
+            round:this.userMsg.round,
+            sort:this.userMsg.sort,
+          }
+        ).then((res) => {
+          console.log("res", res)
+          if(res.code===200){
+            this.userMsg.sort=1;
+          }else{
+            this.$message.error(res.message)
+          }
+        })
+      },
+
+
       //类型0 系统消息
       room(param) {
         let userList = param.userList;
@@ -427,24 +521,15 @@
                 this.seatStatusList[5] = ar.seatStatus;
                 this.$forceUpdate();
                 break;
+              case 5:
+                this.seatStatusList[5] = ar.seatStatus;
+                this.$forceUpdate();
+                break;
               default:
                 break;
             }
         });
-        // for (let i = 0; i < userList.length; i++) {
-        //   switch (userList[i].seatSerial) {
-        //     case 1:
-        //       this.showSit[0] = false;
-        //       this.$forceUpdate()
-        //       break;
-        //     case 2:
-        //       this.showSit[1] = false;
-        //       this.$forceUpdate()
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        // }
+
       },
       //类型1 用户进入房间
       userInToRoom(param) {
@@ -470,35 +555,108 @@
         this.seatStatusList[(param.seatId-1)%6]=2;
         this.$forceUpdate()
       },
-      //游戏开始
+      //类型6 用户看牌
+      userSeeCardA(param){
+        this.userList[(param.seatId-1)%6].seeCardStatus=1;
+        this.$forceUpdate()
+      },
+      //类型7 用户跟注
+      userWithChipA(param){
+        let seatIndex =(param.seatId-1)%6;
+        //更改积分
+        this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
+        this.userMsg.round=param.round;
+        this.userMsg.isTrue=0;
+
+        //改变操作用户
+        if (param.trueUserId==sessionStorage.getItem("userId")){
+          this.userMsg.isTrue=1;
+        }
+
+      },
+
+
+      //游戏开始 类型 11
       //1.关闭座位
       //2.改变有的用户的牌
       gameStart(param){
         let data =  param.userList.roomChildMsgVoList;
+
+        //本局属性
+        this.userMsg.integralFundus = param.userList.integralFundus;
+        this.userMsg.roomId=param.userList.roomId;
+        this.userMsg.gamblingId = param.userList.gamblingId;
+        this.userMsg.round=param.userList.round;
         data.forEach(a=>{
           let seatSerial = (a.seatId-1)%6;
           if (a.isUser==1){
-            this.seatStatusList[seatSerial]=3;
-            this.userList[seatSerial].userNickName = a.nickName;
-            this.userList[seatSerial].headPortrait = a.headPortrait;
-            this.userList[seatSerial].gameStatus = a.gameStatus;
-            this.userList[seatSerial].integral = data.integral;
-            this.userList[seatSerial].userId = a.userId;
-            this.userList[seatSerial].payIntegral = data.integralFundus;
-            this.userList[seatSerial].isA32 = a.isA32;
-            this.userList[seatSerial].isBanker = a.isBanker;
-            this.userList[seatSerial].isSpecial = a.isSpecial;
-            this.userList[seatSerial].seeCardStatus = a.seeCardStatus;
-            this.userList[seatSerial].boardSize = a.boardSize;
-            this.userList[seatSerial].boardType = a.boardType;
-            this.userList[seatSerial].isUser = a.isUser;
+            let userId = sessionStorage.getItem('userId');
+            //根据是否是当前账号显示不同的内润  和 看牌状态控制按钮
+            if (userId== a.userId && userId !='' &&  userId != null){
+              //操作主体的信息
+              this.userMsg.seeCardStatus = a.seeCardStatus;
+              this.userMsg.isTrue=1;
+              this.userMsg.isUserIndex=seatSerial;
+              this.userMsg.seatId=a.seatId;
+              this.userMsg.gameStatus=a.gameStatus;
 
-            this.userList[seatSerial].board[0].color=a.firstBoardColor;
-            this.userList[seatSerial].board[0].number=a.firstBoardNumber;
-            this.userList[seatSerial].board[1].color=a.secondBoardColor;
-            this.userList[seatSerial].board[1].number=a.secondBoardNumber;
-            this.userList[seatSerial].board[2].color=a.thirdlyBoardColor;
-            this.userList[seatSerial].board[2].number=a.thirdlyBoardNumber;
+
+              //详细信息
+              this.seatStatusList[seatSerial]=3;
+              this.userList[seatSerial].userNickName = a.nickName;
+              this.userList[seatSerial].headPortrait = a.headPortrait;
+              this.userList[seatSerial].gameStatus = a.gameStatus;
+              this.userList[seatSerial].integral = a.integral;
+              this.userList[seatSerial].userId = a.userId;
+              this.userList[seatSerial].payIntegral = param.userList.integralFundus;
+              this.userList[seatSerial].isA32 = a.isA32;
+              this.userList[seatSerial].isBanker = a.isBanker;
+              this.userList[seatSerial].isSpecial = a.isSpecial;
+              this.userList[seatSerial].seeCardStatus = a.seeCardStatus;
+              this.userList[seatSerial].boardSize = a.boardSize;
+              this.userList[seatSerial].boardType = a.boardType;
+              this.userList[seatSerial].isUser = a.isUser;
+
+
+              this.userList[seatSerial].board[0].color=0;
+              this.userList[seatSerial].board[0].number=0;
+              this.userList[seatSerial].board[1].color=0;
+              this.userList[seatSerial].board[1].number=0;
+              this.userList[seatSerial].board[2].color=0;
+              this.userList[seatSerial].board[2].number=0;
+
+              //给角色存储牌
+              this.userMsg.board[0].color=a.firstBoardColor;
+              this.userMsg.board[0].number=a.firstBoardNumber;
+              this.userMsg.board[1].color=a.secondBoardColor;
+              this.userMsg.board[1].number=a.secondBoardNumber;
+              this.userMsg.board[2].color=a.thirdlyBoardColor;
+              this.userMsg.board[2].number=a.thirdlyBoardNumber;
+
+            }else {
+
+              this.seatStatusList[seatSerial]=3;
+              this.userList[seatSerial].userNickName = a.nickName;
+              this.userList[seatSerial].headPortrait = a.headPortrait;
+              this.userList[seatSerial].gameStatus = a.gameStatus;
+              this.userList[seatSerial].integral = a.integral;
+              this.userList[seatSerial].userId = a.userId;
+              this.userList[seatSerial].payIntegral = param.userList.integralFundus;
+              this.userList[seatSerial].isA32 = a.isA32;
+              this.userList[seatSerial].isBanker = a.isBanker;
+              this.userList[seatSerial].isSpecial = a.isSpecial;
+              this.userList[seatSerial].seeCardStatus = a.seeCardStatus;
+              this.userList[seatSerial].boardSize = a.boardSize;
+              this.userList[seatSerial].boardType = a.boardType;
+              this.userList[seatSerial].isUser = a.isUser;
+
+              this.userList[seatSerial].board[0].color=0;
+              this.userList[seatSerial].board[0].number=0;
+              this.userList[seatSerial].board[1].color=0;
+              this.userList[seatSerial].board[1].number=0;
+              this.userList[seatSerial].board[2].color=0;
+              this.userList[seatSerial].board[2].number=0;
+            }
           }else {
             this.seatStatusList[seatSerial]=4;
           }
@@ -506,6 +664,86 @@
         });
       }
     },
+    computed:{
+      textOne(){
+        let text ="";
+        if (this.userList[0].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[0].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[0].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+      textTwo(){
+        let text ="";
+        if (this.userList[1].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[1].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[1].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+      textThree(){
+        let text ="";
+        if (this.userList[2].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[2].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[2].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+      textFour(){
+        let text ="";
+        if (this.userList[3].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[3].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[3].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+      textFive(){
+        let text ="";
+        if (this.userList[4].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[4].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[4].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+      textSix(){
+        let text ="";
+        if (this.userList[5].seeCardStatus==1){
+          text = "已看牌";
+        }
+        if(this.userList[5].gameStatus ==1){
+          text = "弃牌";
+        }
+        if(this.userList[5].gameStatus ==2){
+          text = "比牌输";
+        }
+        return text;
+      },
+    }
   }
 </script>
 

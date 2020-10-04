@@ -1,5 +1,6 @@
 package com.wegame.mapper;
 
+import com.wegame.model.GamblingDetails;
 import com.wegame.model.GamblingMessage;
 import com.wegame.provider.GamblingMessageSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -112,4 +113,29 @@ public interface GamblingMessageMapper {
             "</script>"
     })
     int insertGamblingMessageList(@Param(value = "gamblingMessageList") List<GamblingMessage> gamblingMessageList);
+
+    @Update({
+            "update t_gambling_message ",
+            "set see_card_status = #{status,jdbcType=TINYINT} ",
+            "where user_id = #{userId,jdbcType=BIGINT}",
+            "and gambling_id= #{gamblingId,jdbcType=BIGINT}"
+    })
+    int updateSeeCard(Long userId, int status, long gamblingId);
+
+    @Select({
+            "select * from  t_gambling_message where gambling_id = #{gamblingId,jdbcType=BIGINT}"
+    })
+    List<GamblingMessage> selectByGamblingId(long gamblingId);
+
+
+    @Update({
+            "update t_gambling_message ",
+            "set game_status = #{status,jdbcType=TINYINT} ",
+            "where user_id = #{userId,jdbcType=BIGINT}",
+            "and gambling_id= #{gamblingId,jdbcType=BIGINT}"
+    })
+    int updateGameStatus(long userId, int status, long gamblingId);
+
+    @UpdateProvider(type = GamblingMessageSqlProvider.class, method = "updateIsTrue")
+    int updateIsTrue(long gamblingId, int status, long trueUserId);
 }

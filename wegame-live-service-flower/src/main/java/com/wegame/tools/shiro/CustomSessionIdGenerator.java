@@ -15,7 +15,7 @@ public class CustomSessionIdGenerator implements SessionIdGenerator {
     public Serializable generateId(Session session) {
         System.out.println("-----------------自定义sesionid生成-----------------");
 
-        return "xdclass"+UUID.randomUUID().toString().replace("-","");
+        return "wbh"+UUID.randomUUID().toString().replace("-","");
 
     }
 

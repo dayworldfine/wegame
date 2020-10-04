@@ -2,6 +2,7 @@ package com.wegame.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.wegame.model.User;
 import com.wegame.tools.JsonResult;
 import com.wegame.tools.utils.MD5Utiles;
 import org.apache.shiro.SecurityUtils;
@@ -52,8 +53,10 @@ public class LoginController {
         try {
             subject.login(usernamePasswordToken);
             System.out.println("token:"+subject.getSession().getId());
+            User user = (User) subject.getPrincipals().getPrimaryPrincipal();
             JSONObject object = new JSONObject();
             object.put("token",subject.getSession().getId());
+            object.put("userId",String.valueOf(user.getId()));
             return JsonResult.success(object);
         }catch (Exception e){
             e.printStackTrace();

@@ -3,6 +3,7 @@ package com.wegame.mapper;
 import com.wegame.dto.RoomChildMsgDto;
 import com.wegame.dto.RoomMsgDto;
 import com.wegame.model.Gambling;
+import com.wegame.model.GamblingDetails;
 import com.wegame.provider.GamblingSqlProvider;
 import com.wegame.vo.RoomMsgVo;
 import org.apache.ibatis.annotations.*;
@@ -14,10 +15,10 @@ import java.util.List;
 public interface GamblingMapper {
     @Insert({
         "insert into t_gambling (id, create_time, ",
-        "update_time, version, ",
+        "update_time, version, round,",
         "room_id, gambling_status, ",
         "integral_fundus, integral_sum)",
-        "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, ",
+        "values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT},  #{round,jdbcType=INTEGER},",
         "#{updateTime,jdbcType=BIGINT}, #{version,jdbcType=BIGINT}, ",
         "#{roomId,jdbcType=BIGINT}, #{gamblingStatus,jdbcType=TINYINT}, ",
         "#{integralFundus,jdbcType=BIGINT}, #{integralSum,jdbcType=BIGINT})"
@@ -37,6 +38,7 @@ public interface GamblingMapper {
             @Result(column="create_time", property="createTime"),
             @Result(column="update_time", property="updateTime"),
             @Result(column="version", property="version"),
+            @Result(column="round", property="round"),
             @Result(column="room_id", property="roomId"),
             @Result(column="gambling_status", property="gamblingStatus"),
             @Result(column="integral_fundus", property="integralFundus"),
@@ -60,6 +62,7 @@ public interface GamblingMapper {
             "room_id as roomId,\n" +
             "gambling_status as gamblingStatus,\n" +
             "integral_fundus as integralFundus,\n" +
+            "round as round,\n" +
             "integral_sum as integralSum\n" +
             "FROM\n" +
             "t_gambling \n" +
@@ -106,4 +109,16 @@ public interface GamblingMapper {
             "WHERE \n" +
             "tgm.gambling_id = #{gamblingId,jdbcType=BIGINT}\n")
     List<RoomChildMsgDto> listRoomMsgByGamblingId(String gamblingId);
+
+    /**
+     * 修改牌局轮次
+     * @param gamblingId
+     * @return
+     */
+    @Update({
+            "update t_gambling ",
+            "set round = (round +1)",
+            "where id = #{gamblingId,jdbcType=BIGINT} "
+    })
+    int updateRoundByGamblingId(long gamblingId);
 }

@@ -16,4 +16,5 @@ public class RoomMsgDto {
     private String integralFundus;
     private String integralSum;
     private String gamblingId;
+    private Long round;
 }

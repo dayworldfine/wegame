@@ -25,6 +25,7 @@ public class GamblingMessageSqlProvider {
             sql.VALUES("version", "#{version,jdbcType=BIGINT}");
         }
 
+
         if (record.getGamblingId() != null) {
             sql.VALUES("gambling_id", "#{gamblingId,jdbcType=BIGINT}");
         }
@@ -45,7 +46,7 @@ public class GamblingMessageSqlProvider {
             sql.VALUES("is_user", "#{isUser,jdbcType=TINYINT}");
         }
 
-        if (record.getIsUser() != null) {
+        if (record.getIsTurn() != null) {
             sql.VALUES("is_turn", "#{isTurn,jdbcType=TINYINT}");
         }
 
@@ -75,6 +76,7 @@ public class GamblingMessageSqlProvider {
         if (record.getVersion() != null) {
             sql.SET("version = #{version,jdbcType=BIGINT}");
         }
+
 
         if (record.getGamblingId() != null) {
             sql.SET("gambling_id = #{gamblingId,jdbcType=BIGINT}");
@@ -109,6 +111,23 @@ public class GamblingMessageSqlProvider {
         }
 
         sql.WHERE("id = #{id,jdbcType=BIGINT}");
+
+        return sql.toString();
+    }
+
+
+    public String updateIsTrue(long gamblingId, int status, long trueUserId) {
+        SQL sql = new SQL();
+        sql.UPDATE("t_gambling_message");
+
+            sql.SET("is_turn = #{status,jdbcType=TINYINT}");
+
+
+        sql.WHERE("gambling_id = #{gamblingId,jdbcType=BIGINT}");
+        if (trueUserId!=0) {
+            sql.AND();
+            sql.WHERE("user_id = #{trueUserId,jdbcType=BIGINT}");
+        }
 
         return sql.toString();
     }

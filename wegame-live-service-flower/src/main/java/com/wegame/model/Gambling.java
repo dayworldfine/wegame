@@ -36,6 +36,12 @@ public class Gambling implements Serializable {
     private Long version;
 
     /**
+     * 轮次
+     * 2020-09-08T23:15:19.366
+     */
+    private Integer round;
+
+    /**
      * 房间id
 	 * 2020-09-08T23:15:19.366
      */
@@ -176,26 +182,26 @@ public class Gambling implements Serializable {
         this.integralSum = integralSum;
     }
 
-
-        @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", version=").append(version);
-        sb.append(", roomId=").append(roomId);
-        sb.append(", gamblingStatus=").append(gamblingStatus);
-        sb.append(", integralFundus=").append(integralFundus);
-        sb.append(", integralSum=").append(integralSum);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public Integer getRound() {
+        return round;
     }
 
+    public void setRound(Integer round) {
+        this.round = round;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Gambling{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                ", round=" + round +
+                ", roomId=" + roomId +
+                ", gamblingStatus=" + gamblingStatus +
+                ", integralFundus=" + integralFundus +
+                ", integralSum=" + integralSum +
+                '}';
+    }
 }
