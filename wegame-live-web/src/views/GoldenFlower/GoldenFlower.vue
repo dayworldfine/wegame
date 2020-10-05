@@ -850,7 +850,7 @@
         }
         return text;
       },
-    }
+    },
   }
 </script>
 
@@ -906,7 +906,7 @@
   .people-boardCompare{
     box-sizing: border-box;
     border: 10px solid #fff;
-    border-color: #ff1c17 #09800c #156bff #3fff41;
+    border-color: #ff1c17 #e5e908 #156bff #3fff41;
   }
 
   .people-userImg{

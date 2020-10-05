@@ -1,18 +1,32 @@
 package com.wegame.tools.intecepter;
 
+import org.apache.catalina.StoreManager;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.UnknownSessionException;
+import org.apache.shiro.session.mgt.DefaultSessionKey;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.support.ChannelInterceptorAdapter;
+
+import java.security.Principal;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 
 /**
  *
  * 功能描述：频道拦截器 ，类似管道，可以获取消息的一些meta数据
-
- *
- * @author <a href="mailto:xd@xdclass.net">小D老师</a>
- * @since 0.0.1
  */
 public class SocketChannelIntecepter extends ChannelInterceptorAdapter{
 
@@ -49,6 +63,10 @@ public class SocketChannelIntecepter extends ChannelInterceptorAdapter{
 
         String sessionId = headerAccessor.getSessionAttributes().get("sessionId").toString();
         System.out.println("SocketChannelIntecepter -> sessionId = "+sessionId);
+
+        Object payload = message.getPayload();
+        MessageHeaders headers = message.getHeaders();
+
 
         switch (headerAccessor.getCommand()) {
             case CONNECT:

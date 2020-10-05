@@ -12,11 +12,6 @@ import java.util.Map;
 /**
  *
  * 功能描述：http握手拦截器，可以通过这个类的方法获取resuest,和response
- *
- * <p> 创建时间：Jan 6, 2018 </p>
- * <p> 贡献者：小D学院, 官网：www.xdclass.net </p>
- *
- * @author <a href="mailto:xd@xdclass.net">小D老师</a>
  * @since 0.0.1
  */
 public class HttpHandShakeIntecepter implements HandshakeInterceptor{
