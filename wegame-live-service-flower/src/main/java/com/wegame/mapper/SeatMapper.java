@@ -1,6 +1,7 @@
 package com.wegame.mapper;
 
 import com.wegame.dto.SeatUserDto;
+import com.wegame.dto.SeatUserListDto;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.model.Seat;
 import com.wegame.provider.SeatSqlProvider;
@@ -85,7 +86,7 @@ public interface SeatMapper {
             "from t_room r RIGHT JOIN  t_seat s ON r.ID = s.room_id\n" +
             "LEFT JOIN t_user u ON u.id = s.user_id\n" +
             "WHERE r.id= #{roomId,jdbcType=INTEGER}")
-    List<SeatUserEntity> listRoomInfo(long roomId);
+    List<SeatUserListDto> listRoomInfo(long roomId);
 
     /**
      * 准备
@@ -120,4 +121,19 @@ public interface SeatMapper {
             "on t.room_id =r.id\n" +
             "WHERE r.id =#{roomId,jdbcType=BIGINT}")
     List<SeatUserDto> selGmaeStartCondition(int roomId);
+
+    /**
+     * 根据牌局修改状态
+     * @param gamblingId
+     * @param status
+     * @param beStatus
+     * @return
+     */
+    @Update({
+            "update t_seat ",
+            "set seat_status = #{beStatus,jdbcType=INTEGER},update_time =#{systemTimer,jdbcType=BIGINT} ",
+            "where seat_status = #{status,jdbcType=INTEGER} ",
+            "and room_id = (select room_id from t_gambling where id = #{gamblingId,jdbcType=BIGINT})"
+    })
+    int updateSeatStatusByGamblingId(long gamblingId, int status, int beStatus,long systemTimer);
 }

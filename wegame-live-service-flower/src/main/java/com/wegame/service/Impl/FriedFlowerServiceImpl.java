@@ -1,9 +1,7 @@
 package com.wegame.service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.wegame.dto.RoomChildMsgDto;
-import com.wegame.dto.RoomMsgDto;
-import com.wegame.dto.SeatUserDto;
+import com.wegame.dto.*;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.mapper.*;
 import com.wegame.model.*;
@@ -66,6 +64,9 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     private GamblingDetailsMapper gamblingDetailsMapper;
 
     @Autowired
+    private GamblingStatisticsMapper gamblingStatisticsMapper;
+
+    @Autowired
     private UserMapper userMapper;
 
 
@@ -102,7 +103,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
 
         /* 0 未开始  1 一开始*/
 //        List<JSONObject> objects = seatRepository.findRoomInfo(room.getSerial());
-        List<SeatUserEntity> objects = seatMapper.listRoomInfo(room.getId());
+        List<SeatUserListDto> objects = seatMapper.listRoomInfo(room.getId());
         System.out.println("objects:" + objects);
         template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.parseInt(msg.get("roomId").toString())),
                 FriedFlowerJsonObject.room(Integer.parseInt(msg.get("type").toString())-1 , objects));
@@ -349,14 +350,20 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         gamblingDetails.setVersion(1l);
         gamblingDetails.setGamblingId(gamblingId);
         gamblingDetails.setCompareUserId(0l);
-        gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.FOLLOW_CARD.getValue());
+        if (type==7){
+            gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.FOLLOW_CARD.getValue());
+        }else {
+            gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.ADD_CARD.getValue());
+        }
         gamblingDetails.setOperatingLeverage(0l);
         gamblingDetails.setRound(round);
         gamblingDetails.setSeatId(seatId);
         gamblingDetails.setUserId(userId);
         gamblingDetails.setSort(sort);
         int insert = gamblingDetailsMapper.insert(gamblingDetails);
-        return insert;
+        //减少用户积分
+        int userNum =  userMapper.updateUserIntegral(userId,-integralFundus);
+        return insert+userNum;
     }
 
     @Override
@@ -395,6 +402,114 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
                         type,String.valueOf(userId),String.valueOf(seatId),roundNum,String.valueOf(trueUserId))
         );
     }
+
+    @Override
+    public int compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId) {
+        GamblingDetails gamblingDetails = new GamblingDetails();
+        gamblingDetails.setId(SnowUtils.generateId());
+        gamblingDetails.setCreateTime(System.currentTimeMillis());
+        gamblingDetails.setUpdateTime(System.currentTimeMillis());
+        gamblingDetails.setVersion(1l);
+        gamblingDetails.setGamblingId(gamblingId);
+        gamblingDetails.setCompareUserId(beUserId);
+        gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.COMPARE_CARD.getValue());
+        gamblingDetails.setOperatingLeverage(0l);
+        gamblingDetails.setRound(round);
+        gamblingDetails.setSeatId(seatId);
+        gamblingDetails.setUserId(userId);
+        gamblingDetails.setSort(sort);
+        int insert = gamblingDetailsMapper.insert(gamblingDetails);
+        //根据比牌结果 改变牌局信息
+        StringJoiner stringJoiner = new StringJoiner(",");
+        stringJoiner.add(String.valueOf(userId));
+        stringJoiner.add(String.valueOf(beUserId));
+        String userIds = stringJoiner.toString();
+        List<userCompareBoardDto> userCompareBoardDtoList = gamblingBoardMapper.selectByUserIds(gamblingId,userIds);
+        userCompareBoardDto userCompareBoardDto = userCompareBoardDtoList.stream()
+                .min(Comparator.comparing(com.wegame.dto.userCompareBoardDto::getBoardSize)).get();
+        int gamblingMsgNum = gamblingMessageMapper.updateGameStatus(Long.valueOf(userCompareBoardDto.getUserId()),EnumUtils.GAME_STATUS_ENUM.COMPARE_LOSE.getValue(),gamblingId);
+
+        if (insert+gamblingMsgNum==2){
+            //进行发送消息操作
+            template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.valueOf(String.valueOf(roomId))),
+                    FriedFlowerJsonObject.userThanCard(
+                            type,String.valueOf(userId),String.valueOf(seatId),String.valueOf(beUserId),userCompareBoardDto.getUserId())
+            );
+        }
+
+        return insert+gamblingMsgNum;
+
+
+    }
+
+
+    @Override
+    public void examineGameOver(long gamblingId,long roomId) {
+        int num = gamblingMapper.selectGamblingGameNormal(gamblingId);
+        /* 小于等于1表示游戏结束了 ，要进行的操作如下
+        *       1.修改房间状态
+        *       2.修改座位状态
+        *       3.修改牌局状态
+        *       4.改变最后一个用户胜利
+        *       5.添加牌局统计
+        *       6.更改用户积分*/
+        if (num<=1){
+            long systemTimer = System.currentTimeMillis();
+            /*1-4*/
+            int roomNum = roomMapper.updateRoomStatusByGamblingId(gamblingId,EnumUtils.ROOM_STATUS_ENUM.NOT_START.getValue(),systemTimer);
+            int seatNumOne = seatMapper.updateSeatStatusByGamblingId(gamblingId,EnumUtils.SEAT_STATUS_ENUM.IS_GAME.getValue(),EnumUtils.SEAT_STATUS_ENUM.NOT_READY.getValue(),systemTimer);
+            int seatNumTwo = seatMapper.updateSeatStatusByGamblingId(gamblingId,EnumUtils.SEAT_STATUS_ENUM.IS_NOT_GAME.getValue(),EnumUtils.SEAT_STATUS_ENUM.FREE.getValue(),systemTimer);
+            int gamblingNum = gamblingMapper.updateStatusByGamblingId(gamblingId,EnumUtils.GAMBLING_STATUS_ENUM.END.getValue(),systemTimer);
+            int gamblingMessageNum =  gamblingMessageMapper.updateGameStatusByWin(gamblingId,EnumUtils.GAME_STATUS_ENUM.NORMAL.getValue(),EnumUtils.GAME_STATUS_ENUM.WIN.getValue(),systemTimer);
+            /*5*/
+            List<GamblingMessage> gamblingMessageList = gamblingMessageMapper.selectByGamblingId(gamblingId);
+            List<GamblingDetails> gamblingDetailsList = gamblingDetailsMapper.selectByGamblingId(gamblingId);
+            List<GamblingMessage> collect = gamblingMessageList.stream().filter(p -> p.getIsUser().equals(EnumUtils.JUDGE_ENUM.YES.getValue())).collect(Collectors.toList());
+
+            List<GamblingStatistics> gamblingStatisticsList = Lists.newArrayList();
+            collect.forEach(a->{
+                GamblingStatistics gs = new GamblingStatistics();
+                gs.setId(SnowUtils.generateId());
+                gs.setCreateTime(System.currentTimeMillis());
+                gs.setUpdateTime(System.currentTimeMillis());
+                gs.setVersion(1l);
+                gs.setGamblingId(gamblingId);
+                gs.setSeatId(a.getSeatId());
+                gs.setUserId(a.getUserId());
+                gs.setStartTime(System.currentTimeMillis());
+                gs.setEndTime(System.currentTimeMillis());
+                //如果是胜利者
+                if (a.getGameStatus().equals(EnumUtils.GAME_STATUS_ENUM.WIN.getValue())){
+                    gs.setIsWin(EnumUtils.JUDGE_ENUM.YES.getValue());
+                    Long winMoney = gamblingDetailsList.stream()
+                            .filter(p -> !p.getUserId().equals(a.getUserId()))
+                            .collect(Collectors.summingLong(p -> p.getOperatingLeverage()));
+                    gs.setIntegral(winMoney);
+                    /*6*/
+                    int userNum = userMapper.updateUserIntegral(a.getUserId(), winMoney);
+
+                }else {
+                    gs.setIsWin(EnumUtils.JUDGE_ENUM.NO.getValue());
+                    Long loseMoney = gamblingDetailsList.stream()
+                            .filter(p -> p.getUserId().equals(a.getUserId()))
+                            .collect(Collectors.summingLong(p -> p.getOperatingLeverage()));
+                    loseMoney =-loseMoney;
+                    gs.setIntegral(loseMoney);
+                }
+                gamblingStatisticsList.add(gs);
+            });
+           int gamblingStatisicsNum =  gamblingStatisticsMapper.insertAll(gamblingStatisticsList);
+
+            List<SeatUserListDto> seatUserListDtoList = seatMapper.listRoomInfo(roomId);
+            //发送游戏结束即时通讯
+            template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.valueOf(String.valueOf(roomId))),
+                    FriedFlowerJsonObject.gameOver(
+                            12,seatUserListDtoList)
+            );
+        }
+    }
+
+
 
     @Override
     public JSONObject changGeRound(long gamblingId) {

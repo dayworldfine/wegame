@@ -86,4 +86,11 @@ public interface RoomMapper {
             "where s.id = #{seatId,jdbcType=INTEGER}\n" +
             "AND s.user_id IS NOT NULL")
     int selSeatHavePeople(int roomId, int seatId);
+
+    @Update({
+            "update t_room ",
+            "set status = #{status,jdbcType=INTEGER} ,update_time =#{systemTimer,jdbcType=BIGINT} ",
+            "where id = (select room_id from t_gambling where id = #{gamblingId,jdbcType=BIGINT})"
+    })
+    int updateRoomStatusByGamblingId(long gamblingId, int status, long systemTimer);
 }

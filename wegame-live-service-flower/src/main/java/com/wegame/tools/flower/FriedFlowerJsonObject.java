@@ -1,6 +1,7 @@
 package com.wegame.tools.flower;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wegame.dto.SeatUserListDto;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.vo.RoomMsgVo;
 
@@ -22,7 +23,7 @@ public class FriedFlowerJsonObject {
      * @return
      */
     public static JSONObject room(int type,
-                                  List<SeatUserEntity> userList
+                                  List<SeatUserListDto> userList
                                  ){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
@@ -189,22 +190,22 @@ public class FriedFlowerJsonObject {
      * 用户比牌
      * @param type
      * @param userId
-     * @param seat
+     * @param seatId
      * @param beUserId
-     * @param beSeat
+     * @param loseUserId
      * @return
      */
-    public static JSONObject userThanCard(String type,
+    public static JSONObject userThanCard(int type,
                                   String userId,
-                                  String seat,
+                                  String seatId,
                                   String beUserId,
-                                  String beSeat){
+                                  String loseUserId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
-        obj.put("seat",seat);
+        obj.put("seat",seatId);
         obj.put("beUserId",beUserId);
-        obj.put("beSeat",beSeat);
+        obj.put("loseUserId",loseUserId);
         return obj;
     }
 
@@ -246,14 +247,14 @@ public class FriedFlowerJsonObject {
     /**
      * 游戏结束
      * @param type
-     * @param boardList
+     * @param seatUserListDtoList
      * @return
      */
-    public static JSONObject gameOver(String type,
-                               JSONObject[] boardList){
+    public static JSONObject gameOver(int type,
+                                      List<SeatUserListDto> seatUserListDtoList){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("userList",boardList);
+        obj.put("userList",seatUserListDtoList);
         return obj;
     }
 

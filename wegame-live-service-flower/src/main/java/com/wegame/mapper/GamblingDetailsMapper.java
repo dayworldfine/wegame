@@ -130,4 +130,10 @@ public interface GamblingDetailsMapper {
             "order by create_time desc limit 1"
     })
     GamblingDetails selectByGamblingIdLastRound(long gamblingId);
+
+    @Select({
+            "select * from ",
+            "t_gambling_details where gambling_id = #{gamblingId,jdbcType=BIGINT} "
+    })
+    List<GamblingDetails> selectByGamblingId(long gamblingId);
 }

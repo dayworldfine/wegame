@@ -121,4 +121,25 @@ public interface GamblingMapper {
             "where id = #{gamblingId,jdbcType=BIGINT} "
     })
     int updateRoundByGamblingId(long gamblingId);
+
+    @Select({
+            "select count(*) from ",
+            "t_gambling_message where game_status =3 ",
+            "and gambling_id = #{gamblingId,jdbcType=BIGINT}"
+    })
+    int selectGamblingGameNormal(long gamblingId);
+
+    /**
+     *
+     * @param gamblingId
+     * @param status
+     * @param systemTimer
+     * @return
+     */
+    @Update({
+            "update t_gambling ",
+            "set gambling_status = #{status,jdbcType=INTEGER},update_time = #{systemTimer,jdbcType=BIGINT} ",
+            "where id = #{gamblingId,jdbcType=BIGINT}"
+    })
+    int updateStatusByGamblingId(long gamblingId, int status, long systemTimer);
 }

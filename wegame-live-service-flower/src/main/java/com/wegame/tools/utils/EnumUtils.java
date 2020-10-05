@@ -296,7 +296,8 @@ public class EnumUtils {
         NO_BODY("此座位无人", 0, "NO_BODY"),
         DIS_BOARD("弃牌", 1, "DIS_BOARD"),
         COMPARE_LOSE("比牌输", 2, "COMPARE_LOSE"),
-        NORMAL("正常", 3, "NORMAL");
+        NORMAL("正常", 3, "NORMAL"),
+        WIN("胜利", 4, "WIN");
         private String name;
         private int value;
         private String code;

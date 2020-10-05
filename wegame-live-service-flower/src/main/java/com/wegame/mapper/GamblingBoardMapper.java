@@ -1,5 +1,6 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.userCompareBoardDto;
 import com.wegame.model.GamblingBoard;
 import com.wegame.provider.GamblingBoardSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -128,5 +129,16 @@ public interface GamblingBoardMapper {
     })
     int insertGamblingBoardList(@Param(value = "gamblingBoardList") List<GamblingBoard> gamblingBoardList);
 
-
+    /**
+     * 查询用户的牌值大小
+     * @param gamblingId
+     * @param userIds
+     * @return
+     */
+    @Select({
+            "select gm.user_id as userId gb.board_size as boardSize ",
+            "from t_gambling_message gm inner join t_gambling_board gb on gm.id = gb.gambling_message_id ",
+            "where gm.user_id in (#{userIds})"
+    })
+    List<userCompareBoardDto> selectByUserIds(long gamblingId, String userIds);
 }

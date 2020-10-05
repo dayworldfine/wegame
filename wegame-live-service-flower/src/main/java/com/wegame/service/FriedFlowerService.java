@@ -163,4 +163,24 @@ public interface FriedFlowerService  extends  BaseService{
 
     /*发送有人弃牌消息*/
     void sendUserDisCard(int type, long roomId, long seatId, long gamblingId, int roundNum,long userId,long trueUserId);
+
+    /**
+     * 检查是否游戏结束
+     * @param gamblingId
+     */
+    void examineGameOver(long gamblingId,long roomId);
+
+    /**
+     * 用户比牌
+     * @param userId
+     * @param gamblingId
+     * @param type
+     * @param roomId
+     * @param round
+     * @param seatId
+     * @param sort
+     * @param beUserId
+     * @return
+     */
+    int compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId);
 }

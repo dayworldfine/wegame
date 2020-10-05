@@ -3,7 +3,7 @@
 
     <div class="outer-flex outer-flex-one" >
       <!--每个人物-->
-      <div class="people">
+      <div class="people" @click="comPareUser(0)" :class="(userList[0].isUser==1 && userList[0].gameStatus==3 && userList[0].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[0]==1||seatStatusList[0]==2||seatStatusList[0]==3">
           <div class="people-left-name">{{userList[0].userNickName}}</div>
@@ -39,7 +39,7 @@
           <el-button type="primary" class="people-button-style" round  @click="sitDown(0)" v-show="seatStatusList[0]==0">坐下</el-button>
         </div>
       </div>
-      <div class="people" >
+      <div class="people" @click="comPareUser(1)" :class="(userList[1].isUser==1 && userList[1].gameStatus==3 && userList[1].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[1]==1||seatStatusList[1]==2||seatStatusList[1]==3">
           <div class="people-left-name">{{userList[1].userNickName}}</div>
@@ -78,7 +78,7 @@
     </div>
     <div class="outer-flex outer-flex-two">
       <!--每个人物-->
-      <div class="people" >
+      <div class="people" @click="comPareUser(5)" :class="(userList[5].isUser==1 && userList[5].gameStatus==3 && userList[5].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[5]==1||seatStatusList[5]==2||seatStatusList[5]==3">
           <div class="people-left-name">{{userList[5].userNickName}}</div>
@@ -114,7 +114,7 @@
           <el-button type="primary" class="people-button-style" round  @click="sitDown(5)" v-show="seatStatusList[5]==0">坐下</el-button>
         </div>
       </div>
-      <div class="people" >
+      <div class="people" @click="comPareUser(2)" :class="(userList[2].isUser==1 && userList[2].gameStatus==3 && userList[2].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[2]==1||seatStatusList[2]==2||seatStatusList[2]==3">
           <div class="people-left-name">{{userList[2].userNickName}}</div>
@@ -153,7 +153,7 @@
     </div>
     <div class="outer-flex outer-flex-three">
       <!--每个人物-->
-      <div class="people" >
+      <div class="people" @click="comPareUser(4)" :class="(userList[4].isUser==1 && userList[4].gameStatus==3 && userList[4].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[4]==1||seatStatusList[4]==2||seatStatusList[4]==3">
           <div class="people-left-name">{{userList[4].userNickName}}</div>
@@ -189,7 +189,7 @@
           <el-button type="primary" class="people-button-style" round  @click="sitDown(4)" v-show="seatStatusList[4]==0">坐下</el-button>
         </div>
       </div>
-      <div class="people" >
+      <div class="people" @click="comPareUser(3)" :class="(userList[3].isUser==1 && userList[3].gameStatus==3 && userList[3].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[3]==1||seatStatusList[3]==2||seatStatusList[3]==3">
           <div class="people-left-name">{{userList[3].userNickName}}</div>
@@ -236,7 +236,7 @@
           </div>
         </div>
         <div class="entire-button two-button" >
-          <div>
+          <div @click="compareBoard()">
             <el-button type="primary" round class="background-button" :disabled="userMsg.isCompare==1 || userMsg.isTrue==0">比牌</el-button>
           </div>
           <div class="font-button">
@@ -253,9 +253,18 @@
           </div>
         </div>
         <div class="entire-button four-button">
+          <el-dropdown  @command="handleCommand">
           <div>
             <el-button type="warning" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">+</el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item :command="userMsg.integralFundus*1" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*1}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*2" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*2}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*5" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*5}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*10" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*10}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*20" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*20}}</el-dropdown-item>
+            </el-dropdown-menu>
           </div>
+          </el-dropdown>
           <div class="font-button">
             加注
           </div>
@@ -304,13 +313,15 @@
           board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
           integralFundus:1,
           sort:1,
+          compare:0,
+          userId:sessionStorage.getItem('userId'),
         },
         //用户列表
         userList:[
           {
             userNickName: '',
             headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
-            gameStatus: 11,
+            gameStatus: 3,
             integral: 0,
             userId: 12,
             board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
@@ -321,7 +332,7 @@
             seeCardStatus:0,
             boardSize:0,
             boardType:0,
-            isUser:0,
+            isUser:1,
           },
           {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
           {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
@@ -471,6 +482,56 @@
           }
         })
       },
+      //加注
+      handleCommand(e){
+        GoldenFlowerService.AddChip(
+          {
+            type:8,
+            roomId: this.userMsg.roomId,
+            seatId: this.userMsg.seatId,
+            gamblingId:this.userMsg.gamblingId,
+            round:this.userMsg.round,
+            integralFundus:e,
+            sort:this.userMsg.sort,
+          }
+        ).then((res) => {
+          console.log("res", res)
+          if(res.code===200){
+            this.userMsg.sort=1;
+          }else{
+            this.$message.error(res.message)
+          }
+        })
+      },
+      compareBoard(){
+        this.userMsg.compare=1;
+      },
+      //比较用户
+      comPareUser(index){
+        if (this.userList[index].gameStatus==3 && this.userList[index].isUser==1){
+          this.userMsg.compare=0;
+          //发起比较牌接口
+          GoldenFlowerService.thanCard(
+            {
+              type: 9,
+              roomId: this.userMsg.roomId,
+              seatId: this.userMsg.seatId,
+              gamblingId:this.userMsg.gamblingId,
+              round:this.userMsg.round,
+              sort:this.userMsg.sort,
+              beUserId: this.userList[index].userId,
+            }
+          ).then((res) => {
+            console.log("res", res)
+            if(res.code===200){
+              this.userMsg.sort=1;
+            }else{
+              this.$message.error(res.message)
+            }
+          })
+        }
+      },
+      //弃牌
       disCard(){
         GoldenFlowerService.disCard(
           {
@@ -662,7 +723,9 @@
           }
 
         });
-      }
+      },
+
+
     },
     computed:{
       textOne(){
@@ -794,8 +857,14 @@
     display: flex;
     flex-direction: row;
     margin-top: 50px;
-
   }
+
+  .people-boardCompare{
+    box-sizing: border-box;
+    border: 10px solid #fff;
+    border-color: #ff1c17 #09800c #156bff #3fff41;
+  }
+
   .people-userImg{
     width: 116px;
     height: 76px;

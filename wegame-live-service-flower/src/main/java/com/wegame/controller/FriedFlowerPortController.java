@@ -218,12 +218,99 @@ public class FriedFlowerPortController extends BaseController {
         //判断要不要改变轮次 返回的是下一次的轮次
         JSONObject jsb = ffs.changGeRound(gamblingId);
 
-        if (num >0){
+        if (num ==2){
             ffs.sendAddUserWithChip(type,roomId,gamblingId,userId,seatId,integralFundus,jsb.getInteger("round"),jsb.getLong("trueUserId"));
 
             return JsonResult.success("跟注成功");
         }else {
             return JsonResult.failure(401,"跟注失败");
+        }
+
+    }
+
+    /**
+     * @api {POST} /changeSubject 加注
+     * @apiGroup 接口小组
+     * @apiVersion 1.0.0
+     * @apiDescription 接口说明
+     * @apiParam {String} id 机构ID
+     * @apiParamExample {json} 请求样例：
+     *                ?id=bfc5bd62010f467cbbe98c9e4741733b
+     * @apiSuccess (200) {String} code 200:成功</br>
+     *                                 404:机构不存在/ID为空</br>
+     * @apiSuccess (200) {String} message 信息
+     * @apiSuccess (200) {String} data 返回用户信息
+     * @apiSuccessExample {json} 返回样例:
+     * {
+     * 	"code": 200,
+     * 	"message": "登录成功",
+     * 	"data": "{}"
+     * }
+     */
+    @PostMapping("/userAddChip")
+    public JsonResult userAddChip(int type,
+                                   long roomId,
+                                   long seatId,
+                                   long gamblingId,
+                                   int round,
+                                   long integralFundus,
+                                   int sort){
+        /* 1.改变这个userId*/
+        long userId = getUserId();
+        int num = ffs.addUserWithChip(userId,gamblingId,type,roomId,round,seatId,integralFundus,sort);
+        //判断要不要改变轮次 返回的是下一次的轮次
+        JSONObject jsb = ffs.changGeRound(gamblingId);
+
+        if (num ==2){
+            ffs.sendAddUserWithChip(type,roomId,gamblingId,userId,seatId,integralFundus,jsb.getInteger("round"),jsb.getLong("trueUserId"));
+
+            return JsonResult.success("加注成功");
+        }else {
+            return JsonResult.failure(401,"加注失败");
+        }
+
+    }
+
+
+    /**
+     * @api {POST} /changeSubject 比牌
+     * @apiGroup 接口小组
+     * @apiVersion 1.0.0
+     * @apiDescription 接口说明
+     * @apiParam {String} id 机构ID
+     * @apiParamExample {json} 请求样例：
+     *                ?id=bfc5bd62010f467cbbe98c9e4741733b
+     * @apiSuccess (200) {String} code 200:成功</br>
+     *                                 404:机构不存在/ID为空</br>
+     * @apiSuccess (200) {String} message 信息
+     * @apiSuccess (200) {String} data 返回用户信息
+     * @apiSuccessExample {json} 返回样例:
+     * {
+     * 	"code": 200,
+     * 	"message": "登录成功",
+     * 	"data": "{}"
+     * }
+     */
+    @PostMapping("/userThanCard")
+    public JsonResult userThanCard(int type,
+                                  long roomId,
+                                  long seatId,
+                                  long gamblingId,
+                                  int round,
+                                  int sort,
+                                  long beUserId){
+        /* 1.改变这个userId*/
+        long userId = getUserId();
+        int num = ffs.compareThanCard(userId,gamblingId,type,roomId,round,seatId,sort,beUserId);
+        //判断要不要改变轮次 返回的是下一次的轮次
+        JSONObject jsb = ffs.changGeRound(gamblingId);
+
+        if (num ==2){
+            //检查是否游戏结束, 结束进行相对于的业务
+            ffs.examineGameOver(gamblingId,roomId);
+            return JsonResult.success("加注成功");
+        }else {
+            return JsonResult.failure(401,"加注失败");
         }
 
     }
@@ -265,7 +352,8 @@ public class FriedFlowerPortController extends BaseController {
             //发送有人弃牌消息
             JSONObject jsb = ffs.changGeRound(gamblingId);
             ffs.sendUserDisCard(type,roomId,seatId,gamblingId,jsb.getInteger("round"),userId,jsb.getLong("trueUserId"));
-            //检查
+            //检查是否游戏结束, 结束进行相对于的业务
+            ffs.examineGameOver(gamblingId,roomId);
         }else {
             return  JsonResult.failure(401,"弃牌失败");
         }

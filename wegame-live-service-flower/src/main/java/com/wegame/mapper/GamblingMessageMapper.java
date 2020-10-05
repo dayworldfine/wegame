@@ -138,4 +138,11 @@ public interface GamblingMessageMapper {
 
     @UpdateProvider(type = GamblingMessageSqlProvider.class, method = "updateIsTrue")
     int updateIsTrue(long gamblingId, int status, long trueUserId);
+
+    @Update({
+            "update t_gambling_message ",
+            "set game_status = #{beStatus,jdbcType=TINYINT}, update_time=#{systemTimer,jdbcType=BIGINT} ",
+            "where game_status = #{status,jdbcType =TINYINT } and gambling_id=#{gamblingId,jdbcType=BIGINT}"
+    })
+    int updateGameStatusByWin(long gamblingId, int status, int beStatus, long systemTimer);
 }

@@ -43,7 +43,7 @@ public class GamblingStatistics implements Serializable {
      * 座位id
 	 * 2020-09-06T21:55:05.252
      */
-    private Integer seatId;
+    private Long seatId;
 
     /**
      * 用户id
@@ -161,14 +161,14 @@ public class GamblingStatistics implements Serializable {
     /**
      * 座位id
      */
-    public Integer getSeatId() {
+    public Long getSeatId() {
         return seatId;
     }
 
     /**
      * 座位id
      */
-    public void setSeatId(Integer seatId) {
+    public void setSeatId(Long seatId) {
         this.seatId = seatId;
     }
 

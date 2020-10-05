@@ -84,7 +84,47 @@ const withChip = (param={})=>{
   };
 
 /**
- * 跟注
+ * 加注
+ * @param param
+ * @returns {Promise}
+ */
+const AddChip = (param={})=>{
+  return new Promise((resolve,reject) => {
+    http.post({
+      url: '/friedFlowerPort/userAddChip',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
+/**
+ * 比牌
+ * @param param
+ * @returns {Promise}
+ */
+const thanCard = (param={})=>{
+  return new Promise((resolve,reject) => {
+    http.post({
+      url: '/friedFlowerPort/userThanCard',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
+/**
+ * 弃牌
  * @param param
  * @returns {Promise}
  */
@@ -108,6 +148,8 @@ export default {
   setOut,                     /*准备*/
   seeCard,                    /*准备*/
   withChip,                   /*跟注*/
+  AddChip,                    /*加注*/
+  thanCard,                   /*比牌*/
   disCard,                    /*弃牌*/
 }
 
