@@ -71,23 +71,23 @@ public class FriedFlowerJsonObject {
     /**
      * 用户坐下
      * @param type
-     * @param userCode
-     * @param seatSerial
+     * @param userId
+     * @param seatId
      * @param userImg
      * @param userNickName
      * @param integral
      * @return
      */
     public static JSONObject userSitDown(int type,
-                                         int userCode,
-                                         int seatSerial,
+                                         String userId,
+                                         String seatId,
                                          String userImg,
                                          String userNickName,
-                                         int integral){
+                                         String integral){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("userCode",userCode);
-        obj.put("seatSerial",seatSerial);
+        obj.put("userId",userId);
+        obj.put("seatId",seatId);
         obj.put("userImg",userImg);
         obj.put("userNickName",userNickName);
         obj.put("integral",integral);
@@ -114,14 +114,14 @@ public class FriedFlowerJsonObject {
     /**
      * 用户准备
      * @param type
-     * @param seatSerial
+     * @param seatId
      * @return
      */
     public  static JSONObject userSetOut(int type,
-                                  int seatSerial ){
+                                  String seatId ){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
-        obj.put("seatId",seatSerial);
+        obj.put("seatId",seatId);
         return obj;
     }
 
@@ -191,20 +191,23 @@ public class FriedFlowerJsonObject {
      * @param type
      * @param userId
      * @param seatId
-     * @param beUserId
+     * @param round
+     * @param trueUserId
      * @param loseUserId
      * @return
      */
     public static JSONObject userThanCard(int type,
                                   String userId,
                                   String seatId,
-                                  String beUserId,
+                                  int round,
+                                  String trueUserId,
                                   String loseUserId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
-        obj.put("seat",seatId);
-        obj.put("beUserId",beUserId);
+        obj.put("seatId",seatId);
+        obj.put("round",round);
+        obj.put("trueUserId",trueUserId);
         obj.put("loseUserId",loseUserId);
         return obj;
     }
@@ -251,10 +254,12 @@ public class FriedFlowerJsonObject {
      * @return
      */
     public static JSONObject gameOver(int type,
-                                      List<SeatUserListDto> seatUserListDtoList){
+                                      List<SeatUserListDto> seatUserListDtoList,
+                                      String userNickName){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userList",seatUserListDtoList);
+        obj.put("userNickName",userNickName);
         return obj;
     }
 

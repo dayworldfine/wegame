@@ -82,10 +82,10 @@ public interface RoomMapper {
     @Select("SELECT count(*) \n" +
             "from t_seat s \n" +
             "INNER JOIN t_room r\n" +
-            "on s.room_id = r.id AND r.id = #{roomId,jdbcType=INTEGER}\n" +
-            "where s.id = #{seatId,jdbcType=INTEGER}\n" +
-            "AND s.user_id IS NOT NULL")
-    int selSeatHavePeople(int roomId, int seatId);
+            "on s.room_id = r.id AND r.id = #{roomId,jdbcType=BIGINT}\n" +
+            "where s.id = #{seatId,jdbcType=BIGINT}\n" +
+            "AND s.user_id IS NOT NULL AND s.user_id !=0")
+    int selSeatHavePeople(long roomId, long seatId);
 
     @Update({
             "update t_room ",

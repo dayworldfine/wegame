@@ -63,56 +63,56 @@ public interface FriedFlowerService  extends  BaseService{
      * @param seatSerial
      * @return
      */
-    int selSeatHavePeople(int roomSerial, int seatSerial);
+    int selSeatHavePeople(long roomSerial, long seatSerial);
 
     /**
      * 操作坐下
-     * @param userCode
-     * @param seatSerial
-     * @param roomSerial
+     * @param userId
+     * @param seatId
+     * @param roomId
      * @return
      */
-    int SaveUserSitDown(int userCode, int seatSerial, int roomSerial);
+    int SaveUserSitDown(long userId, long seatId, long roomId);
 
     /**
      * 发送有人坐下
      * @param type
-     * @param roomSerial
-     * @param userCode
-     * @param seatSerial
+     * @param roomId
+     * @param userId
+     * @param seatId
      */
-    void sendUserSitDown(int type, int roomSerial, int userCode, int seatSerial, String userImg, String userNickName, int integral);
+    void sendUserSitDown(int type, long roomId, long userId, long seatId);
 
     /**
      * 用户准备
-     * @param roomSerial
-     * @param userCode
-     * @param seatSerial
+     * @param roomId
+     * @param userId
+     * @param seatId
      * @return
      */
-    int saveUserSetOut(int roomSerial, int userCode, int seatSerial);
+    int saveUserSetOut(long roomId, long userId, long seatId);
 
     /**
      * 用户发送准备
      * @param type
-     * @param roomSerial
-     * @param seatSerial
+     * @param roomId
+     * @param seatId
      */
-    void sendUserSetOut(int type, int roomSerial, int seatSerial);
+    void sendUserSetOut(int type, long roomId, long seatId);
 
     /**
      * 查询房间人数和已准备人数
-     * @param roomSerial
+     * @param roomId
      * @return
      */
-    List<SeatUserDto> selGmaeStartCondition(int roomSerial);
+    List<SeatUserDto> selGmaeStartCondition(long roomId);
 
 
     /**
      * 发牌游戏开始
-     * @param roomSerial
+     * @param roomId
      */
-    void sendAndSaveGmaeStart(int roomSerial, List<SeatUserDto> countMap,List<SeatUserDto> SeatUserDtoCountSetOut);
+    void sendAndSaveGmaeStart(long roomId, List<SeatUserDto> countMap,List<SeatUserDto> SeatUserDtoCountSetOut);
 
     /**
      * 改变用户看牌状态
@@ -182,5 +182,8 @@ public interface FriedFlowerService  extends  BaseService{
      * @param beUserId
      * @return
      */
-    int compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId);
+    JSONObject compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId);
+
+    /*发送比牌消息*/
+    void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId);
 }

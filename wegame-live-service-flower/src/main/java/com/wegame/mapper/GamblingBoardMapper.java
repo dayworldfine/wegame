@@ -136,9 +136,9 @@ public interface GamblingBoardMapper {
      * @return
      */
     @Select({
-            "select gm.user_id as userId gb.board_size as boardSize ",
+            "select gm.user_id as userId, gb.board_size as boardSize ",
             "from t_gambling_message gm inner join t_gambling_board gb on gm.id = gb.gambling_message_id ",
-            "where gm.user_id in (#{userIds})"
+            "where gm.user_id in (${userIds}) and gm.gambling_id = #{gamblingId,jdbcType=BIGINT}"
     })
     List<userCompareBoardDto> selectByUserIds(long gamblingId, String userIds);
 }

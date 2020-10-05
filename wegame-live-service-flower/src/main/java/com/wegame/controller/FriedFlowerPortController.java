@@ -65,12 +65,10 @@ public class FriedFlowerPortController extends BaseController {
      */
     @PostMapping("/userSitDown")
     public JsonResult userSitDown(int type,
-                                  int roomId,
-                                  int userId,
-                                  int seatId,
-                                  String userImg,
-                                  String userNickName,
-                                  int integral){
+                                  long roomId,
+                                  long seatId
+                                  ){
+        long userId = getUserId();
         //查询这个座位是否有人
         int num = ffs.selSeatHavePeople(roomId,seatId);
         if(0<num){
@@ -78,7 +76,7 @@ public class FriedFlowerPortController extends BaseController {
         }else{
             int mif = ffs.SaveUserSitDown(userId,seatId,roomId);
             if (0<mif){
-                ffs.sendUserSitDown(type,roomId,userId,seatId,userImg,userNickName,integral);
+                ffs.sendUserSitDown(type,roomId,userId,seatId);
                 return  JsonResult.success("成功坐下");
             }else{
                 return JsonResult.failure(402,"被人捷足先登");
@@ -110,11 +108,9 @@ public class FriedFlowerPortController extends BaseController {
      */
     @PostMapping("/userSetOut")
     public JsonResult userSetOut(int type,
-                                 int roomId,
-                                 int userId,
-                                 int seatId){
-//        String asd ="123123.23123";
-//        Integer.valueOf(asd);
+                                 long roomId,
+                                 long seatId){
+        long userId = getUserId();
         int num =  ffs.saveUserSetOut(roomId,userId,seatId);
         if (0<num){
             //发送即时通讯有人准备
@@ -134,9 +130,11 @@ public class FriedFlowerPortController extends BaseController {
                             .filter(p -> ValidateUtil.isNotEmpty(p.getUserId()) && 0 != p.getUserId() &&p.getSeatStatus()== EnumUtils.SEAT_STATUS_ENUM.READY.getValue())
                             .collect(Collectors.toList());
                     //如果人数相等且不等于0
-                    if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()&&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)){
+                    if (SeatUserDtoCount.size()==SeatUserDtoCountSetOut.size()
+                            &&ValidateUtil.isNotEmpty(SeatUserDtoCountSetOut)
+                            &&SeatUserDtoCountSetOut.size()>1){
                         //发牌游戏开始
-                    ffs.sendAndSaveGmaeStart(roomId, countMap,SeatUserDtoCountSetOut);
+                      ffs.sendAndSaveGmaeStart(roomId, countMap,SeatUserDtoCountSetOut);
 
                     }
                 }
@@ -301,11 +299,12 @@ public class FriedFlowerPortController extends BaseController {
                                   long beUserId){
         /* 1.改变这个userId*/
         long userId = getUserId();
-        int num = ffs.compareThanCard(userId,gamblingId,type,roomId,round,seatId,sort,beUserId);
+        JSONObject jsonObject = ffs.compareThanCard(userId,gamblingId,type,roomId,round,seatId,sort,beUserId);
         //判断要不要改变轮次 返回的是下一次的轮次
         JSONObject jsb = ffs.changGeRound(gamblingId);
 
-        if (num ==2){
+        if (jsonObject.getInteger("num") ==2){
+            ffs.sendUserThanCard(type,roomId,gamblingId,userId,seatId,jsb.getInteger("round"),jsb.getLong("trueUserId"),jsonObject.getString("loseUserId"));
             //检查是否游戏结束, 结束进行相对于的业务
             ffs.examineGameOver(gamblingId,roomId);
             return JsonResult.success("加注成功");

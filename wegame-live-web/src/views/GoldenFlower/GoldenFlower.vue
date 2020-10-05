@@ -36,7 +36,7 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(0)" v-show="seatStatusList[0]==0">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="seatStatusList[0]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" @click="comPareUser(1)" :class="(userList[1].isUser==1 && userList[1].gameStatus==3 && userList[1].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
@@ -72,7 +72,7 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(1)" v-show="seatStatusList[1]==0" >坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(2)" v-show="seatStatusList[1]==0" >坐下</el-button>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(5)" v-show="seatStatusList[5]==0">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(6)" v-show="seatStatusList[5]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" @click="comPareUser(2)" :class="(userList[2].isUser==1 && userList[2].gameStatus==3 && userList[2].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
@@ -147,7 +147,7 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(2)" v-show="seatStatusList[2]==0">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(3)" v-show="seatStatusList[2]==0">坐下</el-button>
         </div>
       </div>
     </div>
@@ -186,7 +186,7 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(4)" v-show="seatStatusList[4]==0">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(5)" v-show="seatStatusList[4]==0">坐下</el-button>
         </div>
       </div>
       <div class="people" @click="comPareUser(3)" :class="(userList[3].isUser==1 && userList[3].gameStatus==3 && userList[3].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
@@ -222,22 +222,22 @@
         </div>
         <!--坐下按钮-->
         <div class="people-button">
-          <el-button type="primary" class="people-button-style" round  @click="sitDown(3)" v-show="seatStatusList[3]==0">坐下</el-button>
+          <el-button type="primary" class="people-button-style" round  @click="sitDown(4)" v-show="seatStatusList[3]==0">坐下</el-button>
         </div>
       </div>
     </div>
     <div class="outer-bottom">
         <div class="entire-button one-button">
-          <div @click="disCard()">
-            <el-button type="danger" round class="background-button" :disabled="userMsg.gameStatus!=3 || userMsg.isTrue==0">弃牌</el-button>
+          <div>
+            <el-button  @click="disCard()" type="danger" round class="background-button" :disabled="userMsg.gameStatus!=3 || userMsg.isTrue==0">弃牌</el-button>
           </div>
           <div class="font-button">
             弃牌
           </div>
         </div>
         <div class="entire-button two-button" >
-          <div @click="compareBoard()">
-            <el-button type="primary" round class="background-button" :disabled="userMsg.isCompare==1 || userMsg.isTrue==0">比牌</el-button>
+          <div >
+            <el-button @click="compareBoard()" type="primary" round class="background-button" :disabled="userMsg.round==1 || userMsg.isTrue==0">比牌</el-button>
           </div>
           <div class="font-button">
             比牌
@@ -246,7 +246,7 @@
         <div class="entire-button three-button"  >
           <div>
             <el-button type="primary" round class="background-button" @click="seeCard()"
-                       :disabled="userMsg.seeCardStatus==1 || userMsg.isTrue==0"> 看牌</el-button>
+                       :disabled="userMsg.seeCardStatus==1 "> 看牌</el-button>
           </div>
           <div class="font-button" >
             看牌
@@ -270,8 +270,8 @@
           </div>
         </div>
         <div class="entire-button five-button">
-          <div @click="userWithChip()">
-            <el-button type="success" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">1</el-button>
+          <div >
+            <el-button @click="userWithChip()" type="success" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">1</el-button>
           </div>
           <div class="font-button">
             跟注
@@ -279,7 +279,7 @@
         </div>
         <div class="entire-button six-button">
           <div>
-            <el-button type="primary" round class="background-button" @click="setOut()" >准备</el-button>
+            <el-button type="primary" round class="background-button" @click="setOut()" :disabled="userMsg.isSetout==1 ">准备</el-button>
           </div>
           <div class="font-button">
             222
@@ -301,11 +301,11 @@
       return {
         userMsg:{
           seeCardStatus:0,
-          isCompare:0,
           isIntegral:0,
-          gameStatus:3,
+          isSetout:0,
+          gameStatus:0,
           isTrue:0,
-          round:0,    //是否第一轮 是的话无法比牌
+          round:1,    //轮次
           isUserIndex:0,   //下标是多少
           roomId:1,
           seatId:1,
@@ -321,9 +321,9 @@
           {
             userNickName: '',
             headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg',
-            gameStatus: 3,
+            gameStatus: 0,
             integral: 0,
-            userId: 12,
+            userId: 0,
             board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
             payIntegral: "0",
             isA32:0,
@@ -332,13 +332,13 @@
             seeCardStatus:0,
             boardSize:0,
             boardType:0,
-            isUser:1,
+            isUser:0,
           },
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 12, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
           ],
         //坐下按钮显示
         seatStatusList: [0, 0, 0, 0, 0, 0], // 0 空闲 1坐下未准备 2 坐下已准备 3 正在游戏中 4没人正在游戏中
@@ -386,8 +386,16 @@
           case 7:
             this.userWithChipA(res);
             break;
+          case 8:
+            this.userAddChipA(res);
+          case 9:
+            this.userThanCardA(res);
+            break;
           case 11:
             this.gameStart(res);
+            break;
+          case 12:
+            this.gameOver(res);
             break;
           default:
             break;
@@ -401,11 +409,11 @@
         GoldenFlowerService.setOut({
           type:5,
           roomId: 1,
-          userId:123,
-          seatId: 3
+          userId:sessionStorage.getItem("userId"),
+          seatId: Number(this.userMsg.seatId)
         }).then((res)=>{
           if(res.code===200){
-
+            this.userMsg.isSetout=1;
           }else{
             this.$message.error(res.message)
           }
@@ -417,11 +425,7 @@
           {
             type: 3,
             roomId: 1,
-            userId: 123,
             seatId: number,
-            userImg: '11',
-            userNickName: 'wang',
-            integral: 11
           }
         ).then((res) => {
           console.log("res", res)
@@ -508,7 +512,7 @@
       },
       //比较用户
       comPareUser(index){
-        if (this.userList[index].gameStatus==3 && this.userList[index].isUser==1){
+        if (this.userList[index].gameStatus==3 && this.userList[index].isUser==1 && this.userMsg.compare==1){
           this.userMsg.compare=0;
           //发起比较牌接口
           GoldenFlowerService.thanCard(
@@ -557,38 +561,11 @@
       room(param) {
         let userList = param.userList;
         userList.forEach(ar=>{
-            switch ((ar.seatId-1)%6) {
-              case 0:
-                this.seatStatusList[0] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 1:
-                this.seatStatusList[1] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 2:
-                this.seatStatusList[2] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 3:
-                this.seatStatusList[3] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 4:
-                this.seatStatusList[4] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 5:
-                this.seatStatusList[5] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              case 5:
-                this.seatStatusList[5] = ar.seatStatus;
-                this.$forceUpdate();
-                break;
-              default:
-                break;
-            }
+          let subscript = (ar.seatId-1)%6;
+          this.seatStatusList[subscript] = Number(ar.seatStatus);
+          this.userList[subscript].integral=Number(ar.integral);
+          this.userList[subscript].headPortrait=ar.userImg;
+          this.userList[subscript].userNickName=ar.userNickName;
         });
 
       },
@@ -600,15 +577,14 @@
       userSitDown(param) {
         let subscript = (param.seatId-1)%6;
         this.seatStatusList[subscript] = 1;
-        // this.styleOne[subscript] = "display:inline";
-        this.userList[subscript]={
-          userNickName: param.userNickName,
-          userImg: param.userImg,
-          status: 0,
-          integral: param.integral,
-          userId: param.userId,
-          board: [0, 0, 0],
-          payIntegral: 0},
+
+        this.userList[subscript].userNickName=param.userNickName,
+          this.userList[subscript].headPortrait=param.userImg,
+          this.userList[subscript].userId=param.userId,
+          this.userList[subscript].integral=Number(param.integral);
+        if(sessionStorage.getItem('userId')==param.userId){
+          this.userMsg.seatId=Number(param.seatId)
+        }
         this.$forceUpdate()
       },
       //类型5 用户准备
@@ -619,14 +595,18 @@
       //类型6 用户看牌
       userSeeCardA(param){
         this.userList[(param.seatId-1)%6].seeCardStatus=1;
+        if(sessionStorage.getItem('userId')==param.userId){
+          this.userMsg.seeCardStatus=1;
+        }
+
         this.$forceUpdate()
       },
       //类型7 用户跟注
       userWithChipA(param){
-        let seatIndex =(param.seatId-1)%6;
+        let seatIndex =(Number(param.seatId)-1)%6;
         //更改积分
         this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
-        this.userMsg.round=param.round;
+        this.userMsg.round=Number(param.round);
         this.userMsg.isTrue=0;
 
         //改变操作用户
@@ -634,6 +614,37 @@
           this.userMsg.isTrue=1;
         }
 
+      },
+      //类型8 用户加注
+      userAddChipA(param){
+        let seatIndex =(Number(param.seatId)-1)%6;
+        //更改积分
+        this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
+        this.userMsg.round=Number(param.round);
+        this.userMsg.isTrue=0;
+
+        //改变操作用户
+        if (param.trueUserId==sessionStorage.getItem("userId")){
+          this.userMsg.isTrue=1;
+        }
+      },
+      //类型9 ,用户比牌
+      userThanCardA(param){
+        let seatIndex =(Number(param.seatId)-1)%6;
+        //输的人状态
+        this.userList.forEach(a=>{
+          if (a.userId==param.loseUserId){
+           a.gameStatus=2;
+          }
+        });
+
+        this.userMsg.round=Number(param.round);
+        this.userMsg.isTrue=0;
+
+        //改变操作用户
+        if (param.trueUserId==sessionStorage.getItem("userId")){
+          this.userMsg.isTrue=1;
+        }
       },
 
 
@@ -647,7 +658,7 @@
         this.userMsg.integralFundus = param.userList.integralFundus;
         this.userMsg.roomId=param.userList.roomId;
         this.userMsg.gamblingId = param.userList.gamblingId;
-        this.userMsg.round=param.userList.round;
+        this.userMsg.round=Number(param.userList.round);
         data.forEach(a=>{
           let seatSerial = (a.seatId-1)%6;
           if (a.isUser==1){
@@ -656,11 +667,10 @@
             if (userId== a.userId && userId !='' &&  userId != null){
               //操作主体的信息
               this.userMsg.seeCardStatus = a.seeCardStatus;
-              this.userMsg.isTrue=1;
+              this.userMsg.isTrue=a.isTurn;
               this.userMsg.isUserIndex=seatSerial;
               this.userMsg.seatId=a.seatId;
               this.userMsg.gameStatus=a.gameStatus;
-
 
               //详细信息
               this.seatStatusList[seatSerial]=3;
@@ -721,9 +731,43 @@
           }else {
             this.seatStatusList[seatSerial]=4;
           }
-
+          this.$forceUpdate();
         });
       },
+
+      //游戏结束
+      gameOver(param){
+        let userList = param.userList;
+        this.openGameOver(param.userNickName);
+        this.userMsg.seeCardStatus=0,
+          this.userMsg.isIntegral=0,
+          this.userMsg.isSetout=0,
+          this.userMsg.gameStatus=0,
+          this.userMsg.isTrue=0,
+          this.userMsg.round=1,
+          this.userMsg.isUserIndex=0,
+          this.userMsg.gamblingId=0,
+          this.userMsg.board=[{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
+          this.userMsg.integralFundus=1,
+          this.userMsg.seeCardStatus=0,
+          this.userMsg.sort=0,
+          this.userMsg.compare=0,
+          this.userMsg.userId=sessionStorage.getItem('userId'),
+
+        userList.forEach(ar=>{
+          let subscript = (ar.seatId-1)%6;
+          this.seatStatusList[subscript] = Number(ar.seatStatus);
+          this.userList[subscript].integral=Number(ar.integral);
+          this.userList[subscript].headPortrait=ar.userImg;
+          this.userList[subscript].userNickName=ar.userNickName;
+        });
+      },
+      openGameOver(userNickName) {
+        this.$alert(userNickName+'胜利', '游戏结束', {
+          showConfirmButton:false,
+          center: true,
+        });
+      }
 
 
     },

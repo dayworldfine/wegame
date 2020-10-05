@@ -99,11 +99,11 @@ public interface SeatMapper {
             "LEFT JOIN t_room r\n" +
             "ON t.room_id = r.ID\n" +
             "SET t.seat_status = 2, t.update_time= #{timeMillis,jdbcType=BIGINT}\n" +
-            "WHERE r.id = #{roomId,jdbcType=INTEGER}\n" +
-            "AND t.user_id = #{userId,jdbcType=INTEGER}\n" +
-            "AND t.id = #{seatId,jdbcType=INTEGER}\n" +
+            "WHERE r.id = #{roomId,jdbcType=BIGINT}\n" +
+            "AND t.user_id = #{userId,jdbcType=BIGINT}\n" +
+            "AND t.id = #{seatId,jdbcType=BIGINT}\n" +
             "AND t.seat_status !=2")
-    int updateUserSetOut(int roomId, int userId, int seatId,long timeMillis);
+    int updateUserSetOut(long roomId, long userId, long seatId,long timeMillis);
 
 
     /**
@@ -120,7 +120,7 @@ public interface SeatMapper {
             "INNER JOIN t_room r \n" +
             "on t.room_id =r.id\n" +
             "WHERE r.id =#{roomId,jdbcType=BIGINT}")
-    List<SeatUserDto> selGmaeStartCondition(int roomId);
+    List<SeatUserDto> selGmaeStartCondition(long roomId);
 
     /**
      * 根据牌局修改状态
@@ -136,4 +136,20 @@ public interface SeatMapper {
             "and room_id = (select room_id from t_gambling where id = #{gamblingId,jdbcType=BIGINT})"
     })
     int updateSeatStatusByGamblingId(long gamblingId, int status, int beStatus,long systemTimer);
+
+    @Update({
+            "update t_seat ",
+            "set user_id = #{userId,jdbcType=BIGINT} ,seat_status=1 ",
+            "where room_id =#{roomId,jdbcType=BIGINT} ",
+            "AND id = #{seatId,jdbcType=BIGINT}"
+    })
+    int saveUserSitDown(long userId, long seatId, long roomId);
+
+    @Update({
+            "update t_seat ",
+            "set seat_status = #{beStatus,jdbcType=INTEGER} , update_time = #{timeMillis,jdbcType=BIGINT}",
+            "where room_id = #{roomId, jdbcType=BIGINT} ",
+            "And seat_status = #{status,jdbcType=INTEGER}"
+    })
+    int updateSeatStatus(long roomId, int status, int beStatus,long timeMillis);
 }

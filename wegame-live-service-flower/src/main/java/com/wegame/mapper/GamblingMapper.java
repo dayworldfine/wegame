@@ -70,7 +70,7 @@ public interface GamblingMapper {
             "AND gambling_status=0\n" +
             "order by create_time desc\n"+
             "LIMIT 1")
-    RoomMsgDto getRoomMsgByRoomId(int roomId);
+    RoomMsgDto getRoomMsgByRoomId(long roomId);
 
     /**
      * 根据牌局信息查询牌局所有信息
