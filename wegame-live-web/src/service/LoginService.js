@@ -24,11 +24,27 @@ const login = (param={})=>{
   })
 };
 
-const login1 = (param={})=>{
+const getCode = (param={})=>{
   return new Promise((resolve,reject) => {
 
     http.post({
-      url: '/asdads',
+      url: '/sendSms',
+      data: param
+    }).then((res) => {
+      console.log("resolve",res)
+      resolve(res)
+    },err =>{
+      console.log("reject1",err)
+      reject(err)
+    })
+  })
+};
+
+const userRegister = (param={})=>{
+  return new Promise((resolve,reject) => {
+
+    http.post({
+      url: '/register',
       data: param
     }).then((res) => {
       console.log("resolve",res)
@@ -42,5 +58,6 @@ const login1 = (param={})=>{
 
 export default {
   login,                   /*登录*/
-  login1
+  getCode,                  /*获取验证码*/
+  userRegister,            /*用户注册*/
 }

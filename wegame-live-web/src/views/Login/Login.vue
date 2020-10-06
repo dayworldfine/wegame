@@ -10,7 +10,8 @@
       </el-form-item>
       <el-form-item>
         <el-button  type="primary">忘记密码</el-button>
-        <el-button @click.prevent="Login()"  type="primary">登录</el-button>
+        <el-button  type="primary" @click="goToRegister()">注册</el-button>
+        <el-button @click.prevent="Login() "  @keydown="Login()" type="primary">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -45,7 +46,9 @@
               this.$message.error(res.message);
             }
           }))
-
+        },
+        goToRegister(){
+          this.$router.push({name:'Register'})
         }
       }
     }

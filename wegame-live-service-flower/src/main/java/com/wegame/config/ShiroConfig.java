@@ -72,6 +72,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/topic/**","anon");
         filterChainDefinitionMap.put("/app/**","anon");
         filterChainDefinitionMap.put("/endpoint-websocket/**","anon");
+        filterChainDefinitionMap.put("/sendSms","anon");
+        filterChainDefinitionMap.put("/register","anon");
 
         //登录用户才可以访问
         filterChainDefinitionMap.put("/authc/**","authc");
@@ -169,7 +171,7 @@ public class ShiroConfig {
         CustomSessionManager customSessionManager = new CustomSessionManager();
 
         //超时时间,默认30分钟，会话超时,方法里面的单位是毫秒
-//        customSessionManager.setGlobalSessionTimeout(20000);
+        customSessionManager.setGlobalSessionTimeout(6000*60*60*24);
 
         //配置session持久化
         customSessionManager.setSessionDAO(redisSessionDAO());

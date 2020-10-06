@@ -186,4 +186,9 @@ public interface FriedFlowerService  extends  BaseService{
 
     /*发送比牌消息*/
     void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId,long integralFundus,long beUserId);
+
+    /**
+     * 清理所有桌子的用户
+     */
+    void updateSeatUser();
 }

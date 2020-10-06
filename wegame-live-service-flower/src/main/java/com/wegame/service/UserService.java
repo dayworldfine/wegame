@@ -17,4 +17,13 @@ public interface UserService {
      * @return
      */
     User findUserByUserName(String userName);
+
+    /**
+     * 添加用户
+     * @param userName
+     * @param nickName
+     * @param pwd
+     * @param phone
+     */
+    void addUser(String userName, String nickName, String pwd, String phone);
 }

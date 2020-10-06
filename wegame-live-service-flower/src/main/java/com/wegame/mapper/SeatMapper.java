@@ -152,4 +152,10 @@ public interface SeatMapper {
             "And seat_status = #{status,jdbcType=INTEGER}"
     })
     int updateSeatStatus(long roomId, int status, int beStatus,long timeMillis);
+
+    @Update({
+            "update t_seat ",
+            "set seat_status=0, user_id=0 "
+    })
+    void updateCleanUser();
 }

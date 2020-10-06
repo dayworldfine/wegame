@@ -538,7 +538,7 @@
       },
       //比较用户
       comPareUser(index){
-        if (this.userList[index].gameStatus==3 && this.userList[index].isUser==1 && this.userMsg.compare==1){
+        if (this.userList[index].gameStatus==3 && this.userList[index].isUser==1 && this.userMsg.compare==1 &&index != this.userMsg.isUserIndex){
           this.userMsg.compare=0;
           //发起比较牌接口
           GoldenFlowerService.thanCard(
@@ -889,7 +889,7 @@
           this.userMsg.sort=0,
           this.userMsg.compare=0,
           this.userMsg.userId=sessionStorage.getItem('userId'),
-
+          this.userMsg.nowIntegralFundus=1,
         userList.forEach(ar=>{
           let subscript = (ar.seatId-1)%6;
           this.seatStatusList[subscript] = Number(ar.seatStatus);

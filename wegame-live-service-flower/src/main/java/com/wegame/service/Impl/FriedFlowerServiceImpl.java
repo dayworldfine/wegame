@@ -452,8 +452,13 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
             //进行发送消息操作
             template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.valueOf(String.valueOf(roomId))),
                     FriedFlowerJsonObject.userThanCard(
-                            type,String.valueOf(userId),String.valueOf(seatId),round,String.valueOf(trueUserId),loseUserId,String.valueOf(integralFundus),String.valueOf(beUserId));
+                            type,String.valueOf(userId),String.valueOf(seatId),round,String.valueOf(trueUserId),loseUserId,String.valueOf(integralFundus),String.valueOf(beUserId))
             );
+    }
+
+    @Override
+    public void updateSeatUser() {
+        seatMapper.updateCleanUser();
     }
 
 
