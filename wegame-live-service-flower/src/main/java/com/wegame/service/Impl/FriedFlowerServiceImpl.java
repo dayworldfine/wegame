@@ -411,7 +411,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public JSONObject compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId) {
+    public JSONObject compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId,long integralFundus) {
         GamblingDetails gamblingDetails = new GamblingDetails();
         gamblingDetails.setId(SnowUtils.generateId());
         gamblingDetails.setCreateTime(System.currentTimeMillis());
@@ -420,7 +420,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         gamblingDetails.setGamblingId(gamblingId);
         gamblingDetails.setCompareUserId(beUserId);
         gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.COMPARE_CARD.getValue());
-        gamblingDetails.setOperatingLeverage(0l);
+        gamblingDetails.setOperatingLeverage(integralFundus);
         gamblingDetails.setRound(round);
         gamblingDetails.setSeatId(seatId);
         gamblingDetails.setUserId(userId);
@@ -440,18 +440,19 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
        jsb.put("num",insert+gamblingMsgNum);
        jsb.put("loseUserId",userCompareBoardDto.getUserId());
 
+        int userNum =  userMapper.updateUserIntegral(userId,-integralFundus);
         return jsb;
 
 
     }
 
     @Override
-    public void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId) {
+    public void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId,long integralFundus,long beUserId) {
 
             //进行发送消息操作
             template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.valueOf(String.valueOf(roomId))),
                     FriedFlowerJsonObject.userThanCard(
-                            type,String.valueOf(userId),String.valueOf(seatId),round,String.valueOf(trueUserId),loseUserId)
+                            type,String.valueOf(userId),String.valueOf(seatId),round,String.valueOf(trueUserId),loseUserId,String.valueOf(integralFundus),String.valueOf(beUserId));
             );
     }
 

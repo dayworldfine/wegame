@@ -201,7 +201,9 @@ public class FriedFlowerJsonObject {
                                   String seatId,
                                   int round,
                                   String trueUserId,
-                                  String loseUserId){
+                                  String loseUserId,
+                                          String integralFundus,
+                                          String beUserId){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userId",userId);
@@ -209,6 +211,8 @@ public class FriedFlowerJsonObject {
         obj.put("round",round);
         obj.put("trueUserId",trueUserId);
         obj.put("loseUserId",loseUserId);
+        obj.put("integralFundus",integralFundus);
+        obj.put("beUserId",beUserId);
         return obj;
     }
 

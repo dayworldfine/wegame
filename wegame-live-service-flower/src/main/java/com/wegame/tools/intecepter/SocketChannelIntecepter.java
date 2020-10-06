@@ -64,10 +64,6 @@ public class SocketChannelIntecepter extends ChannelInterceptorAdapter{
         String sessionId = headerAccessor.getSessionAttributes().get("sessionId").toString();
         System.out.println("SocketChannelIntecepter -> sessionId = "+sessionId);
 
-        Object payload = message.getPayload();
-        MessageHeaders headers = message.getHeaders();
-
-
         switch (headerAccessor.getCommand()) {
             case CONNECT:
                 connect(sessionId);

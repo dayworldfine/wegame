@@ -182,8 +182,8 @@ public interface FriedFlowerService  extends  BaseService{
      * @param beUserId
      * @return
      */
-    JSONObject compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId);
+    JSONObject compareThanCard(long userId, long gamblingId, int type, long roomId, int round, long seatId, int sort, long beUserId,long integralFundus);
 
     /*发送比牌消息*/
-    void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId);
+    void sendUserThanCard(int type, long roomId, long gamblingId, long userId, long seatId, Integer round, Long trueUserId,String loseUserId,long integralFundus,long beUserId);
 }

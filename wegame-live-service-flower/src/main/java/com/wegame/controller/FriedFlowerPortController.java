@@ -296,15 +296,16 @@ public class FriedFlowerPortController extends BaseController {
                                   long gamblingId,
                                   int round,
                                   int sort,
+                                   long integralFundus,
                                   long beUserId){
         /* 1.改变这个userId*/
         long userId = getUserId();
-        JSONObject jsonObject = ffs.compareThanCard(userId,gamblingId,type,roomId,round,seatId,sort,beUserId);
+        JSONObject jsonObject = ffs.compareThanCard(userId,gamblingId,type,roomId,round,seatId,sort,beUserId,integralFundus);
         //判断要不要改变轮次 返回的是下一次的轮次
         JSONObject jsb = ffs.changGeRound(gamblingId);
 
         if (jsonObject.getInteger("num") ==2){
-            ffs.sendUserThanCard(type,roomId,gamblingId,userId,seatId,jsb.getInteger("round"),jsb.getLong("trueUserId"),jsonObject.getString("loseUserId"));
+            ffs.sendUserThanCard(type,roomId,gamblingId,userId,seatId,jsb.getInteger("round"),jsb.getLong("trueUserId"),jsonObject.getString("loseUserId"), integralFundus,beUserId);
             //检查是否游戏结束, 结束进行相对于的业务
             ffs.examineGameOver(gamblingId,roomId);
             return JsonResult.success("加注成功");

@@ -4,6 +4,7 @@
     <div class="outer-flex outer-flex-one" >
       <!--每个人物-->
       <div class="people" @click="comPareUser(0)" :class="(userList[0].isUser==1 && userList[0].gameStatus==3 && userList[0].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[0]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[0]==1||seatStatusList[0]==2||seatStatusList[0]==3">
           <div class="people-left-name">{{userList[0].userNickName}}</div>
@@ -40,6 +41,7 @@
         </div>
       </div>
       <div class="people" @click="comPareUser(1)" :class="(userList[1].isUser==1 && userList[1].gameStatus==3 && userList[1].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[1]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[1]==1||seatStatusList[1]==2||seatStatusList[1]==3">
           <div class="people-left-name">{{userList[1].userNickName}}</div>
@@ -79,6 +81,7 @@
     <div class="outer-flex outer-flex-two">
       <!--每个人物-->
       <div class="people" @click="comPareUser(5)" :class="(userList[5].isUser==1 && userList[5].gameStatus==3 && userList[5].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[5]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[5]==1||seatStatusList[5]==2||seatStatusList[5]==3">
           <div class="people-left-name">{{userList[5].userNickName}}</div>
@@ -114,7 +117,27 @@
           <el-button type="primary" class="people-button-style" round  @click="sitDown(6)" v-show="seatStatusList[5]==0">坐下</el-button>
         </div>
       </div>
+      <div class="people-center">
+        <div class="people-center-left">
+          <div class="people-center-left-big">
+            <div class="people-center-left-big-for" v-for="item in gameText">
+              {{item}}
+            </div>
+          </div>
+
+        </div>
+        <div class="people-center-right">
+          <div class="people-center-right-img">
+            <el-image src="/static/money.png" fit="fill"></el-image>
+          </div>
+          <div class="people-center-right-money">
+            <div>场上筹码</div>
+            <div>{{allMoney}}</div>
+          </div>
+        </div>
+      </div>
       <div class="people" @click="comPareUser(2)" :class="(userList[2].isUser==1 && userList[2].gameStatus==3 && userList[2].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[2]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[2]==1||seatStatusList[2]==2||seatStatusList[2]==3">
           <div class="people-left-name">{{userList[2].userNickName}}</div>
@@ -154,6 +177,7 @@
     <div class="outer-flex outer-flex-three">
       <!--每个人物-->
       <div class="people" @click="comPareUser(4)" :class="(userList[4].isUser==1 && userList[4].gameStatus==3 && userList[4].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[4]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[4]==1||seatStatusList[4]==2||seatStatusList[4]==3">
           <div class="people-left-name">{{userList[4].userNickName}}</div>
@@ -190,6 +214,7 @@
         </div>
       </div>
       <div class="people" @click="comPareUser(3)" :class="(userList[3].isUser==1 && userList[3].gameStatus==3 && userList[3].userId!= userMsg.userId && userMsg.compare==1)?'people-boardCompare':'' ">
+        <div class="people-isTrue" v-if="isTureUserList[3]==1">轮到该用户操作</div>
         <!--左边框-->
         <div class="people-left" v-show="seatStatusList[3]==1||seatStatusList[3]==2||seatStatusList[3]==3">
           <div class="people-left-name">{{userList[3].userNickName}}</div>
@@ -257,11 +282,11 @@
           <div>
             <el-button type="warning" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">+</el-button>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item :command="userMsg.integralFundus*1" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*1}}</el-dropdown-item>
-              <el-dropdown-item :command="userMsg.integralFundus*2" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*2}}</el-dropdown-item>
-              <el-dropdown-item :command="userMsg.integralFundus*5" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*5}}</el-dropdown-item>
-              <el-dropdown-item :command="userMsg.integralFundus*10" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*10}}</el-dropdown-item>
-              <el-dropdown-item :command="userMsg.integralFundus*20" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">{{userMsg.integralFundus*20}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*1" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0 || userMsg.integralFundus*1<=(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus)" >{{userMsg.integralFundus*1}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*2" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0 || userMsg.integralFundus*2<=(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus)">{{userMsg.integralFundus*2}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*5" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0 || userMsg.integralFundus*5<=(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus)">{{userMsg.integralFundus*5}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*10" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0 || userMsg.integralFundus*10<=(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus)">{{userMsg.integralFundus*10}}</el-dropdown-item>
+              <el-dropdown-item :command="userMsg.integralFundus*20" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0 || userMsg.integralFundus*20<=(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus) || userMsg.seeCardStatus==0">{{userMsg.integralFundus*20}}</el-dropdown-item>
             </el-dropdown-menu>
           </div>
           </el-dropdown>
@@ -271,7 +296,9 @@
         </div>
         <div class="entire-button five-button">
           <div >
-            <el-button @click="userWithChip()" type="success" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">1</el-button>
+            <el-button @click="userWithChip()" type="success" round class="background-button" :disabled="userMsg.isIntegral==1 || userMsg.isTrue==0">
+              {{(userMsg.seeCardStatus==1?userMsg.nowIntegralFundus*2:userMsg.nowIntegralFundus)}}
+            </el-button>
           </div>
           <div class="font-button">
             跟注
@@ -282,7 +309,7 @@
             <el-button type="primary" round class="background-button" @click="setOut()" :disabled="userMsg.isSetout==1 ">准备</el-button>
           </div>
           <div class="font-button">
-            222
+            准备
           </div>
         </div>
     </div>
@@ -315,6 +342,7 @@
           sort:1,
           compare:0,
           userId:sessionStorage.getItem('userId'),
+          nowIntegralFundus:1,
         },
         //用户列表
         userList:[
@@ -325,7 +353,7 @@
             integral: 0,
             userId: 0,
             board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}],
-            payIntegral: "0",
+            payIntegral: 0,
             isA32:0,
             isBanker:0,
             isSpecial:0,
@@ -334,27 +362,21 @@
             boardType:0,
             isUser:0,
           },
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
-          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: "0", isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: 0, isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: 0, isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: 0, isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: 0, isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
+          {userNickName: '', headPortrait: 'https://img.tomtangmu.com/images/2019/08/05/u203009510364911888fm26gp0.jpg', gameStatus: 11, integral: 0, userId: 0, board: [{color:0,number:1}, {color:0,number:0}, {color:0,number:0}], payIntegral: 0, isA32:0, isBanker:0, isSpecial:0, seeCardStatus:0, boardSize:0, boardType:0,  isUser:0},
           ],
         //坐下按钮显示
         seatStatusList: [0, 0, 0, 0, 0, 0], // 0 空闲 1坐下未准备 2 坐下已准备 3 正在游戏中 4没人正在游戏中
+        //操作主体
+        isTureUserList:[0, 0, 0, 0, 0, 0],
+        //内容娴熟
+        gameText:[],
+      }
+    },
 
-      }
-    },
-    computed:{
-      styleOne(){
-        let arrList=[];
-        this.showSit.forEach((arr)=>{
-          arrList.push(!arr);
-        });
-        console.log("arrList",arrList)
-        return arrList;
-      }
-    },
     created() {
       socket.disconnect()
       socket.connect('one')
@@ -388,8 +410,12 @@
             break;
           case 8:
             this.userAddChipA(res);
+            break;
           case 9:
             this.userThanCardA(res);
+            break;
+          case 10:
+            this.userDisCardA(res);
             break;
           case 11:
             this.gameStart(res);
@@ -474,7 +500,7 @@
             seatId: this.userMsg.seatId,
             gamblingId:this.userMsg.gamblingId,
             round:this.userMsg.round,
-            integralFundus:this.userMsg.integralFundus,
+            integralFundus:this.userMsg.seeCardStatus==1? Number(this.userMsg.nowIntegralFundus)*2:Number(this.userMsg.nowIntegralFundus),
             sort:this.userMsg.sort,
           }
         ).then((res) => {
@@ -524,6 +550,7 @@
               round:this.userMsg.round,
               sort:this.userMsg.sort,
               beUserId: this.userList[index].userId,
+              integralFundus:this.userMsg.seeCardStatus==1? Number(this.userMsg.nowIntegralFundus)*2:Number(this.userMsg.nowIntegralFundus),
             }
           ).then((res) => {
             console.log("res", res)
@@ -585,16 +612,19 @@
         if(sessionStorage.getItem('userId')==param.userId){
           this.userMsg.seatId=Number(param.seatId)
         }
+        this.addGameText(param.userNickName+"坐下了");
         this.$forceUpdate()
       },
       //类型5 用户准备
       userSetOut(param){
-        this.seatStatusList[(param.seatId-1)%6]=2;
+        this.seatStatusList[(Number(param.seatId)-1)%6]=2;
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName +"准备了");
         this.$forceUpdate()
       },
       //类型6 用户看牌
       userSeeCardA(param){
-        this.userList[(param.seatId-1)%6].seeCardStatus=1;
+        this.userList[(Number(param.seatId)-1)%6].seeCardStatus=1;
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName +"看牌了");
         if(sessionStorage.getItem('userId')==param.userId){
           this.userMsg.seeCardStatus=1;
         }
@@ -604,8 +634,10 @@
       //类型7 用户跟注
       userWithChipA(param){
         let seatIndex =(Number(param.seatId)-1)%6;
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName+"跟注了"+param.integralFundus);
         //更改积分
         this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
+        this.userList[seatIndex].integral =Number(this.userList[seatIndex].integral)- Number(param.integralFundus);
         this.userMsg.round=Number(param.round);
         this.userMsg.isTrue=0;
 
@@ -614,12 +646,33 @@
           this.userMsg.isTrue=1;
         }
 
+        //控制显示轮到自己的字
+        for(let i =0;i<this.userList.length;i++){
+          if (this.userList[i].userId==param.trueUserId){
+            this.isTureUserList[i]=1;
+          }else {
+            this.isTureUserList[i]=0;
+          }
+
+          if (this.userList[i].userId == param.userId){
+            if (this.userList[i].seeCardStatus==1){
+              this.userMsg.nowIntegralFundus= Math.floor(Number(param.integralFundus)/2)
+            }else {
+              this.userMsg.nowIntegralFundus= Number(param.integralFundus)
+            }
+          }
+        }
+        this.$forceUpdate()
+
       },
+
       //类型8 用户加注
       userAddChipA(param){
         let seatIndex =(Number(param.seatId)-1)%6;
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName +"加注了"+param.integralFundus);
         //更改积分
         this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
+        this.userList[seatIndex].integral =Number(this.userList[seatIndex].integral)- Number(param.integralFundus);
         this.userMsg.round=Number(param.round);
         this.userMsg.isTrue=0;
 
@@ -627,14 +680,80 @@
         if (param.trueUserId==sessionStorage.getItem("userId")){
           this.userMsg.isTrue=1;
         }
+        //控制显示轮到自己的字
+        for(let i =0;i<this.userList.length;i++){
+          if (this.userList[i].userId==param.trueUserId){
+            this.isTureUserList[i]=1;
+          }else {
+            this.isTureUserList[i]=0;
+          }
+
+          if (this.userList[i].userId == param.userId){
+            if (this.userList[i].seeCardStatus==1){
+              this.userMsg.nowIntegralFundus= Math.floor(Number(param.integralFundus)/2)
+            }else {
+              this.userMsg.nowIntegralFundus= Number(param.integralFundus)
+            }
+          }
+        }
+        console.log(" this.userList[seatIndex].payIntegral", this.userList[seatIndex].payIntegral);
+        this.$forceUpdate()
       },
+
       //类型9 ,用户比牌
       userThanCardA(param){
         let seatIndex =(Number(param.seatId)-1)%6;
         //输的人状态
+        let beUserName ;
+        let loseUserName;
         this.userList.forEach(a=>{
           if (a.userId==param.loseUserId){
-           a.gameStatus=2;
+            loseUserName=a.userNickName;
+            a.gameStatus=2;
+          }
+          if (a.userId==param.beUserId){
+            beUserName = a.userNickName;
+          }
+        });
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName+"跟"+beUserName+"比牌");
+        this.addGameText(loseUserName+"比牌输了");
+        this.userList[seatIndex].payIntegral =Number(this.userList[seatIndex].payIntegral)+ Number(param.integralFundus);
+        this.userList[seatIndex].integral =Number(this.userList[seatIndex].integral)- Number(param.integralFundus);
+        this.userMsg.round=Number(param.round);
+        this.userMsg.isTrue=0;
+
+        //改变操作用户
+        if (param.trueUserId==sessionStorage.getItem("userId")){
+          this.userMsg.isTrue=1;
+        }
+
+        //控制显示轮到自己的字
+        for(let i =0;i<this.userList.length;i++){
+          if (this.userList[i].userId==param.trueUserId){
+            this.isTureUserList[i]=1;
+          }else {
+            this.isTureUserList[i]=0;
+          }
+
+          if (this.userList[i].userId == param.userId){
+            if (this.userList[i].seeCardStatus==1){
+              this.userMsg.nowIntegralFundus= Math.floor(Number(param.integralFundus)/2)
+            }else {
+              this.userMsg.nowIntegralFundus= Number(param.integralFundus)
+            }
+          }
+        }
+        this.$forceUpdate()
+      },
+
+      //弃牌
+      userDisCardA(param){
+        let seatIndex =(Number(param.seatId)-1)%6;
+        this.addGameText(this.userList[(Number(param.seatId)-1)%6].userNickName+"弃牌了");
+        //输的人状态
+        this.userList.forEach(a=>{
+          if (a.userId==param.userId){
+            a.gameStatus=1;
           }
         });
 
@@ -645,15 +764,24 @@
         if (param.trueUserId==sessionStorage.getItem("userId")){
           this.userMsg.isTrue=1;
         }
-      },
 
+        //控制显示轮到自己的字
+        for(let i =0;i<this.userList.length;i++){
+          if (this.userList[i].userId==param.trueUserId){
+            this.isTureUserList[i]=1;
+          }else {
+            this.isTureUserList[i]=0;
+          }
+        }
+        this.$forceUpdate()
+      },
 
       //游戏开始 类型 11
       //1.关闭座位
       //2.改变有的用户的牌
       gameStart(param){
         let data =  param.userList.roomChildMsgVoList;
-
+        this.addGameText("游戏开始!!!");
         //本局属性
         this.userMsg.integralFundus = param.userList.integralFundus;
         this.userMsg.roomId=param.userList.roomId;
@@ -679,7 +807,7 @@
               this.userList[seatSerial].gameStatus = a.gameStatus;
               this.userList[seatSerial].integral = a.integral;
               this.userList[seatSerial].userId = a.userId;
-              this.userList[seatSerial].payIntegral = param.userList.integralFundus;
+              this.userList[seatSerial].payIntegral = Number(param.userList.integralFundus);
               this.userList[seatSerial].isA32 = a.isA32;
               this.userList[seatSerial].isBanker = a.isBanker;
               this.userList[seatSerial].isSpecial = a.isSpecial;
@@ -712,7 +840,7 @@
               this.userList[seatSerial].gameStatus = a.gameStatus;
               this.userList[seatSerial].integral = a.integral;
               this.userList[seatSerial].userId = a.userId;
-              this.userList[seatSerial].payIntegral = param.userList.integralFundus;
+              this.userList[seatSerial].payIntegral =Number(param.userList.integralFundus);
               this.userList[seatSerial].isA32 = a.isA32;
               this.userList[seatSerial].isBanker = a.isBanker;
               this.userList[seatSerial].isSpecial = a.isSpecial;
@@ -728,6 +856,13 @@
               this.userList[seatSerial].board[2].color=0;
               this.userList[seatSerial].board[2].number=0;
             }
+
+            //显示轮到自己的字
+            if (a.isTurn==1){
+              this.isTureUserList[seatSerial]=1;
+            }else {
+              this.isTureUserList[seatSerial]=0;
+            }
           }else {
             this.seatStatusList[seatSerial]=4;
           }
@@ -739,6 +874,7 @@
       gameOver(param){
         let userList = param.userList;
         this.openGameOver(param.userNickName);
+        this.addGameText("游戏结束!!!",param.userNickName+"胜利");
         this.userMsg.seeCardStatus=0,
           this.userMsg.isIntegral=0,
           this.userMsg.isSetout=0,
@@ -761,17 +897,33 @@
           this.userList[subscript].headPortrait=ar.userImg;
           this.userList[subscript].userNickName=ar.userNickName;
         });
+        this.isTureUserList=[0, 0, 0, 0, 0, 0]
       },
       openGameOver(userNickName) {
         this.$alert(userNickName+'胜利', '游戏结束', {
           showConfirmButton:false,
           center: true,
         });
-      }
+      },
+      addGameText(text){
+        this.gameText.push(new Date().toLocaleTimeString()+" "+text);
+
+
+        if (this.gameText.length>10){
+          this.gameText.shift();
+        }
+      },
 
 
     },
     computed:{
+      allMoney(){
+        let money =0;
+        this.userList.forEach(a=>{
+          money = Number(money)+ Number(a.payIntegral);
+        })
+        return  money;
+      },
       textOne(){
         let text ="";
         if (this.userList[0].seeCardStatus==1){
@@ -901,6 +1053,54 @@
     display: flex;
     flex-direction: row;
     margin-top: 50px;
+    color: #ebe2e2;
+  }
+  .people-center{
+    width: 500px;
+    height:300px;
+    z-index: 99;
+    border: 1px solid #7e9579;
+    border-radius: 25px;
+    /*justify-content: space-between;*/
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    /*margin-top: 50px;*/
+  }
+  .people-center-left{
+    width: 350px;
+    overflow:hidden;
+    font-size: 20px;
+    padding: 15px;
+    color: #574d4d;
+  }
+  .people-center-left-big{
+    height: 270px;
+  }
+  .people-center-left-big-for{
+    height: 27px;
+  }
+  .people-center-right{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .people-center-right-img{
+
+  }
+  .people-center-right-money{
+    text-align: center;
+    color: #eb9c9c;
+    font-size: 20px;
+  }
+  .people-isTrue{
+    position: absolute;
+    margin-left: 90px;
+    margin-top: -40px;
+    font-size: 20px;
+    color:pink;
+    -webkit-mask:linear-gradient(to left, red, transparent);
   }
 
   .people-boardCompare{
