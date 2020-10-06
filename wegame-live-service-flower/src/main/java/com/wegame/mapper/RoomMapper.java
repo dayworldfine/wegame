@@ -2,6 +2,7 @@ package com.wegame.mapper;
 
 import com.wegame.model.Room;
 import com.wegame.provider.RoomSqlProvider;
+import lombok.Data;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -93,4 +94,12 @@ public interface RoomMapper {
             "where id = (select room_id from t_gambling where id = #{gamblingId,jdbcType=BIGINT})"
     })
     int updateRoomStatusByGamblingId(long gamblingId, int status, long systemTimer);
+
+    /**
+     * 删除所有房间
+     */
+    @Delete({
+            "delete from t_room"
+    })
+    void deleteAll();
 }

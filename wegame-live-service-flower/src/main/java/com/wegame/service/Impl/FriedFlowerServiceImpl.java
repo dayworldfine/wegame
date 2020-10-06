@@ -2,7 +2,6 @@ package com.wegame.service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.wegame.dto.*;
-import com.wegame.entity.SeatUserEntity;
 import com.wegame.mapper.*;
 import com.wegame.model.*;
 import com.wegame.service.FriedFlowerService;
@@ -362,7 +361,7 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
         }else {
             gamblingDetails.setOperationType(EnumUtils.OPERATION_ENUM.ADD_CARD.getValue());
         }
-        gamblingDetails.setOperatingLeverage(0l);
+        gamblingDetails.setOperatingLeverage(integralFundus);
         gamblingDetails.setRound(round);
         gamblingDetails.setSeatId(seatId);
         gamblingDetails.setUserId(userId);
@@ -457,8 +456,29 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
     }
 
     @Override
-    public void updateSeatUser() {
-        seatMapper.updateCleanUser();
+    public void insertStartData() {
+            roomMapper.deleteAll();
+            seatMapper.deleteAll();
+            Room room = new Room();
+            room.setId(1l);
+            room.setCreateTime(System.currentTimeMillis());
+            room.setUpdateTime(System.currentTimeMillis());
+            room.setVersion(1l);
+            room.setRoomName("");
+            room.setStatus(EnumUtils.ROOM_STATUS_ENUM.FREE.getValue());
+            roomMapper.insert(room);
+            for (int i=1;i<7;i++){
+                Seat seat = new Seat();
+                seat.setId((long)i);
+                seat.setCreateTime(System.currentTimeMillis());
+                seat.setUpdateTime(System.currentTimeMillis());
+                seat.setVersion(1l);
+                seat.setSeatStatus(EnumUtils.SEAT_STATUS_ENUM.FREE.getValue());
+                seat.setRoomId(1l);
+                seat.setUserId(0l);
+                seatMapper.insert(seat);
+            }
+
     }
 
 
@@ -528,10 +548,38 @@ public class FriedFlowerServiceImpl implements FriedFlowerService {
             String winUserNickName = seatUserListDtoList.stream().filter(p -> String.valueOf(p.getUserId()).equals(winUserId))
                     .map(p -> p.getUserNickName())
                     .collect(Collectors.joining(","));
+
+
+            //发送的集合
+            List<GameOverUserDto> gameOverUserBoardDtoList = Lists.newArrayList();
+            //拼凑数据
+            List<GameOverBoardDto> gameBoardDtoList = gamblingBoardMapper.selectGameOverMsg(gamblingId);
+            gameBoardDtoList.forEach(a->{
+                GameOverUserDto gameOverUserBoardDto = new GameOverUserDto();
+                BeanUtils.copyProperties(a,gameOverUserBoardDto);
+                gameOverUserBoardDtoList.add(gameOverUserBoardDto);
+            });
+            List<GameOverStatisticsDto> gameOverStatisticsDtoList = gamblingStatisticsMapper.selectGameOverMsg(gamblingId);
+            String userIds = gameOverUserBoardDtoList.stream().map(p -> String.valueOf(p.getUserId())).collect(Collectors.joining(","));
+            List<GameOverNameDto> gameOverNameDtoList =userMapper.selectGameOverMsg(userIds);
+            gameOverUserBoardDtoList.forEach(a->{
+                gameOverStatisticsDtoList.forEach(b->{
+                    if (a.getUserId().equals(b.getUserId())){
+                        a.setIsWin(b.getIsWin());
+                        a.setIntegral(b.getIntegral());
+                    }
+                });
+                gameOverNameDtoList.forEach(c->{
+                    if (a.getUserId().equals(c.getUserId())){
+                        a.setNickName(c.getNickName());
+                    }
+                });
+            });
+
             //发送游戏结束即时通讯
             template.convertAndSend("/friedFlowerServer/" + FriedFlowerJsonObject.serial(Integer.valueOf(String.valueOf(roomId))),
                     FriedFlowerJsonObject.gameOver(
-                            12,seatUserListDtoList,winUserNickName)
+                            12,seatUserListDtoList,winUserNickName,gameOverUserBoardDtoList)
             );
         }
     }

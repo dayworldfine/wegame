@@ -1,6 +1,7 @@
 package com.wegame.tools.flower;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wegame.dto.GameOverUserDto;
 import com.wegame.dto.SeatUserListDto;
 import com.wegame.entity.SeatUserEntity;
 import com.wegame.vo.RoomMsgVo;
@@ -259,11 +260,13 @@ public class FriedFlowerJsonObject {
      */
     public static JSONObject gameOver(int type,
                                       List<SeatUserListDto> seatUserListDtoList,
-                                      String userNickName){
+                                      String userNickName,
+                                      List<GameOverUserDto> gameOverUserBoardDtoList){
         JSONObject obj = new JSONObject();
         obj.put("type",type);
         obj.put("userList",seatUserListDtoList);
         obj.put("userNickName",userNickName);
+        obj.put("gameOverList",gameOverUserBoardDtoList);
         return obj;
     }
 

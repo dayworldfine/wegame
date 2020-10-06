@@ -96,7 +96,7 @@ public class EnumUtils {
         STRAIGHT("顺子", 2, "STRAIGHT"),
         FLUSH("同花", 3, "FLUSH"),
         STRAIGHT_FLUSH("同花顺", 4, "STRAIGHT_FLUSH"),
-        BOMB("同花顺", 5, "BOMB");
+        BOMB("炸弹", 5, "BOMB");
         private String name;
         private int value;
         private String code;

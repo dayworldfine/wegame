@@ -9,9 +9,9 @@
         <el-input v-model="formdata.password" type="password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button  type="primary">忘记密码</el-button>
+<!--        <el-button  type="primary">忘记密码</el-button>-->
         <el-button  type="primary" @click="goToRegister()">注册</el-button>
-        <el-button @click.prevent="Login() "  @keydown="Login()" type="primary">登录</el-button>
+        <el-button @click.prevent="Login() "   type="primary">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -21,7 +21,15 @@
   import LoginService from '@/service/LoginService'
     export default {
       name: "Login",
-
+      created() {
+        let _this =this
+        document.onkeydown = function(e) {
+          let key = window.event.keyCode;
+          if (key == 13) {
+            _this.Login()
+          }
+        }
+      },
       data(){
           return{
             formdata: {
@@ -49,7 +57,7 @@
         },
         goToRegister(){
           this.$router.push({name:'Register'})
-        }
+        },
       }
     }
 </script>

@@ -23,8 +23,8 @@ public class StartController extends BaseController {
 
     @PostConstruct
     public void cleanSeatUser(){
-        LOGGER.info("------------------开始执行清理桌子用户----------------------");
-        ffs.updateSeatUser();
-        LOGGER.info("------------------清理桌子用户结束----------------------");
+        LOGGER.info("------------------开始执行插入初始化数据----------------------");
+        ffs.insertStartData();
+        LOGGER.info("------------------插入初始化数据结束----------------------");
     }
 }

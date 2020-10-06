@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 9725
 spring:
   jmx:
     enabled: false

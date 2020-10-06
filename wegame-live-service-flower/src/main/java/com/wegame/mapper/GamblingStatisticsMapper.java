@@ -1,5 +1,6 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.GameOverStatisticsDto;
 import com.wegame.model.GamblingStatistics;
 import com.wegame.provider.GamblingStatisticsSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -106,4 +107,19 @@ public interface GamblingStatisticsMapper {
             "</script>"
     })
     int insertAll(@Param(value = "gamblingStatisticsList") List<GamblingStatistics> gamblingStatisticsList);
+
+    @Select({
+            "SELECT\n" +
+                    "gs.user_id as userId ,\n" +
+                    "CASE gs.is_win\n" +
+                    "\tWHEN 0 THEN '战败'\n" +
+                    "\tWHEN 1 THEN '胜利'\n" +
+                    "\tELSE'未知'\n" +
+                    "END as  isWin,\n" +
+                    "gs.integral as integral \n" +
+                    "FROM\n" +
+                    "t_gambling_statistics gs \n" +
+                    "WHERE gs.gambling_id = #{gamblingId,jdbcType=BIGINT}"
+    })
+    List<GameOverStatisticsDto> selectGameOverMsg(long gamblingId);
 }

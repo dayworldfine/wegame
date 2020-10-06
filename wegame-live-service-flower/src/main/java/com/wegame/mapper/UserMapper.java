@@ -1,17 +1,13 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.GameOverNameDto;
 import com.wegame.model.User;
 import com.wegame.provider.UserSqlProvider;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserMapper {
@@ -97,4 +93,9 @@ public interface UserMapper {
             "where user_name = #{userName,jdbcType=VARCHAR}"
     })
     User findByUserName(String userName);
+
+    @Select({
+            "select id as userId, nick_name as nickName from t_user where id in (${userIds})"
+    })
+    List<GameOverNameDto> selectGameOverMsg(@Param(value = "userIds")  String userIds);
 }

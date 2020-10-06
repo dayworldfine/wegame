@@ -153,9 +153,8 @@ public interface SeatMapper {
     })
     int updateSeatStatus(long roomId, int status, int beStatus,long timeMillis);
 
-    @Update({
-            "update t_seat ",
-            "set seat_status=0, user_id=0 "
+    @Delete({
+            "delete from t_seat"
     })
-    void updateCleanUser();
+    void deleteAll();
 }

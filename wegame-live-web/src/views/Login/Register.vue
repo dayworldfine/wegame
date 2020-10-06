@@ -1,7 +1,8 @@
 <template>
   <div class="login-wrap">
     <el-form class="login-form" label-position="left" label-width="80px" :model="formdata">
-      <h2>用户注册/找回密码</h2>
+<!--      <h2>用户注册/找回密码</h2>-->
+      <h2>用户注册</h2>
       <el-form-item label="手机号">
         <el-input v-model="formdata.account"></el-input>
       </el-form-item>

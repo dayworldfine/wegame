@@ -1,5 +1,5 @@
 <template>
-  <div class="outer">
+  <div class="outer" >
 
     <div class="outer-flex outer-flex-one" >
       <!--每个人物-->
@@ -313,6 +313,30 @@
           </div>
         </div>
     </div>
+    <el-dialog
+      title="游戏结束"
+      :visible.sync="centerDialogVisible"
+      width="30%"
+      center>
+      <div class=" dialog-gameOver-top">
+        <div class="dialog-gameOver-top-nickName">昵称</div>
+        <div class="dialog-gameOver-top-integral">积分结算</div>
+        <div class="dialog-gameOver-top-boardType">类型</div>
+        <div class="dialog-gameOver-top-board">牌</div>
+        <div class="dialog-gameOver-top-win">结局</div>
+      </div>
+      <div v-for="item in gameOverList" class="dialog-gameOver">
+        <div class="dialog-gameOver-top-nickName">{{item.nickName}}</div>
+        <div class="dialog-gameOver-top-integral">{{item.integral}}</div>
+        <div class="dialog-gameOver-top-boardType">{{item.boardType}}</div>
+        <div class="dialog-gameOver-imgAll">
+          <el-image fit="fill" :src="'/static/board/card_'+item.firstBoardColor+item.firstBoardNumber+'.png'"></el-image>
+          <el-image fit="fill" :src="'/static/board/card_'+item.secondBoardColor+item.secondBoardNumber+'.png'"></el-image>
+          <el-image fit="fill" :src="'/static/board/card_'+item.thirdlyBoardColor+item.thirdlyBoardNumber+'.png'"></el-image>
+        </div>
+        <div class="dialog-gameOver-top-win">{{item.isWin}}</div>
+      </div>
+    </el-dialog>
   </div>
 
 </template>
@@ -330,6 +354,7 @@
           seeCardStatus:0,
           isIntegral:0,
           isSetout:0,
+          isSitDown:0,
           gameStatus:0,
           isTrue:0,
           round:1,    //轮次
@@ -374,6 +399,12 @@
         isTureUserList:[0, 0, 0, 0, 0, 0],
         //内容娴熟
         gameText:[],
+        centerDialogVisible:false,
+        gameOverList:[
+          {userId:'0', nickName:"无名",isWin:'0',integral:'0',boardSize:"0",boardType:"0",isSpecial:'0',isA32:'0',firstBoardColor:'0',firstBoardNumber:'0',secondBoardColor:'0',secondBoardNumber:'0',thirdlyBoardColor:'0',thirdlyBoardNumber:"0"},
+          {userId:'0', nickName:"无名",isWin:'0',integral:'0',boardSize:"0",boardType:"0",isSpecial:'0',isA32:'0',firstBoardColor:'0',firstBoardNumber:'0',secondBoardColor:'0',secondBoardNumber:'0',thirdlyBoardColor:'0',thirdlyBoardNumber:"0"}
+        ],
+
       }
     },
 
@@ -447,6 +478,10 @@
       },
       //点击坐下的方法
       sitDown(number) {
+        if (this.userMsg.isSitDown==1){
+          this.$message.error("已经有位置坐了")
+          return;
+        }
         GoldenFlowerService.sitDown(
           {
             type: 3,
@@ -456,7 +491,7 @@
         ).then((res) => {
           console.log("res", res)
           if(res.code===200){
-
+            this.userMsg.isSitDown=1;
           }else{
             this.$message.error(res.message)
           }
@@ -873,11 +908,12 @@
       //游戏结束
       gameOver(param){
         let userList = param.userList;
-        this.openGameOver(param.userNickName);
+        this.openGameOver(param.gameOverList);
         this.addGameText("游戏结束!!!",param.userNickName+"胜利");
         this.userMsg.seeCardStatus=0,
           this.userMsg.isIntegral=0,
           this.userMsg.isSetout=0,
+          this.userMsg.isSitDown=0,
           this.userMsg.gameStatus=0,
           this.userMsg.isTrue=0,
           this.userMsg.round=1,
@@ -899,15 +935,16 @@
         });
         this.isTureUserList=[0, 0, 0, 0, 0, 0]
       },
-      openGameOver(userNickName) {
-        this.$alert(userNickName+'胜利', '游戏结束', {
-          showConfirmButton:false,
-          center: true,
-        });
+      openGameOver(gameOverList) {
+        this.gameOverList=gameOverList
+        this.centerDialogVisible=true
+        // this.$alert(userNickName+'胜利', '游戏结束', {
+        //   showConfirmButton:false,
+        //   center: true,
+        // });
       },
       addGameText(text){
         this.gameText.push(new Date().toLocaleTimeString()+" "+text);
-
 
         if (this.gameText.length>10){
           this.gameText.shift();
@@ -1247,6 +1284,44 @@
 
   .six-button { /*第六个按钮*/
     margin-left: 20px;
+  }
+  .dialog-gameOver{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .dialog-gameOver-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .dialog-gameOver-top-nickName{
+    width: 100px;
+  }
+  .dialog-gameOver-top-integral{
+    width: 100px;
+  }
+  .dialog-gameOver-top-boardType{
+    width: 100px;
+  }
+  .dialog-gameOver-top-board{
+    width: 300px;
+  }
+  .dialog-gameOver-top-win{
+    width: 100px;
+  }
+  .dialog-gameOver-imgAll{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 300px;
   }
 
 </style>

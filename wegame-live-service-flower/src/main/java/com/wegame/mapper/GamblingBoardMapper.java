@@ -1,5 +1,6 @@
 package com.wegame.mapper;
 
+import com.wegame.dto.GameOverBoardDto;
 import com.wegame.dto.userCompareBoardDto;
 import com.wegame.model.GamblingBoard;
 import com.wegame.provider.GamblingBoardSqlProvider;
@@ -141,4 +142,38 @@ public interface GamblingBoardMapper {
             "where gm.user_id in (${userIds}) and gm.gambling_id = #{gamblingId,jdbcType=BIGINT}"
     })
     List<userCompareBoardDto> selectByUserIds(long gamblingId, String userIds);
+
+    /**
+     * 查询游戏结束时牌的信息
+     * @param gamblingId
+     * @return
+     */
+    @Select({
+            "SELECT \n" +
+                    "gm.user_id as userId ,\n" +
+                    "gb.board_size as boardSize,\n" +
+                    "CASE gb.board_type\n" +
+                    "\tWHEN 0 THEN '普通牌'\n" +
+                    "\tWHEN 1 THEN '对子'\n" +
+                    "\tWHEN 2 THEN '顺子'\n" +
+                    "\tWHEN 3 THEN '同花'\n" +
+                    "\tWHEN 4 THEN '同花顺'\n" +
+                    "\tWHEN 5 THEN '炸弹'\n" +
+                    "\tELSE'未知'\n" +
+                    "END as  boardType,\n" +
+                    "is_special as isSpecial,\n" +
+                    "is_a32 as isA32,\n" +
+                    "first_board_color as firstBoardColor,\n" +
+                    "first_board_number as firstBoardNumber,\n" +
+                    "second_board_color as secondBoardColor,\n" +
+                    "second_board_number as secondBoardNumber,\n" +
+                    "thirdly_board_color as thirdlyBoardColor,\n" +
+                    "thirdly_board_number as thirdlyBoardNumber\n" +
+                    "FROM\n" +
+                    "t_gambling_message gm \n" +
+                    "INNER JOIN t_gambling_board gb\n" +
+                    "on gm.id = gb.gambling_message_id\n" +
+                    "WHERE gm.gambling_id = #{gamblingId,jdbcType=BIGINT}"
+    })
+    List<GameOverBoardDto> selectGameOverMsg(long gamblingId);
 }
