@@ -4,4 +4,4 @@
 
 ### 界面(效果图待上传高清)
 
-![image](https://github.com/dayworldfine/wegame/blob/dev/show.png)
+![image](https://markdown.tomtangmu.com/git/wegame/show.png)
